@@ -2604,6 +2604,10 @@ span.tags-punctuation i {
   background: #0079ff;
   color: #fff;
 }
+#aside-content #card-toc:hover .toc-content .toc-link:not(.active) span {
+  filter: blur(0);
+  opacity: 1;
+}
 @media screen and (min-width: 901px) {
   #aside-content #card-toc {
     right: 0;
@@ -2641,26 +2645,20 @@ span.tags-punctuation i {
 #aside-content #card-toc .toc-content .toc-item.active > .toc-child {
   display: block;
 }
-#aside-content #card-toc .toc-content:hover .toc-link:not(.active) span,
-#aside-content #card-toc .toc-content .toc-content .toc-link:not(.active) span {
-  filter: blur(0);
-  opacity: 1;
-}
 #aside-content #card-toc .toc-content .toc-item.active .toc-link {
   opacity: 1;
   border-radius: 8px;
 }
 #aside-content #card-toc .toc-content .toc-link {
+  transition: all 0.2s ease-in-out 0s;
   line-height: 24px;
   padding: 8px;
-  border-left: 0 solid transparent;
   border-radius: 12px;
   color: var(--efu-secondtext);
-  cursor: default;
   min-height: 40px;
   display: flex;
   align-items: center;
-  transition: all 0.2s ease-in-out 0s;
+  cursor: pointer;
 }
 #aside-content #card-toc .toc-content .toc-link.active {
   border-radius: 12px;
@@ -2670,14 +2668,14 @@ span.tags-punctuation i {
   font-weight: 700;
   font-size: 20px;
 }
+#aside-content #card-toc .toc-content .toc-link:hover {
+  background-color: var(--efu-main-op-light);
+}
 #aside-content #card-toc .toc-content .toc-link:not(.active) span {
   opacity: 0.6;
   cursor: pointer;
   filter: blur(1px);
   transition: 0.3s;
-}
-#aside-content #card-toc .toc-content .toc-link:not(.active) span:hover {
-  color: var(--efu-lighttext);
 }
 [data-theme=dark] .toc .toc-item.active .toc-link .toc-text {
   color: var(--efu-white);
@@ -3685,54 +3683,6 @@ span.tags-punctuation i {
 }
 #footer-bar > div > div.footer-bar-left > span {
   margin-right: 1rem;
-}
-#footer #cookies-window {
-  min-width: 300px;
-  background: var(--efu-maskbgdeep);
-  color: var(--efu-fontcolor);
-  padding: 8px 16px;
-  display: flex;
-  flex-direction: column;
-  bottom: 20px;
-  right: 20px;
-  position: fixed;
-  border-radius: 12px;
-  transition: 0.3s;
-  z-index: 8;
-  user-select: none;
-  backdrop-filter: saturate(180%) blur(20px);
-  transform: translateZ(0);
-  border: var(--style-border);
-  animation: barrageIn 0.6s cubic-bezier(0.42, 0, 0.3, 1.11);
-}
-@media screen and (max-width: 1300px) {
-  #footer #cookies-window {
-    display: none;
-  }
-}
-#footer #cookies-window.cw-hide {
-  opacity: 0;
-  animation: barrageOut 0.6s cubic-bezier(0.42, 0, 0.3, 1.11);
-  z-index: -1;
-}
-#footer #cookies-window .cookies-window-title {
-  padding-bottom: 4px;
-  border-bottom: var(--style-border);
-  font-size: 12px;
-  font-weight: 700;
-}
-#footer #cookies-window .cookies-window-content {
-  font-size: 14px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-#footer #cookies-window .cookies-window-content .cookies-link {
-  margin-left: 10px;
-  font-size: 16px;
-}
-#footer #cookies-window .cookies-window-content .cookies-link i.solitude {
-  font-size: 16px;
 }
 #loading-box {
   user-select: none;
@@ -5404,12 +5354,16 @@ span.tags-punctuation {
   margin-bottom: 60px;
 }
 #sidebar #sidebar-menus .card-tag-cloud a {
-  color: var(--efu-fontcolor) !important;
+  color: var(--efu-fontcolor);
   padding: 2px 8px 2px 12px;
   border-radius: 8px;
   border: var(--style-border-always);
   background: var(--efu-card-bg);
   font-size: 14px !important;
+}
+#sidebar #sidebar-menus .card-tag-cloud a:hover {
+  background: var(--efu-main);
+  color: var(--efu-white);
 }
 #sidebar #sidebar-menus .card-tag-cloud a sup {
   opacity: 0.6;
@@ -5428,6 +5382,12 @@ span.tags-punctuation {
 }
 #sidebar #sidebar-menus .sidebar-menu-item span.darkmode_switchbutton {
   padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.5s ease 0s;
+}
+#sidebar #sidebar-menus .sidebar-menu-item span.darkmode_switchbutton:hover {
+  background: var(--efu-main);
+  color: var(--efu-white);
 }
 [data-theme="dark"] #sidebar #sidebar-menus .sidebar-menu-item span.darkmode_switchbutton {
   background: var(--efu-orange);
@@ -5583,6 +5543,7 @@ span.tags-punctuation {
   transition: 0.3s;
   position: relative;
   box-shadow: var(--efu-shadow-border);
+  min-width: fit-content;
 }
 .topGroup .recent-post-item:nth-last-child(2):nth-child(1),
 .topGroup .recent-post-item:nth-last-child(1):nth-child(2) {
@@ -6145,7 +6106,7 @@ span.tagsPageCount {
   padding: 0.5rem;
   text-align: center;
   font-size: 14px;
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
 }
 @media screen and (max-width: 768px) {
   #body-wrap.error #error-wrap .error-content .error-info {
@@ -6245,6 +6206,7 @@ div.console_recentcomments {
 .comment-card {
   position: relative;
   width: calc(100% / 3 - 8px);
+  min-width: fit-content;
   background: var(--efu-card-bg);
   border-radius: 12px;
   border: var(--style-border-always);
