@@ -1,51 +1,12 @@
-document.addEventListener('DOMContentLoaded', function () {
-    async function cardHistory() {
-        const historyContainer = document.getElementById('history-container');
-        if (!historyContainer) return;
-        const data = await fetchHistoryData();
-        const html = data.map(item => `<div class="swiper-slide history_slide"><span class="history_slide_time">A.D.${item.year}</span><span class="history_slide_link">${item.title}</span></div>`).join('');
-        const swiperContainer = document.querySelector('.history_swiper-container');
-        document.getElementById('history_container_wrapper').innerHTML = html
-        const swiperHistory = new Swiper(swiperContainer, {
-            loop: true,
-            direction: 'vertical',
-            autoplay: {disableOnInteraction: true, delay: 5000},
-            mousewheel: false,
-        });
-        historyContainer.onmouseenter = () => swiperHistory.autoplay.stop();
-        historyContainer.onmouseleave = () => swiperHistory.autoplay.start();
-
-        async function fetchHistoryData() {
-            const myDate = new Date();
-            const formattedDate = 'S' + `${myDate.getMonth() + 1}`.padStart(2, '0') + `${myDate.getDate()}`.padStart(2, '0');
-            const historyDataUrl = `https://fastly.jsdelivr.net/gh/Zfour/Butterfly-card-history@2.08/baiduhistory/json/${myDate.getMonth() < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1}.json`;
-            const response = await fetch(historyDataUrl);
-            const data = await response.json();
-            return data[formattedDate];
-        }
-    }
-
-    cardHistory()
-    document.addEventListener('pjax:complete', cardHistory);
-})
-
-let ipLocation;
-
-// 进行 fetch 请求
+//get请求
 fetch('https://api.qjqq.cn/api/Local')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         ipLocation = data;
-        if (isHomePage()) {
-            showWelcome();
-        }
+        showWelcome();
     })
     .catch(error => console.error('Error:', error));
+
 
 function getDistance(e1, n1, e2, n2) {
     const R = 6371;
@@ -64,12 +25,8 @@ function getDistance(e1, n1, e2, n2) {
 }
 
 function showWelcome() {
-    if (!ipLocation || !ipLocation.data) {
-        console.error('ipLocation data is not available.');
-        return;
-    }
 
-    let dist = getDistance(121.413921, 31.089290, ipLocation.data.lng, ipLocation.data.lat); // 修改自己的经度（121.413921）纬度（31.089290）
+    let dist = getDistance(121.413921, 31.089290, ipLocation.data.lng, ipLocation.data.lat); //修改自己的经度（121.413921）纬度（31.089290）
     let pos = ipLocation.data.country;
     let ip = ipLocation.ip;
     let posdesc;
@@ -103,39 +60,39 @@ function showWelcome() {
         case "中国":
             pos = ipLocation.data.prov + " " + ipLocation.data.city + " " + ipLocation.data.district;
             switch (ipLocation.data.prov) {
-                case "北京":
+                case "北京市":
                     posdesc = "北——京——欢迎你~~~";
                     break;
-                case "天津":
+                case "天津市":
                     posdesc = "讲段相声吧";
                     break;
-                case "河北":
+                case "河北省":
                     posdesc = "山势巍巍成壁垒，天下雄关铁马金戈由此向，无限江山";
                     break;
-                case "山西":
+                case "山西省":
                     posdesc = "展开坐具长三尺，已占山河五百余";
                     break;
                 case "内蒙古自治区":
                     posdesc = "天苍苍，野茫茫，风吹草低见牛羊";
                     break;
-                case "辽宁":
+                case "辽宁省":
                     posdesc = "我想吃烤鸡架！";
                     break;
-                case "吉林":
+                case "吉林省":
                     posdesc = "状元阁就是东北烧烤之王";
                     break;
-                case "黑龙江":
+                case "黑龙江省":
                     posdesc = "很喜欢哈尔滨大剧院";
                     break;
-                case "上海":
+                case "上海市":
                     posdesc = "众所周知，中国只有两个城市";
                     break;
-                case "江苏":
+                case "江苏省":
                     switch (ipLocation.data.city) {
-                        case "南京":
+                        case "南京市":
                             posdesc = "这是我挺想去的城市啦";
                             break;
-                        case "苏州":
+                        case "苏州市":
                             posdesc = "上有天堂，下有苏杭";
                             break;
                         default:
@@ -143,34 +100,24 @@ function showWelcome() {
                             break;
                     }
                     break;
-                case "浙江":
-                    switch (ipLocation.data.city) {
-                        case "杭州":
-                            posdesc = "东风渐绿西湖柳，雁已还人未南归";
-                            break;
-                        default:
-                            posdesc = "望海楼明照曙霞,护江堤白蹋晴沙";
-                            break;
-                    }
+                case "浙江省":
+                    posdesc = "东风渐绿西湖柳，雁已还人未南归";
                     break;
-                case "河南":
+                case "河南省":
                     switch (ipLocation.data.city) {
-                        case "郑州":
+                        case "郑州市":
                             posdesc = "豫州之域，天地之中";
                             break;
-                        case "信阳":
-                            posdesc = "品信阳毛尖，悟人间芳华";
-                            break;
-                        case "南阳":
+                        case "南阳市":
                             posdesc = "臣本布衣，躬耕于南阳此南阳非彼南阳！";
                             break;
-                        case "驻马店":
+                        case "驻马店市":
                             posdesc = "峰峰有奇石，石石挟仙气嵖岈山的花很美哦！";
                             break;
-                        case "开封":
+                        case "开封市":
                             posdesc = "刚正不阿包青天";
                             break;
-                        case "洛阳":
+                        case "洛阳市":
                             posdesc = "洛阳牡丹甲天下";
                             break;
                         default:
@@ -178,19 +125,19 @@ function showWelcome() {
                             break;
                     }
                     break;
-                case "安徽":
+                case "安徽省":
                     posdesc = "蚌埠住了，芜湖起飞";
                     break;
-                case "福建":
+                case "福建省":
                     posdesc = "井邑白云间，岩城远带山";
                     break;
-                case "江西":
+                case "江西省":
                     posdesc = "落霞与孤鹜齐飞，秋水共长天一色";
                     break;
-                case "山东":
+                case "山东省":
                     posdesc = "遥望齐州九点烟，一泓海水杯中泻";
                     break;
-                case "湖北":
+                case "湖北省":
                     switch (ipLocation.data.city) {
                         case "黄冈市":
                             posdesc = "红安将军县！辈出将才！";
@@ -200,18 +147,18 @@ function showWelcome() {
                             break;
                     }
                     break;
-                case "湖南":
+                case "湖南省":
                     posdesc = "74751，长沙斯塔克";
                     break;
-                case "广东":
+                case "广东省":
                     switch (ipLocation.data.city) {
-                        case "广州":
+                        case "广州市":
                             posdesc = "看小蛮腰，喝早茶了嘛~";
                             break;
-                        case "深圳":
+                        case "深圳市":
                             posdesc = "今天你逛商场了嘛~";
                             break;
-                        case "阳江":
+                        case "阳江市":
                             posdesc = "阳春合水！博主家乡~ 欢迎来玩~";
                             break;
                         default:
@@ -222,28 +169,28 @@ function showWelcome() {
                 case "广西壮族自治区":
                     posdesc = "桂林山水甲天下";
                     break;
-                case "海南":
+                case "海南省":
                     posdesc = "朝观日出逐白浪，夕看云起收霞光";
                     break;
-                case "四川":
+                case "四川省":
                     posdesc = "康康川妹子";
                     break;
-                case "贵州":
+                case "贵州省":
                     posdesc = "茅台，学生，再塞200";
                     break;
-                case "云南":
+                case "云南省":
                     posdesc = "玉龙飞舞云缠绕，万仞冰川直耸天";
                     break;
                 case "西藏自治区":
                     posdesc = "躺在茫茫草原上，仰望蓝天";
                     break;
-                case "陕西":
+                case "陕西省":
                     posdesc = "来份臊子面加馍";
                     break;
-                case "甘肃":
+                case "甘肃省":
                     posdesc = "羌笛何须怨杨柳，春风不度玉门关";
                     break;
-                case "青海":
+                case "青海省":
                     posdesc = "牛肉干和老酸奶都好好吃";
                     break;
                 case "宁夏回族自治区":
@@ -252,7 +199,7 @@ function showWelcome() {
                 case "新疆维吾尔自治区":
                     posdesc = "驼铃古道丝绸路，胡马犹闻唐汉风";
                     break;
-                case "台湾":
+                case "台湾省":
                     posdesc = "我在这头，大陆在那头";
                     break;
                 case "香港特别行政区":
@@ -271,7 +218,7 @@ function showWelcome() {
             break;
     }
 
-    // 根据本地时间切换欢迎语
+    //根据本地时间切换欢迎语
     let timeChange;
     let date = new Date();
     if (date.getHours() >= 5 && date.getHours() < 11) timeChange = "<span>🌤️ 早上好，一日之计在于晨</span>";
@@ -281,29 +228,55 @@ function showWelcome() {
     else if (date.getHours() >= 19 && date.getHours() < 24) timeChange = "<span>🌙 晚上好，夜生活嗨起来！</span>";
     else timeChange = "夜深了，早点休息，少熬夜";
 
-    let welcomeInfoElement = document.getElementById("welcome-info");
-
-    if (welcomeInfoElement) {
-        welcomeInfoElement.innerHTML =
-            `欢迎来自 <b><span style="color: var(--kouseki-ip-color);font-size: var(--kouseki-gl-size)">${pos}</span></b> 的小友💖<br>${posdesc}🍂<br>当前位置距博主约 <b><span style="color: var(--kouseki-ip-color)">${dist}</span></b> 公里！<br>您的IP地址为：<b><span style="font-size: 15px;">${ip}</span></b><br>${timeChange} <br>`;
-    } else {
+    try {
+        //自定义文本和需要放的位置
+        document.getElementById("welcome-info").innerHTML =
+            `欢迎来自 <b><span style="color: var(--kouseki-ip-color);font-size: var(--kouseki-gl-size)">${pos}</span></b> 的小友💖<br>${posdesc}🍂<br>当前位置距博主约 <b><span style="color: var(--kouseki-ip-color)">${dist}</span></b> 公里！<br>您的IP地址为：<b><span style="font-size: 12px;">${ip}</span></b><br>${timeChange} <br>`;
+    } catch (err) {
         console.log("Pjax无法获取元素");
     }
 }
 
+// Pjax完成页面切换的事件回调处理
 function handlePjaxComplete() {
-    if (isHomePage()) {
-        showWelcome();
-    }
+    showWelcome();
 }
 
-function isHomePage() {
-    return window.location.pathname === '/' || window.location.pathname === '/index.html';
-}
+window.onload = function() {
+    showWelcome();
 
-window.onload = function () {
-    if (isHomePage()) {
-        showWelcome();
-    }
+    // 添加pjax:complete事件监听
     document.addEventListener("pjax:complete", handlePjaxComplete);
 };
+
+
+// 那年今日
+document.addEventListener('DOMContentLoaded', function () {
+    async function cardHistory() {
+        const historyContainer = document.getElementById('history-container');
+        if (!historyContainer) return;
+        const data = await fetchHistoryData();
+        const html = data.map(item => `<div class="swiper-slide history_slide"><span class="history_slide_time">A.D.${item.year}</span><span class="history_slide_link">${item.title}</span></div>`).join('');
+        const swiperContainer = document.querySelector('.history_swiper-container');
+        document.getElementById('history_container_wrapper').innerHTML = html
+        const swiperHistory = new Swiper(swiperContainer, {
+            loop: true,
+            direction: 'vertical',
+            autoplay: {disableOnInteraction: true, delay: 5000},
+            mousewheel: false,
+        });
+        historyContainer.onmouseenter = () => swiperHistory.autoplay.stop();
+        historyContainer.onmouseleave = () => swiperHistory.autoplay.start();
+
+        async function fetchHistoryData() {
+            const myDate = new Date();
+            const formattedDate = 'S' + `${myDate.getMonth() + 1}`.padStart(2, '0') + `${myDate.getDate()}`.padStart(2, '0');
+            const historyDataUrl = `https://fastly.jsdelivr.net/gh/Zfour/Butterfly-card-history@2.08/baiduhistory/json/${myDate.getMonth() < 10 ? '0' + (myDate.getMonth() + 1) : myDate.getMonth() + 1}.json`;
+            const response = await fetch(historyDataUrl);
+            const data = await response.json();
+            return data[formattedDate];
+        }
+    }
+    cardHistory()
+    document.addEventListener('pjax:complete', cardHistory);
+})
