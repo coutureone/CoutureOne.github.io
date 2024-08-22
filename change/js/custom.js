@@ -280,3 +280,4 @@ document.addEventListener('DOMContentLoaded', function () {
     cardHistory()
     document.addEventListener('pjax:complete', cardHistory);
 })
+
