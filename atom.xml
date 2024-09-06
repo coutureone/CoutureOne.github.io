@@ -6,7 +6,7 @@
   <link href="https://coutures.top/atom.xml" rel="self"/>
   
   <link href="https://coutures.top/"/>
-  <updated>2024-09-01T02:12:39.488Z</updated>
+  <updated>2024-09-06T13:59:23.816Z</updated>
   <id>https://coutures.top/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mac修改远程VNC端口号</title>
+    <link href="https://coutures.top/posts/17990.html"/>
+    <id>https://coutures.top/posts/17990.html</id>
+    <published>2024-09-06T13:44:29.000Z</published>
+    <updated>2024-09-06T13:59:23.816Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>因为需求就是想在家远程工作的<code>Mac</code>电脑，借助<code>VPN</code>的方式，因为端口开放是有限制的，所以想着修改<code>Mac</code>的<code>VNC</code>远程端口号。</p></blockquote><p> 因为<code>Mac</code>很多文件都是隐藏的，如果想要查看，快捷键可以显示出来<code>cmd+shift+i</code>，这样就可以显示隐藏文件了，如果想要恢复，同样的快捷键。</p><p> <code>Mac</code>上的<code>etc</code>文件有一个快捷方式，当然我不知道是不是大家都是一样的，我的这个可能是操作出来的，其实这个<code>etc</code>是在<code>private</code>文件夹里面。</p><p><img src="https://s3.qjqq.cn/50/66d94e2aa591a.webp!color" alt="" loading="lazy"></p><ul><li>选中文件夹以后，首先要解锁权限，快捷键是<code>cmd + i</code>，解锁完成以后进入文件夹里面，选中<code>etc</code>同样也是需要解锁，上面一样的操作，都改成读与写。</li></ul><p><img src="https://s3.qjqq.cn/50/66d94eff0ffe6.webp!color" alt="" loading="lazy"></p><ul><li>进入<code>etc</code>文件夹，找到<code>services</code>这个文件，也是需要解锁，因为这样方便直接进行编辑。</li><li>打开文件，然后快捷键<code>cmd+f</code>搜索<code>5900</code>，因为<code>Mac</code>默认远程的端口号是<code>5900</code>，然后改成你想要的端口号，即可，两个<code>5900</code>都需要修改。</li></ul><p><img src="https://s3.qjqq.cn/50/66d9502833319.webp!color" alt="" loading="lazy"></p><p>在这里温馨提示，还原之前文件夹的权限，防止系统文件被篡改，远程屏幕共享和文件共享一定要打开，否则无法远程你的电脑屏幕，防火墙建议关掉。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;因为需求就是想在家远程工作的&lt;code&gt;Mac&lt;/code&gt;电脑，借助&lt;code&gt;VPN&lt;/code&gt;的方式，因为端口开放是有限制的，所以想着修改&lt;code&gt;Mac&lt;/code&gt;的&lt;code&gt;VNC&lt;/code&gt;远程端口号。&lt;/p&gt;
+&lt;/block</summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://coutures.top/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>关于我的博客图床</title>
@@ -434,25 +458,6 @@
     
     
     <category term="Ubuntu" scheme="https://coutures.top/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS网配置模板</title>
-    <link href="https://coutures.top/posts/5232.html"/>
-    <id>https://coutures.top/posts/5232.html</id>
-    <published>2023-11-07T13:49:27.000Z</published>
-    <updated>2024-04-11T13:54:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[rootClocalhost~]# <span class="built_in">cd</span> /etc/sysconf ig/network-scripts/</span><br><span class="line">[rootClocalhost~]# <span class="built_in">ls</span></span><br><span class="line">[rootClocalhost~]# vi ifcfg-ens160</span><br></pre></td></tr></table></figure><span id="more"></span><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# <span class="built_in">cd</span> /etc/sysconfig/network-scripts/</span><br><span class="line">[root@localhost network-scripts]# vim ifcfg-ens160 </span><br><span class="line"></span><br><span class="line">TYPE=<span class="string">&quot;Ethernet&quot;</span></span><br><span class="line">PROXY_METHOD=<span class="string">&quot;none&quot;</span></span><br><span class="line">BROWSER_ONLY=<span class="string">&quot;no&quot;</span></span><br><span class="line">BOOTPROTO=<span class="string">&quot;static&quot;</span></span><br><span class="line">DEFROUTE=<span class="string">&quot;yes&quot;</span></span><br><span class="line">IPV4_FAILURE_FATAL=<span class="string">&quot;no&quot;</span></span><br><span class="line">IPV6INIT=<span class="string">&quot;yes&quot;</span></span><br><span class="line">IPV6_AUTOCONF=<span class="string">&quot;yes&quot;</span></span><br><span class="line">IPV6_DEFROUTE=<span class="string">&quot;yes&quot;</span></span><br><span class="line">IPV6_FAILURE_FATAL=<span class="string">&quot;no&quot;</span></span><br><span class="line">IPV6_ADDR_GEN_MODE=<span class="string">&quot;stable-privacy&quot;</span></span><br><span class="line">NAME=<span class="string">&quot;ens160&quot;</span></span><br><span class="line">UUID=<span class="string">&quot;c203d758-1006-4fed-85cf-b485feac9682&quot;</span></span><br><span class="line">DEVICE=<span class="string">&quot;ens160&quot;</span></span><br><span class="line">ONBOOT=<span class="string">&quot;yes&quot;</span></span><br><span class="line">IPADDR=192.168.200.181</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=192.168.200.2</span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启网卡 </span></span><br><span class="line">systemctl restart network</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">网卡配置</summary>
-    
-    
-    
-    
-    <category term="CentOS" scheme="https://coutures.top/tags/CentOS/"/>
     
   </entry>
   
