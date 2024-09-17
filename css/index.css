@@ -2076,7 +2076,7 @@ i.solitude {
 }
 span.tags-punctuation i {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   transition: none;
   margin-right: 2px;
   opacity: 0.4;
@@ -2782,29 +2782,6 @@ span.tags-punctuation i {
 [data-theme=dark] #aside-content > .card-widget.card-info {
   border: var(--style-border-always);
 }
-#aside-content .card-webinfo .webinfo .webinfo-item-title {
-  display: flex;
-}
-#aside-content .card-webinfo .webinfo .webinfo-item-title i {
-  line-height: 2 !important;
-  margin-right: 6px;
-  width: 16px;
-  text-align: center;
-  font-size: 16px !important;
-}
-#aside-content .card-webinfo .webinfo .webinfo-item {
-  display: flex;
-  justify-content: space-between;
-  white-space: nowrap;
-  -webkit-box-align: center;
-  align-items: center;
-  padding: 0.1rem 0.5rem 0;
-}
-#aside-content .card-webinfo .webinfo .webinfo-item div:first-child {
-  -webkit-box-flex: 1;
-  flex: 1 1 0;
-  padding-right: 1rem;
-}
 #aside-content .card-allinfo hr {
   display: flex;
   position: relative;
@@ -3116,6 +3093,29 @@ span.tags-punctuation i {
   font-size: 12px;
   color: var(--efu-secondtext);
   margin-top: auto;
+}
+.webinfo-item {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0.1rem 0.5rem 0;
+}
+.webinfo-item div:first-child {
+  -webkit-box-flex: 1;
+  flex: 1 1 0;
+  padding-right: 1rem;
+}
+.webinfo .webinfo-item-title {
+  display: flex;
+}
+.webinfo .webinfo-item-title i {
+  line-height: 2;
+  margin-right: 6px;
+  width: 16px;
+  text-align: center;
+  font-size: 16px;
 }
 #console {
   display: flex;
@@ -7231,7 +7231,7 @@ i.bber-gotobb {
   background: linear-gradient(120deg, #5b27ff 0, #00d4ff 100%);
   background-size: 200%;
   animation: gradient 15s ease infinite;
-  width: calc(60% - 0.5rem / 2);
+  flex: 4;
 }
 #about-page .myInfoAndSayHello .title1 {
   opacity: 0.8;
@@ -7252,7 +7252,7 @@ i.bber-gotobb {
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: calc(40% - (0.5rem / 2));
+  flex: 3;
 }
 #about-page .aboutsiteTips h2 {
   margin-right: auto;
@@ -7307,7 +7307,6 @@ i.bber-gotobb {
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: calc(50% - (0.5rem / 2));
   min-height: 450px;
 }
 #about-page .author-content-item.skills .tags-group-all {
@@ -7387,7 +7386,7 @@ i.bber-gotobb {
   }
 }
 #about-page .author-content-item-group.mapAndInfo {
-  width: calc(60% - (0.5rem / 2));
+  flex: 8;
   gap: 0.5rem;
 }
 @media screen and (min-width: 1300px) {
@@ -7488,7 +7487,6 @@ i.bber-gotobb {
   animation: gradient 15s ease infinite;
   min-height: 200px;
   height: fit-content;
-  width: calc(60% - (0.5rem / 2));
 }
 #about-page .author-content-item.buff .card-content {
   display: flex;
@@ -7516,7 +7514,6 @@ i.bber-gotobb {
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
-  width: calc(40% - (0.5rem / 2));
 }
 #about-page .author-content-item.maxim .maxim-title {
   display: flex;
@@ -7534,7 +7531,7 @@ i.bber-gotobb {
 .author-content-item.personalities {
   overflow: hidden;
   position: relative;
-  width: calc(60% - (0.5rem / 2));
+  flex: 6;
 }
 @media screen and (max-width: 768px) {
   .author-content-item.personalities {
@@ -7566,7 +7563,6 @@ i.bber-gotobb {
   min-height: 240px;
   position: relative;
   overflow: hidden;
-  width: calc(40% - (0.5rem / 2));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7626,7 +7622,6 @@ i.bber-gotobb {
 }
 #about-page .about-statistic {
   min-height: 380px;
-  width: calc(40% - (0.5rem / 2));
   background-size: cover;
   color: var(--efu-white);
   overflow: hidden;
@@ -7961,6 +7956,7 @@ div#banners .bannerText {
 @media screen and (max-width: 768px) {
   .author-content {
     margin-top: 0;
+    flex-direction: column;
   }
 }
 @media screen and (max-width: 1300px) {
@@ -7982,7 +7978,7 @@ div#banners .bannerText {
   margin-top: 0;
 }
 .author-content-item {
-  width: 49.5%;
+  flex: 4;
   border-radius: 12px;
   background: var(--efu-card-bg);
   border: var(--style-border-always);
