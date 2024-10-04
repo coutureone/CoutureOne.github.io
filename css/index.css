@@ -1682,8 +1682,8 @@
   --sidebar-bg: #f6f8fa;
   --btn-hover-color: #ff7242;
   --btn-color: #fff;
-  --btn-bg: #307af6;
-  --text-bg-hover: #307af6;
+  --btn-bg: var(--efu-main);
+  --text-bg-hover: #f6f8fa;
   --light-grey: #eee;
   --text-highlight-color: #1f2d3d;
   --blockquote-color: #6a737d;
@@ -2407,8 +2407,12 @@ span.tags-punctuation i {
   color: var(--efu-fontcolor);
 }
 #aside-content {
-  width: 300px;
   order: 2;
+}
+@media screen and (min-width: 1200px) {
+  #aside-content {
+    width: 300px;
+  }
 }
 @media screen and (min-width: 900px) {
   #aside-content {
@@ -2416,7 +2420,7 @@ span.tags-punctuation i {
   }
 }
 @media screen and (max-width: 1200px) {
-  #aside-content {
+  #aside-content .card-widget:not(#card-toc) {
     display: none;
   }
 }
@@ -2467,6 +2471,7 @@ span.tags-punctuation i {
 #aside-content .sticky_layout {
   top: calc(60px + 0.5rem);
   position: sticky;
+  z-index: 10;
   transition: top 0.3s ease 0s;
 }
 #aside-content #author-info__sayhi {
@@ -2591,6 +2596,23 @@ span.tags-punctuation i {
   #aside-content #card-toc {
     right: 0;
     padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #aside-content #card-toc {
+    position: fixed;
+    right: 3rem;
+    bottom: 2rem;
+    z-index: 100;
+    max-width: 380px;
+    max-height: calc(100% - 60px);
+    width: calc(100% - 80px);
+    transition: transform 0.3s;
+    transform: scale(0);
+    transform-origin: right bottom;
+  }
+  #aside-content #card-toc.open {
+    transform: scale(1);
   }
 }
 #aside-content #card-toc .toc-content {
@@ -3895,6 +3917,7 @@ span.tags-punctuation i {
   }
 }
 #page-header #nav {
+  z-index: 100;
   box-shadow: none;
   transition: 0.3s;
   display: flex;
@@ -5681,6 +5704,13 @@ span.tags-punctuation {
   justify-content: space-between;
   flex-wrap: wrap;
   height: 120px;
+}
+@media screen and (max-width: 1200px) {
+  .banners-links {
+    flex-direction: row;
+    left: 2rem;
+    height: 60px;
+  }
 }
 .banners-link-btn {
   display: flex;
@@ -8795,7 +8825,7 @@ div#banners .bannerText {
   transition: all 0.3s ease-out 0s;
 }
 .post #post-info #post-meta i {
-  font-size: 13px;
+  font-size: 14px;
   margin-right: 4px;
 }
 .post #post-info #post-meta > div {
@@ -8837,7 +8867,6 @@ div#banners .bannerText {
   margin: 0 1rem 0 0;
 }
 .post #post-info #post-meta .meta-secondline .post-meta-pv {
-  margin-right: 8px;
   padding: 0 8px;
   display: flex;
   align-items: center;
@@ -8860,7 +8889,6 @@ div#banners .bannerText {
   cursor: pointer;
   transition: 0.3s;
   border-radius: 12px;
-  padding: 8px;
 }
 .post #post-info #post-meta .meta-secondline .post-meta-commentcount:hover {
   opacity: 1;
@@ -9205,7 +9233,8 @@ div#banners .bannerText {
   border-radius: 8px;
   line-height: 39px;
   box-shadow: var(--efu-shadow-red);
-  display: inline-block;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   transition: all 0.4s ease 0s;
 }
@@ -9329,6 +9358,8 @@ div#banners .bannerText {
   height: 40px;
   line-height: 39px;
   box-shadow: var(--efu-shadow-green);
+  display: flex;
+  align-items: center;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
