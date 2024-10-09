@@ -2016,10 +2016,17 @@ i.solitude {
   line-height: 1;
   font-synthesis: style;
 }
+#body-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
 .layout {
   display: flex;
   margin: 0 auto;
   padding: 0 1.5rem;
+  width: 100%;
   max-width: 1200px;
 }
 @media screen and (max-width: 768px) {
@@ -2029,6 +2036,7 @@ i.solitude {
 }
 .layout#content-inner {
   max-width: 1400px;
+  flex-grow: 1;
 }
 .hide-aside.layout {
   max-width: 1400px;
@@ -2154,8 +2162,8 @@ span.tags-punctuation i {
   display: none;
 }
 #article-container a.headerlink::before {
-  content: "\e082";
-  font-family: solitude;
+  content: "\f0c1";
+  font-family: 'FontAwesome';
   cursor: pointer;
 }
 #article-container a.headerlink:hover {
@@ -2238,13 +2246,13 @@ span.tags-punctuation i {
 }
 #article-container ul > li:not(.tab):before {
   margin: 0;
-  top: 0.78em;
-  width: 0.42em;
-  height: 0.42em;
-  border-radius: 0.42em;
+  top: 0.9em;
+  width: 0.2em;
+  height: 0.2em;
+  border-radius: 50%;
   background: 0 0;
   content: "";
-  line-height: 0.42em;
+  line-height: 0.2em;
   border: 0.21em solid var(--efu-lighttext);
   background: var(--efu-lighttext);
 }
@@ -2414,12 +2422,12 @@ span.tags-punctuation i {
     width: 300px;
   }
 }
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1200px) {
   #aside-content {
     padding-left: 15px;
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1199px) {
   #aside-content .card-widget:not(#card-toc) {
     display: none;
   }
@@ -2602,7 +2610,7 @@ span.tags-punctuation i {
   #aside-content #card-toc {
     position: fixed;
     right: 3rem;
-    bottom: 2rem;
+    bottom: 10px;
     z-index: 100;
     max-width: 380px;
     max-height: calc(100% - 60px);
@@ -3085,7 +3093,7 @@ span.tags-punctuation i {
   position: relative;
 }
 .card-recent-comment .aside-list-item:not(:last-child) {
-  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  border-bottom: var(--style-border-dashed);
 }
 .card-recent-comment .aside-list-item .thumbnail img {
   width: 60px;
@@ -4957,6 +4965,9 @@ span.tags-punctuation {
   width: 100%;
   box-shadow: var(--efu-shadow-border);
 }
+#tag .recent-post-item {
+  margin-top: 2.5rem;
+}
 @media screen and (max-width: 768px) {
   .recent-post-item {
     border-radius: 12px;
@@ -5421,6 +5432,7 @@ span.tags-punctuation {
 }
 #home_top {
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   padding: 0.5rem 1.5rem;
 }
@@ -5704,13 +5716,6 @@ span.tags-punctuation {
   justify-content: space-between;
   flex-wrap: wrap;
   height: 120px;
-}
-@media screen and (max-width: 1200px) {
-  .banners-links {
-    flex-direction: row;
-    left: 2rem;
-    height: 60px;
-  }
 }
 .banners-link-btn {
   display: flex;
@@ -6585,7 +6590,6 @@ i.bber-gotobb {
   line-height: 1;
   margin-bottom: 8px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
   width: fit-content;
 }
@@ -6899,11 +6903,10 @@ i.bber-gotobb {
 @media screen and (max-width: 768px) {
   #article-container .flink-list-item {
     width: calc(50% - 12px);
+    height: 120px;
   }
-}
-@media screen and (max-width: 600px) {
-  #article-container .flink-list-item {
-    width: calc(100% - 12px);
+  #article-container .flink-list-item a {
+    flex-direction: column;
   }
 }
 #article-container .flink-list-item a {
@@ -6934,6 +6937,21 @@ i.bber-gotobb {
   width: calc(100% - 90px);
   height: fit-content;
   padding: 0 4px;
+}
+@media screen and (max-width: 768px) {
+  #article-container .flink-list-item a .flink-item-info {
+    align-items: center;
+    width: 100%;
+  }
+  #article-container .flink-list-item a .flink-item-info .flink-item-name {
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+  }
+  #article-container .flink-list-item a .flink-item-info .flink-item-desc {
+    display: none;
+  }
 }
 #article-container .flink-list-item a .flink-item-info span {
   transition: 0.3s;
@@ -8006,6 +8024,7 @@ div#banners .bannerText {
   color: var(--efu-white);
   overflow: hidden;
   margin-top: 0;
+  margin-bottom: 12px;
 }
 .author-content-item {
   flex: 4;
@@ -8420,7 +8439,8 @@ div#banners .bannerText {
   text-align: center;
   font-size: 14px;
   color: var(--efu-secondtext);
-  margin-top: 4px;
+  margin: 4px 10px 0;
+  line-height: 1.5;
 }
 #post .post-copyright .post-copyright__notice {
   font-size: 12px;
@@ -8889,6 +8909,7 @@ div#banners .bannerText {
   cursor: pointer;
   transition: 0.3s;
   border-radius: 12px;
+  padding: 8px;
 }
 .post #post-info #post-meta .meta-secondline .post-meta-commentcount:hover {
   opacity: 1;
@@ -10461,7 +10482,7 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
 #article-container .tabs {
   position: relative;
   border: 1px solid var(--tab-border-color);
-  margin: 1rem 0 !important;
+  margin: 1rem 0;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--efu-shadow-border);

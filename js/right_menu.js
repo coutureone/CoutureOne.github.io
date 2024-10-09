@@ -163,8 +163,8 @@ window.oncontextmenu = (ele) => {
     } else {
         rm.menuItems.paste.style.display = "none";
     }
-
-    if (tagName === "meting-js") {
+    let cls = ele.target.className.toLowerCase();
+    if (cls.match(/aplayer/)) {
         display = true;
         rm.menuItems.music.forEach((item) => (item.style.display = "flex"));
     } else {
@@ -175,6 +175,7 @@ window.oncontextmenu = (ele) => {
     Array.from(display ? rm.menuItems.other : rm.menuItems.plugin).forEach(
         (item) => (item.style.display = "none")
     );
+
     Array.from(display ? rm.menuItems.plugin : rm.menuItems.other).forEach(
         (item) => (item.style.display = "block")
     );
