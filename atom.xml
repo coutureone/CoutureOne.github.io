@@ -6,7 +6,7 @@
   <link href="https://coutures.top/atom.xml" rel="self"/>
   
   <link href="https://coutures.top/"/>
-  <updated>2024-09-06T13:59:23.816Z</updated>
+  <updated>2024-10-13T01:56:51.899Z</updated>
   <id>https://coutures.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GitHub加速（非挂VPN）</title>
+    <link href="https://coutures.top/posts/5321.html"/>
+    <id>https://coutures.top/posts/5321.html</id>
+    <published>2024-10-13T01:37:51.000Z</published>
+    <updated>2024-10-13T01:56:51.899Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>因为国内很多地方的DNS污染严重，打开GitHub的时候经常抽风，为了更加稳定的访问，因此找到了一个这样的方法。</p></blockquote><p> 感谢两个<code>GitHub</code>上面的开源项目<a href="https://github.com/oldj/SwitchHosts">SwitchHosts</a>和<a href="https://github.com/521xueweihan/GitHub520">Github520</a></p><p> 下载并安装<code>SwitchHosts</code>这个软件，安装完成以后,打开如下</p><p><img src="https://s3.qjqq.cn/50/670b22376857d.webp!color" alt="" loading="lazy"></p><p> 打开左上角的加号，然后去<a href="https://github.com/521xueweihan/GitHub520">Github520</a>找到连接：<a href="https://raw.hellogithub.com/hosts">https://raw.hellogithub.com/hosts</a></p><p><img src="https://s3.qjqq.cn/50/670b238d13aeb.webp!color" alt="" loading="lazy"></p><p> 添加完成以后，确定即可，这时候可能需要你授予权限，输入密码，需要给添加的这个<code>hosts</code>开关打开。</p><p><img src="https://s3.qjqq.cn/50/670b23fb68527.webp!color" alt="" loading="lazy"></p><p> 会自动更新，如果出现上面的内容，那就说明问题没啥问题了，访问<code>GitHub</code>速度明显加快 ~</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;因为国内很多地方的DNS污染严重，打开GitHub的时候经常抽风，为了更加稳定的访问，因此找到了一个这样的方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 感谢两个&lt;code&gt;GitHub&lt;/code&gt;上面的开源项目&lt;a href=&quot;https:</summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://coutures.top/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac修改远程VNC端口号</title>
@@ -137,9 +162,9 @@
     
     
     
-    <category term="软考" scheme="https://coutures.top/tags/%E8%BD%AF%E8%80%83/"/>
-    
     <category term="杂谈" scheme="https://coutures.top/tags/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="软考" scheme="https://coutures.top/tags/%E8%BD%AF%E8%80%83/"/>
     
   </entry>
   
@@ -164,9 +189,9 @@
     
     
     
-    <category term="杂谈" scheme="https://coutures.top/tags/%E6%9D%82%E8%B0%88/"/>
-    
     <category term="罗技" scheme="https://coutures.top/tags/%E7%BD%97%E6%8A%80/"/>
+    
+    <category term="杂谈" scheme="https://coutures.top/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
@@ -437,27 +462,6 @@
     
     
     <category term="Mac" scheme="https://coutures.top/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu 22.04配置静态IP地址</title>
-    <link href="https://coutures.top/posts/475.html"/>
-    <id>https://coutures.top/posts/475.html</id>
-    <published>2023-11-08T12:15:24.000Z</published>
-    <updated>2024-04-12T00:02:28.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>进入系统以后：</p><p>编辑网络配置文件（<code>nano</code>或者<code>vim</code>）</p><span id="more"></span><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">couture@couture:~$ <span class="built_in">sudo</span> vim /etc/netplan/00-installer-config.yaml </span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the network config written by &#x27;subiquity&#x27;</span></span><br><span class="line">network:</span><br><span class="line">  ethernets:</span><br><span class="line">    ens33:</span><br><span class="line">      dhcp4: <span class="literal">true</span></span><br><span class="line">  version: 2</span><br></pre></td></tr></table></figure><p>将 <code>dhcp4: true</code> 修改为 <code>dhcp4: false</code>，然后在<code>ethernets</code>下添加您的<a href="https://so.csdn.net/so/search?q=%E9%9D%99%E6%80%81IP&amp;spm=1001.2101.3001.7020">静态IP</a>配置</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">network:</span><br><span class="line">  ethernets:</span><br><span class="line">    enp0s3:</span><br><span class="line">      dhcp4: <span class="literal">false</span></span><br><span class="line">      addresses: [192.168.1.10/24]  <span class="comment"># 静态IP和子网掩码</span></span><br><span class="line">      gateway4: 192.168.1.1  <span class="comment"># 默认网关</span></span><br><span class="line">      nameservers:</span><br><span class="line">        addresses: [8.8.8.8, 8.8.4.4]  <span class="comment"># DNS服务器</span></span><br><span class="line">  version: 2</span><br></pre></td></tr></table></figure><p>关闭并且保存文件,然后重启网络</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> netplan apply</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> systemctl restart network-manager</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">网卡配置</summary>
-    
-    
-    
-    <category term="Ubuntu" scheme="https://coutures.top/categories/Ubuntu/"/>
-    
-    
-    <category term="Ubuntu" scheme="https://coutures.top/tags/Ubuntu/"/>
     
   </entry>
   
