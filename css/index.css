@@ -5811,6 +5811,7 @@ span.tags-punctuation {
   border-radius: 8px;
   align-items: center;
   height: 30px;
+  scrollbar-width: none;
 }
 @media screen and (max-width: 768px) {
   #category-bar .category-bar-items {
@@ -5850,6 +5851,9 @@ span.tags-punctuation {
   color: var(--efu-white);
 }
 #home {
+  order: 1;
+}
+#page {
   order: 1;
 }
 #category #category-bar {
@@ -9485,7 +9489,7 @@ div#banners .bannerText {
     width: 300px;
     bottom: -100px;
     right: 20px;
-    z-index: 7;
+    z-index: 12;
     height: fit-content;
     transition: cubic-bezier(0.42, 0, 0.3, 1.11) 0.3s;
     border: var(--style-border);
@@ -10191,6 +10195,8 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
   transition: 0.3s;
   border-radius: 8px;
   animation: slide-in 0.6s ease 0s 1 normal none running;
+  gap: 16px;
+  flex-direction: column;
 }
 .search-dialog:hover {
   border: var(--style-border-hover);
@@ -10214,14 +10220,10 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
 .search-dialog .search-dialog-title {
   font-weight: 700;
   color: var(--efu-main);
-  padding: 0 0 0.7rem;
   font-size: 1.4em;
   line-height: 1;
 }
 .search-dialog .search-close-button {
-  position: absolute;
-  top: 0.8rem;
-  right: 1rem;
   color: var(--efu-gray);
   font-size: 1.4em;
   line-height: 1;
@@ -10261,7 +10263,6 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
   }
 }
 .search-dialog #search-pagination .pagination-list {
-  margin: 0.2rem 0 0;
   padding: 0;
   text-align: center;
 }
@@ -10287,13 +10288,13 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
   color: var(--efu-white);
 }
 .search-dialog #search-tips {
-  padding-top: 12px;
   color: var(--efu-secondtext);
   right: 0;
   margin: auto;
 }
 .search-dialog #search-tips .search-result-count {
   color: var(--efu-gray);
+  font-size: 12px;
 }
 .search-dialog #search-tips .search-result-count b {
   color: var(--efu-main);
@@ -10303,8 +10304,6 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
   margin: 0 auto;
   max-width: 100%;
   width: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
 }
 .search-dialog .search-box input {
   height: 100%;
@@ -10317,9 +10316,9 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
   color: var(--efu-fontcolor);
   caret-color: var(--efu-theme);
 }
-.search-dialog .search-box input ::placeholder {
+.search-dialog .search-box input::placeholder {
   color: var(--efu-gray);
-  opacity: 0.5;
+  opacity: 0.8;
 }
 #search-mask {
   position: fixed;
@@ -10343,9 +10342,13 @@ figure.highlight .code-expand-btn:not(.expand-done) ~ pre {
   background: var(--efu-main);
   color: var(--efu-white);
 }
+.search-nav {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
 #article-container figure.gallery-group {
   position: relative;
-  float: left;
   overflow: hidden;
   margin: 0;
   width: calc(50% - 8px);
