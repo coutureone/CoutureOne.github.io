@@ -6,7 +6,7 @@
   <link href="https://coutures.top/atom.xml" rel="self"/>
   
   <link href="https://coutures.top/"/>
-  <updated>2024-10-13T01:56:51.899Z</updated>
+  <updated>2024-10-22T06:12:51.847Z</updated>
   <id>https://coutures.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS换源阿里云</title>
+    <link href="https://coutures.top/posts/18407.html"/>
+    <id>https://coutures.top/posts/18407.html</id>
+    <published>2024-10-22T06:09:54.000Z</published>
+    <updated>2024-10-22T06:12:51.847Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>CentOS官网镜像源现在已经基本访问不通，所以需要更换下载镜像源。</p></blockquote><p> 如果你的服务器是内网，首先需要需要添加DNS，否则还是可能遇到其他的问题。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/resolv.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给下面这两个DNS粘贴进去，并保存</span></span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.4.4</span><br></pre></td></tr></table></figure><p> 换源路径：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure><p> 阿里云的地址（原有的镜像源需要删除或者是注释掉）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[base]</span><br><span class="line">name=CentOS-<span class="variable">$releasever</span> - Base</span><br><span class="line"><span class="comment">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=os&amp;infra=$infra</span></span><br><span class="line">baseurl=http://your.valid.mirror.url/centos/<span class="variable">$releasever</span>/os/<span class="variable">$basearch</span>/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-<span class="variable">$releasever</span> - Updates</span><br><span class="line"><span class="comment">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=updates&amp;infra=$infra</span></span><br><span class="line">baseurl=http://your.valid.mirror.url/centos/<span class="variable">$releasever</span>/updates/<span class="variable">$basearch</span>/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br></pre></td></tr></table></figure><p> 保存文件后，清理 yum 缓存并更新仓库信息：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure><p>需要什么就可以安装，拉取速度很快。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;CentOS官网镜像源现在已经基本访问不通，所以需要更换下载镜像源。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 如果你的服务器是内网，首先需要需要添加DNS，否则还是可能遇到其他的问题。&lt;/p&gt;
+&lt;figure class=&quot;highlight </summary>
+      
+    
+    
+    
+    
+    <category term="教程" scheme="https://coutures.top/tags/%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>GitHub加速（非挂VPN）</title>
@@ -443,25 +469,6 @@
     
     
     <category term="Hexo" scheme="https://coutures.top/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac自带文件修改</title>
-    <link href="https://coutures.top/posts/65189.html"/>
-    <id>https://coutures.top/posts/65189.html</id>
-    <published>2023-11-12T07:23:34.000Z</published>
-    <updated>2024-04-11T13:57:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="问题所在："><a class="headerlink" href="#问题所在："></a>问题所在：</h3><span id="more"></span><img src="https://typora-couture.oss-cn-hangzhou.aliyuncs.com/image-20231112151723433.png" alt="image-20231112151723433" style="zoom:50%;" /><p>想要修改<code>Mac</code>系统的文件，但是上图来看，没有操作权限</p><h3 id="解决方案："><a class="headerlink" href="#解决方案："></a>解决方案：</h3><ol><li><h5 id="禁用SIP并删除文件："><a class="headerlink" href="#禁用SIP并删除文件："></a><strong>禁用SIP并删除文件：</strong></h5><ul><li><p>重启电脑，并在启动时按住<code>Command + R</code> 进入恢复模式。</p></li><li><p>打开终端（在“实用工具”菜单中选择“终端”）。</p></li><li><p>在终端中输入以下命令来禁用SIP：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrutil disable</span><br></pre></td></tr></table></figure></li><li><p>重启电脑。</p></li><li><p>重新尝试删除文件：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf ~/Desktop/hosts</span><br></pre></td></tr></table></figure></li></ul></li><li><h5 id="重新启用SIP："><a class="headerlink" href="#重新启用SIP："></a><strong>重新启用SIP：</strong></h5><ul><li><p>重启电脑，并在启动时按住<code>Command + R</code> 进入恢复模式。</p></li><li><p>打开终端，输入以下命令来重新启用SIP：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csrutil enable</span><br></pre></td></tr></table></figure></li><li><p>重启电脑。</p></li></ul></li></ol><p>问题解决!!!</p>]]></content>
-    
-    
-    <summary type="html">删除hosts复制到本地的文件</summary>
-    
-    
-    
-    
-    <category term="Mac" scheme="https://coutures.top/tags/Mac/"/>
     
   </entry>
   
