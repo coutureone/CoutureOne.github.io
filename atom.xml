@@ -6,7 +6,7 @@
   <link href="https://coutures.top/atom.xml" rel="self"/>
   
   <link href="https://coutures.top/"/>
-  <updated>2024-10-22T06:12:51.847Z</updated>
+  <updated>2024-11-09T13:11:30.219Z</updated>
   <id>https://coutures.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>奔跑吧，“骚”年</title>
+    <link href="https://coutures.top/posts/27811.html"/>
+    <id>https://coutures.top/posts/27811.html</id>
+    <published>2024-11-09T13:06:50.000Z</published>
+    <updated>2024-11-09T13:11:30.219Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙。怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮、竞豪奢。 重湖叠山献清佳。</p></blockquote><p> 杭州最近迎来了深秋，跑步热身的时间也是越来越长，自己从7月份到现在已经跑了快400公里，跑步的目的对我来说就是为了锻炼身体，我一直都是喜欢轻装上阵，带着手表和耳机，从来都是不拿手机的，毕竟对我来说现在还是家庭，工作上面的琐事都是提前处理，跑步的时候就是希望放下这些，一个人去享受这个过程。</p><p> 因为自己跑步的记录软件一直都是<code>keep</code>，但是我发现这个软件现在是越来越不老实了，让我觉得有必要去给我的数据放到新的软件上面，毕竟鸡蛋不能放在同一个篮子，虽然导出的<code>gpx</code>文件心率无法同步到其他平台，但是我还是这样坚持去做了,我花费了一天的时间，在<code>Github</code>上面看到了大佬<a href="https://github.com/yihong0618">yihong0618</a>关于跑步的开源项目<a href="https://github.com/yihong0618/running_page">running_page</a>，直接帮我解决数据同步的问题，刚好我的想法也是同步到<code>strava</code>上面，同步过程中也发现了不少问题，没想到我给大佬提issues，没想到都是基本秒回，也顺利帮助我完成了同步，但是跑步主页我暂时还没有精力去打造，可能等到自己在十二月份自己有时间了会去更新一下自己的跑步主页吧，自己现在跑得不多，主页更新起来也没那么好看，总而言之，非常感谢大佬~</p><p> 今年的自己估计跑步量可能不到500公里了，毕竟不能忘记自己的初心还好以健康为主，健康的坚持才是王道，加强自己关节的肌肉锻炼，很多人因为跑步伤了膝盖，脚踝等。</p><p> 跑步就像是我们的生活一样，一往无前，循序渐进…</p><p><img src="https://s3.qjqq.cn/50/672f5e19b51e1.webp!color" alt="" loading="lazy"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;东南形胜，三吴都会，钱塘自古繁华。烟柳画桥，风帘翠幕，参差十万人家。云树绕堤沙。怒涛卷霜雪，天堑无涯。市列珠玑，户盈罗绮、竞豪奢。 重湖叠山献清佳。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 杭州最近迎来了深秋，跑步热身的时间也是越来越长，自己从</summary>
+      
+    
+    
+    
+    
+    <category term="杂谈" scheme="https://coutures.top/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>CentOS换源阿里云</title>
@@ -188,9 +213,9 @@
     
     
     
-    <category term="软考" scheme="https://coutures.top/tags/%E8%BD%AF%E8%80%83/"/>
-    
     <category term="杂谈" scheme="https://coutures.top/tags/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="软考" scheme="https://coutures.top/tags/%E8%BD%AF%E8%80%83/"/>
     
   </entry>
   
@@ -448,27 +473,6 @@
     
     
     <category term="Mac" scheme="https://coutures.top/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo主题之hexo-theme-matery踩坑</title>
-    <link href="https://coutures.top/posts/57178.html"/>
-    <id>https://coutures.top/posts/57178.html</id>
-    <published>2023-12-31T13:47:39.000Z</published>
-    <updated>2024-04-11T23:57:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1、序言："><a class="headerlink" href="#1、序言："></a>1、序言：</h2><blockquote><p>最近元旦放假，想着自己也没啥事情要做的，自己博客也是好久没有更新过了，自己想换一个主题，然后参照了很多主题，最后选择了github上面的开源主题<a href="https://github.com/blinkfox/hexo-theme-matery">hexo-thme-matery</a>这个主题，然后就有了下面就是自己遇到的一些坑了~</p></blockquote><h2 id="2、踩坑"><a class="headerlink" href="#2、踩坑"></a>2、踩坑</h2><h3 id="2-1-标题"><a class="headerlink" href="#2-1-标题"></a>2.1 标题</h3><p><img src="https://typora-couture.oss-cn-hangzhou.aliyuncs.com/image-20231231222639509.png" alt="" loading="lazy"></p><p>上图箭头指的就是我踩坑的第一个点了，这个其实也是怪我自己没有好好去看官方文档，其实这里就是你想要的博客名称，但是这个配置文件里面是没有显示的，这个需要你手动去添加，在根目录配置文件里面修改<code>themes/hexo-theme-matery/_config.yml</code>在<code>_config.yml</code>配置文件里面进行添加：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title: Couture<span class="string">&#x27;s Blog       # title后面就是你的博客名字，也就是我上面箭头指的地方</span></span><br></pre></td></tr></table></figure><p>修改完成以后，就是下面这样的了，第一个坑算是解决了</p><p><img src="https://typora-couture.oss-cn-hangzhou.aliyuncs.com/image-20231231222609248.png" alt="" loading="lazy"></p><h3 id="2-2-副标题"><a class="headerlink" href="#2-2-副标题"></a>2.2 副标题</h3><p>先说明这个问题如何产生，如下图（当然这个是我已经修改好了），没有修改的话上面这段话显示的是<code>subtitle</code>,我一直以为副标题在配置文件中修改：</p><p><code>subtitle</code>配置文件：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">subtitle:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">loop:</span> <span class="literal">true</span> <span class="comment"># 是否循环</span></span><br><span class="line">  <span class="attr">showCursor:</span> <span class="literal">true</span> <span class="comment"># 是否显示光标</span></span><br><span class="line">  <span class="attr">startDelay:</span> <span class="number">300</span> <span class="comment"># 开始延迟</span></span><br><span class="line">  <span class="attr">typeSpeed:</span> <span class="number">100</span> <span class="comment"># 打字速度</span></span><br><span class="line">  <span class="attr">backSpeed:</span> <span class="number">50</span> <span class="comment"># 删除速度</span></span><br><span class="line">  <span class="attr">sub:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">忽有故人心上过,回首山河已是秋,恰有相思同沐雪,此生已算共白头</span></span><br></pre></td></tr></table></figure><p>但是我发现问题根本不是在这里，而是在<code>themes/hexo-theme-matery/layout/_partial/bg-cover-content.ejs</code>在博客主题里面的<code>bg-cover-content.ejs</code>这个文件夹里面，第7行8行之间，下面我也给配置文件内容给列出来，对应修改就行了，第二个坑也算是给解决了。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;row&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;col s10 offset-s1 m8 offset-m2 l8 offset-l2&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;brand&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;title center-align&quot;&gt;</span><br><span class="line">                &lt;% if (config.subtitle &amp;&amp; config.subtitle.length &gt; 0) &#123; %&gt;</span><br><span class="line">                &lt;%= config.subtitle %&gt;</span><br><span class="line">                &lt;% &#125; else &#123; %&gt;</span><br><span class="line">                        物来顺应，未来不迎，当时不杂，既过不恋  </span><br><span class="line">                &lt;% &#125; %&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><img src="https://typora-couture.oss-cn-hangzhou.aliyuncs.com/image-20231231222711587.png" alt="" loading="lazy"></p><p>上面是我修改这个副标题的方式，可能看到这篇博客的大佬们还有更好的修改方式，我可能只是用了一种最笨的方式了。</p><h3 id="2-3-代码块之究极大坑"><a class="headerlink" href="#2-3-代码块之究极大坑"></a>2.3 代码块之究极大坑</h3><p>问题产生，如图所示的代码块显示出了明显的问题：</p><p><img src="https://typora-couture.oss-cn-hangzhou.aliyuncs.com/11111.png" alt="" loading="lazy"></p><p>我最开始想着是我在<code>_config.yml</code>配置文件中没有设置好，但是我看配置文件中的相关的是<code>code</code>,没有代码块的样式设置，只有一些开关如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 代码块相关</span></span><br><span class="line"><span class="attr">code:</span></span><br><span class="line">  <span class="attr">lang:</span> <span class="literal">true</span> <span class="comment"># 代码块是否显示名称</span></span><br><span class="line">  <span class="attr">copy:</span> <span class="literal">true</span> <span class="comment"># 代码块是否可复制</span></span><br><span class="line">  <span class="attr">shrink:</span> <span class="literal">true</span> <span class="comment"># 代码块是否可以收缩</span></span><br><span class="line">  <span class="attr">break:</span> <span class="literal">false</span> <span class="comment"># 代码是否折行</span></span><br></pre></td></tr></table></figure><p>这些显示，我是怎么设置都不能解决问题，然后就开始百度查询问题解决方式，最后经过不懈努力，终于是找到了方式，这个<code>github</code>的<code>issue</code>中也有其他的小伙伴提到过，我的解决方案：</p><h5 id="2-3-1-首先要安装插件hexo-prism-plugin："><a class="headerlink" href="#2-3-1-首先要安装插件hexo-prism-plugin："></a>2.3.1 首先要安装插件<code>hexo-prism-plugin</code>：</h5>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-prism-plugin --save</span><br><span class="line"></span><br></pre></td></tr></table></figure><h5 id="2-3-2-因为hexo主题自带有highlight语法高亮插件，这个插件要禁用"><a class="headerlink" href="#2-3-2-因为hexo主题自带有highlight语法高亮插件，这个插件要禁用"></a>2.3.2 因为<code>hexo</code>主题自带有<code>highlight</code>语法高亮插件，这个插件要禁用</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">highlight:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>  <span class="comment"># 禁用</span></span><br><span class="line">  <span class="attr">line_number:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">auto_detect:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">tab_replace:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">wrap:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">hljs:</span> <span class="literal">false</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 禁用以后下面的这些都不用管的</span></span><br></pre></td></tr></table></figure><p>2.3.3 开始配置<code>hexo-prism-plugin</code>插件，然后插件的配置用途我在下面也进行解释说明</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">prism_plugin:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>  <span class="comment"># 插件是否开启</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">&#x27;tomorrow&#x27;</span> <span class="comment"># 插件主题</span></span><br><span class="line">  <span class="attr">preprocess:</span> <span class="literal">true</span>  <span class="comment"># 预加载功能是否开启</span></span><br><span class="line">  <span class="attr">line_number:</span> <span class="literal">true</span> <span class="comment"># 行号是否开启</span></span><br><span class="line">  <span class="attr">tab_replace:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure><h5 id="2-3-4-看最后的显示效果"><a class="headerlink" href="#2-3-4-看最后的显示效果"></a>2.3.4 看最后的显示效果</h5><p><img src="https://typora-couture.oss-cn-hangzhou.aliyuncs.com/image-20231231222806955.png" alt="" loading="lazy"></p><h5 id="2-4-5-到此这个坑已经是解决了。"><a class="headerlink" href="#2-4-5-到此这个坑已经是解决了。"></a>2.4.5 到此这个坑已经是解决了。</h5><h3 id="3、致谢"><a class="headerlink" href="#3、致谢"></a>3、致谢</h3><p>感谢开源作者<a href="https://github.com/blinkfox">@Blinkfox</a>的贡献精美主题</p><p>对我来说这个主题里面的很多功能我是没有启用的，目前看来也已经是够用了，记录一些琐碎的东西，也希望更多伙伴能一起讨论关于这个主题的一些东西，共同学习和进步，希望我的这篇记录也能给你带来些许的帮助~</p>]]></content>
-    
-    
-    <summary type="html">hexo主题的完善之一</summary>
-    
-    
-    
-    <category term="Hexo" scheme="https://coutures.top/categories/Hexo/"/>
-    
-    
-    <category term="Hexo" scheme="https://coutures.top/tags/Hexo/"/>
     
   </entry>
   
