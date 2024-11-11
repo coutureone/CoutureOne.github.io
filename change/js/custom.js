@@ -1,7 +1,7 @@
 let ipLocation; // 确保 ipLocation 在全局范围内定义
 
 // 进行 fetch 请求
-fetch('https://api.76.al/api/ip/query?key=J37yv6YihQLSXFT07ASriV4RlA') //申请key:https://api.76.al
+fetch('https://api.76.al/api/ip/query?key=ky7kgDokxU1aWZfYNjWttgZD2y') //申请key:https://api.76.al
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -38,7 +38,7 @@ function showWelcome() {
         return;
     }
 
-    let dist = getDistance(121.413921, 31.089290, ipLocation.data.lng, ipLocation.data.lat); // 修改自己的经度（121.413921）纬度（31.089290）
+    let dist = getDistance(120.209000,30.247100, ipLocation.data.lng, ipLocation.data.lat); // 修改自己的经度（121.413921）纬度（31.089290）
     let pos = ipLocation.data.country;
     let ip = ipLocation.ip;
     let posdesc;
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const month = `${myDate.getMonth() + 1}`.padStart(2, '0');
         const day = `${myDate.getDate()}`.padStart(2, '0');
         const formattedDate = `${month}${day}`;
-        const historyDataUrl = `https://api.76.al/api/history/query?key=J37yv6YihQLSXFT07ASriV4RlA`; //请到:https://api.76.al申请
+        const historyDataUrl = `https://api.76.al/api/history/query?key=ky7kgDokxU1aWZfYNjWttgZD2y`; //请到:https://api.76.al申请
 
         try {
             const response = await fetch(historyDataUrl);
