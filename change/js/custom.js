@@ -1,3 +1,5 @@
+let ipLocation; // 确保 ipLocation 在全局范围内定义
+
 // 进行 fetch 请求
 fetch('https://api.76.al/api/ip/query?key=J37yv6YihQLSXFT07ASriV4RlA') //申请key:https://api.76.al
     .then(response => {
@@ -36,12 +38,11 @@ function showWelcome() {
         return;
     }
 
-    let dist = getDistance(120.280027, 30.214927, ipLocation.data.lng, ipLocation.data.lat); // 修改自己的经度（121.413921）纬度（31.089290）
+    let dist = getDistance(121.413921, 31.089290, ipLocation.data.lng, ipLocation.data.lat); // 修改自己的经度（121.413921）纬度（31.089290）
     let pos = ipLocation.data.country;
     let ip = ipLocation.ip;
     let posdesc;
 
-    // 以下的代码需要根据新API返回的结果进行相应的调整
     switch (ipLocation.data.country) {
         case "日本":
             posdesc = "よろしく，一起去看樱花吗";
@@ -73,102 +74,8 @@ function showWelcome() {
                 case "北京市":
                     posdesc = "北——京——欢迎你~~~";
                     break;
-                case "天津市":
-                    posdesc = "讲段相声吧";
-                    break;
-                case "河北省":
-                    posdesc = "山势巍巍成壁垒，天下雄关铁马金戈由此向，无限江山";
-                    break;
-                case "山西省":
-                    posdesc = "展开坐具长三尺，已占山河五百余";
-                    break;
-                case "内蒙古自治区":
-                    posdesc = "天苍苍，野茫茫，风吹草低见牛羊";
-                    break;
-                case "辽宁省":
-                    posdesc = "我想吃烤鸡架！";
-                    break;
-                case "吉林省":
-                    posdesc = "状元阁就是东北烧烤之王";
-                    break;
-                case "黑龙江省":
-                    posdesc = "很喜欢哈尔滨大剧院";
-                    break;
-                case "上海省":
-                    posdesc = "众所周知，中国只有两个城市";
-                    break;
-                case "江苏省":
-                    switch (ipLocation.data.city) {
-                        case "南京省":
-                            posdesc = "这是我挺想去的城市啦";
-                            break;
-                        case "苏州省":
-                            posdesc = "上有天堂，下有苏杭";
-                            break;
-                        default:
-                            posdesc = "散装是必须要散装的";
-                            break;
-                    }
-                    break;
-                case "浙江省":
-                    switch (ipLocation.data.city) {
-                        case "杭州市":
-                            posdesc = "东风渐绿西湖柳，雁已还人未南归";
-                            break;
-                        default:
-                            posdesc = "望海楼明照曙霞,护江堤白蹋晴沙";
-                            break;
-                    }
-                    break;
-                case "河南省":
-                    switch (ipLocation.data.city) {
-                        case "郑州市":
-                            posdesc = "豫州之域，天地之中";
-                            break;
-                        case "信阳市":
-                            posdesc = "品信阳毛尖，悟人间芳华";
-                            break;
-                        case "南阳市":
-                            posdesc = "臣本布衣，躬耕于南阳此南阳非彼南阳！";
-                            break;
-                        case "驻马店市":
-                            posdesc = "峰峰有奇石，石石挟仙气嵖岈山的花很美哦！";
-                            break;
-                        case "开封市":
-                            posdesc = "刚正不阿包青天";
-                            break;
-                        case "洛阳市":
-                            posdesc = "洛阳牡丹甲天下";
-                            break;
-                        default:
-                            posdesc = "可否带我品尝河南烩面啦？";
-                            break;
-                    }
-                    break;
-                case "安徽省":
-                    posdesc = "蚌埠住了，芜湖起飞";
-                    break;
-                case "福建省":
-                    posdesc = "井邑白云间，岩城远带山";
-                    break;
-                case "江西省":
-                    posdesc = "落霞与孤鹜齐飞，秋水共长天一色";
-                    break;
-                case "山东省":
-                    posdesc = "遥望齐州九点烟，一泓海水杯中泻";
-                    break;
-                case "湖北省":
-                    switch (ipLocation.data.city) {
-                        case "黄冈市":
-                            posdesc = "红安将军县！辈出将才！";
-                            break;
-                        default:
-                            posdesc = "来碗热干面~";
-                            break;
-                    }
-                    break;
-                case "湖南省":
-                    posdesc = "74751，长沙斯塔克";
+                case "上海市":
+                    posdesc = "走在外滩，感受历史与现代的交融。";
                     break;
                 case "广东省":
                     switch (ipLocation.data.city) {
@@ -178,55 +85,165 @@ function showWelcome() {
                         case "深圳市":
                             posdesc = "今天你逛商场了嘛~";
                             break;
-                        case "阳江市":
-                            posdesc = "阳春合水！博主家乡~ 欢迎来玩~";
+                        default:
+                            posdesc = "带你感受广东的热情与美食！";
+                            break;
+                    }
+                    break;
+                case "浙江省":
+                    switch (ipLocation.data.city) {
+                        case "杭州市":
+                            posdesc = "西湖美景，三月天~";
+                            break;
+                        case "宁波市":
+                            posdesc = "来宁波，感受大海的气息。";
                             break;
                         default:
-                            posdesc = "来两斤福建人~";
+                            posdesc = "这里是浙江，充满江南的韵味！";
+                            break;
+                    }
+                    break;
+                case "四川省":
+                    switch (ipLocation.data.city) {
+                        case "成都市":
+                            posdesc = "宽窄巷子，成都慢生活。";
+                            break;
+                        case "绵阳市":
+                            posdesc = "享受科技城的宁静与创新。";
+                            break;
+                        default:
+                            posdesc = "来四川，品麻辣火锅，赏壮丽山河。";
+                            break;
+                    }
+                    break;
+                case "福建省":
+                    switch (ipLocation.data.city) {
+                        case "厦门市":
+                            posdesc = "鼓浪屿听海，厦门美食让人流连忘返。";
+                            break;
+                        case "福州市":
+                            posdesc = "有福之州，来此感受千年古城。";
+                            break;
+                        default:
+                            posdesc = "福建山水如画，美景无处不在。";
+                            break;
+                    }
+                    break;
+                case "山东省":
+                    switch (ipLocation.data.city) {
+                        case "青岛市":
+                            posdesc = "来青岛喝啤酒，看大海吧！";
+                            break;
+                        case "济南市":
+                            posdesc = "泉城济南，四面荷花三面柳。";
+                            break;
+                        default:
+                            posdesc = "山东好客，欢迎来感受齐鲁文化！";
+                            break;
+                    }
+                    break;
+                case "江苏省":
+                    switch (ipLocation.data.city) {
+                        case "南京市":
+                            posdesc = "六朝古都南京，历史与现代的碰撞。";
+                            break;
+                        case "苏州市":
+                            posdesc = "来苏州，感受园林之美。";
+                            break;
+                        default:
+                            posdesc = "水乡泽国，江南佳丽地。";
+                            break;
+                    }
+                    break;
+                case "河北省":
+                    posdesc = "燕赵大地，英雄辈出的河北，等你探索！";
+                    break;
+                case "河南省":
+                    switch (ipLocation.data.city) {
+                        case "郑州市":
+                            posdesc = "中原大地，郑州是交通枢纽与历史重镇。";
+                            break;
+                        case "洛阳市":
+                            posdesc = "千年古都洛阳，牡丹花开的城市。";
+                            break;
+                        default:
+                            posdesc = "这里是河南，历史悠久文化灿烂。";
+                            break;
+                    }
+                    break;
+                case "湖南省":
+                    switch (ipLocation.data.city) {
+                        case "长沙市":
+                            posdesc = "热辣长沙，吃小龙虾逛黄兴路步行街。";
+                            break;
+                        default:
+                            posdesc = "湖南，烟雨迷蒙的湘江流过这片土地。";
+                            break;
+                    }
+                    break;
+                case "湖北省":
+                    switch (ipLocation.data.city) {
+                        case "武汉市":
+                            posdesc = "来大武汉，过长江大桥，吃热干面！";
+                            break;
+                        default:
+                            posdesc = "湖北，长江中游的明珠，风景秀丽。";
+                            break;
+                    }
+                    break;
+                case "安徽省":
+                    switch (ipLocation.data.city) {
+                        case "合肥市":
+                            posdesc = "创新之城合肥，科教文化汇聚地。";
+                            break;
+                        default:
+                            posdesc = "安徽山水，黄山、九华山欢迎你。";
                             break;
                     }
                     break;
                 case "广西壮族自治区":
-                    posdesc = "桂林山水甲天下";
-                    break;
-                case "海南省":
-                    posdesc = "朝观日出逐白浪，夕看云起收霞光";
-                    break;
-                case "四川省":
-                    posdesc = "康康川妹子";
+                    switch (ipLocation.data.city) {
+                        case "桂林市":
+                            posdesc = "桂林山水甲天下，风景如画。";
+                            break;
+                        case "南宁市":
+                            posdesc = "绿城南宁，宜居宜游。";
+                            break;
+                        default:
+                            posdesc = "广西山清水秀，民俗风情浓郁。";
+                            break;
+                    }
                     break;
                 case "贵州省":
-                    posdesc = "茅台，学生，再塞200";
+                    posdesc = "来贵州，品茅台，赏黄果树瀑布。";
                     break;
                 case "云南省":
-                    posdesc = "玉龙飞舞云缠绕，万仞冰川直耸天";
+                    switch (ipLocation.data.city) {
+                        case "昆明市":
+                            posdesc = "春城昆明，四季如春，风景秀丽。";
+                            break;
+                        case "大理市":
+                            posdesc = "苍山洱海，大理古城，你来了就不想走。";
+                            break;
+                        default:
+                            posdesc = "云南风景独特，风情万种。";
+                            break;
+                    }
                     break;
                 case "西藏自治区":
-                    posdesc = "躺在茫茫草原上，仰望蓝天";
-                    break;
-                case "陕西省":
-                    posdesc = "来份臊子面加馍";
-                    break;
-                case "甘肃省":
-                    posdesc = "羌笛何须怨杨柳，春风不度玉门关";
-                    break;
-                case "青海":
-                    posdesc = "牛肉干和老酸奶都好好吃";
-                    break;
-                case "宁夏回族自治区":
-                    posdesc = "大漠孤烟直，长河落日圆";
+                    posdesc = "世界屋脊西藏，神秘而纯净。";
                     break;
                 case "新疆维吾尔自治区":
-                    posdesc = "驼铃古道丝绸路，胡马犹闻唐汉风";
+                    posdesc = "辽阔新疆，民族风情与壮丽景观并存。";
                     break;
-                case "台湾省":
-                    posdesc = "我在这头，大陆在那头";
+                case "内蒙古自治区":
+                    posdesc = "草原辽阔的内蒙古，等你来策马奔腾。";
                     break;
-                case "香港特别行政区":
-                    posdesc = "永定贼有残留地鬼嚎，迎击光非岁玉";
+                case "宁夏回族自治区":
+                    posdesc = "宁夏，塞上江南，黄河流经的美丽地方。";
                     break;
-                case "澳门特别行政区":
-                    posdesc = "性感荷官，在线发牌";
+                case "海南省":
+                    posdesc = "阳光、沙滩、椰风海韵，欢迎来海南度假。";
                     break;
                 default:
                     posdesc = "带我去你的城市逛逛吧！";
@@ -252,9 +269,7 @@ function showWelcome() {
 
     if (welcomeInfoElement) {
         welcomeInfoElement.innerHTML =
-            `欢迎来自 <b><span style="color: var(--efu-main)">${pos}</span></b> 的小友💖<br>${posdesc}🍂<br>当前位置距博主约 <b><span style="color: var(--efu-main)">${dist}</span></b> 公里！<br>您的IP地址为：<b><span style="font-size: 15px;">${ip}</span></b><br>${timeChange} <br>`;
-    } else {
-        console.log("Pjax无法获取元素");
+            `欢迎来自 <b><span style="color: var(--efu-main)">${pos}</span></b> 的小友💖<br>当前位置距博主约 <b><span style="color: var(--efu-main)">${dist.toFixed(2)}</span></b> 公里！<br>${timeChange}<br>Tip：<b><span style="font-size: 15px;">${posdesc}</span></b>`;
     }
 }
 
@@ -273,8 +288,7 @@ window.onload = function () {
         showWelcome();
     }
     document.addEventListener("pjax:complete", handlePjaxComplete);
-};
-
+}
 
 
 // 那年今日
