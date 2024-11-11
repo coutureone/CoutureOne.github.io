@@ -34,7 +34,6 @@ function getDistance(e1, n1, e2, n2) {
 
 function showWelcome() {
     if (!ipLocation || !ipLocation.data) {
-        console.error('ipLocation data is not available.');
         return;
     }
 
