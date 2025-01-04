@@ -51,6 +51,93 @@
       --loader-bg: rgba(26, 26, 26, .95);
       --card-bg: #2a2a2a;
       --card-border: #333333;
+      
+      /* 文章相关样式 */
+      --title-color: #ffffff;
+      --meta-color: #888888;
+      --content-color: #dddddd;
+      --heading-color: #ffffff;
+      --blockquote-color: #888888;
+      --blockquote-border: #333333;
+      --code-bg: #2a2a2a;
+      --code-color: #dddddd;
+      --pre-bg: #2a2a2a;
+      --pre-color: #dddddd;
+      --hr-color: #333333;
+      
+      /* 导航和用户信息相关 */
+      --nav-bg: #2a2a2a;
+      --nav-border: #333333;
+      --user-border: #333333;
+      --avatar-border: #444444;
+      
+      /* 评论区相关 */
+      --comment-bg: #2a2a2a;
+      --comment-border: #333333;
+      --comment-meta: #888888;
+      
+      /* 其他元素 */
+      --shadow-color: rgba(0, 0, 0, 0.2);
+      --selection-bg: #666666;
+      --selection-color: #ffffff;
+    }
+
+    /* 添加选中文本的样式 */
+    ::selection {
+      background-color: var(--selection-bg);
+      color: var(--selection-color);
+    }
+
+    /* 补充文章内容的样式 */
+    .single .post {
+      color: var(--content-color);
+    }
+
+    .single .post h1,
+    .single .post h2,
+    .single .post h3,
+    .single .post h4,
+    .single .post h5,
+    .single .post h6 {
+      color: var(--heading-color);
+    }
+
+    .single .post blockquote {
+      color: var(--blockquote-color);
+      border-left-color: var(--blockquote-border);
+    }
+
+    .single .post code {
+      background-color: var(--code-bg);
+      color: var(--code-color);
+    }
+
+    .single .post pre {
+      background-color: var(--pre-bg);
+      color: var(--pre-color);
+    }
+
+    .single .post hr {
+      border-color: var(--hr-color);
+    }
+
+    /* 用户信息和导航样式 */
+    #user {
+      border-color: var(--user-border);
+    }
+
+    .avatar {
+      border-color: var(--avatar-border);
+    }
+
+    /* 评论区样式 */
+    .comments {
+      background-color: var(--comment-bg);
+      border-color: var(--comment-border);
+    }
+
+    .comment-meta {
+      color: var(--comment-meta);
     }
 
     body {
