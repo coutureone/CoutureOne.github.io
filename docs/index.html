@@ -157,7 +157,6 @@
   </div>
 </div>
 <div id="loader"><div></div></div>
-<script src="./index.92ae90d1.js"></script>
 <script>
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -175,6 +174,19 @@
       document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     }
   });
+
+  window.config = {
+    organization: false,
+    order: 'CREATED_AT',
+    title: "Couture's Blog",
+    user: 'coutureone',
+    repository: 'gitblog',
+    authors: 'Couture',
+    ignores: '',
+    hash: 'ghp_WxJ$kKHi^rOFBUcCxwypTbLbEh(xRs#dw%hhYmxvZy5jb3V0dXJlcy50b3A=',
+    perpage: 5,
+  }
 </script>
+<script src="./index.92ae90d1.js"></script>
 </body>
 </html>
