@@ -1,0 +1,77 @@
+:root[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --link-color: #6ea8fe;
+  --border-color: #404040;
+  --code-bg: #2d2d2d;
+  --blockquote-color: #808080;
+  --card-bg: #2d2d2d;
+  --header-bg: #242424;
+}
+
+:root[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #24292f;
+  --link-color: #0969da;
+  --border-color: #d0d7de;
+  --code-bg: #f6f8fa;
+  --blockquote-color: #6e7781;
+  --card-bg: #ffffff;
+  --header-bg: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--link-color);
+}
+
+pre, code {
+  background-color: var(--code-bg);
+}
+
+blockquote {
+  color: var(--blockquote-color);
+  border-left-color: var(--border-color);
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+#bar {
+  background-color: var(--header-bg);
+  border-bottom-color: var(--border-color);
+}
+
+.theme-switch {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+}
+
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  opacity: 0.8;
+}
+
+#theme-toggle:hover {
+  opacity: 1;
+  background-color: var(--border-color);
+}
+
+.loading #loader div {
+  background-color: var(--bg-color);
+} 
