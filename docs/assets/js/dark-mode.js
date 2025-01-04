@@ -8,13 +8,31 @@ function initThemeToggle() {
 
   const themeToggle = document.getElementById('theme-toggle');
   const root = document.documentElement;
-  const body = document.body;
   
   // 应用主题
   function applyTheme(theme) {
+    // 设置根元素属性
     root.setAttribute('data-theme', theme);
-    body.style.backgroundColor = theme === 'dark' ? '#1a1a1a' : '#ffffff';
-    body.style.color = theme === 'dark' ? '#e0e0e0' : '#24292f';
+    
+    // 直接设置样式
+    document.body.style.setProperty('background-color', theme === 'dark' ? '#1a1a1a' : '#ffffff');
+    document.body.style.setProperty('color', theme === 'dark' ? '#e0e0e0' : '#24292f');
+    
+    // 设置链接颜色
+    const links = document.getElementsByTagName('a');
+    const linkColor = theme === 'dark' ? '#6ea8fe' : '#0969da';
+    for (let link of links) {
+      link.style.setProperty('color', linkColor, 'important');
+    }
+    
+    // 设置代码块背景
+    const codeBlocks = document.getElementsByTagName('pre');
+    const codeBg = theme === 'dark' ? '#2d2d2d' : '#f6f8fa';
+    for (let block of codeBlocks) {
+      block.style.setProperty('background-color', codeBg, 'important');
+    }
+    
+    // 保存主题设置
     localStorage.setItem('theme', theme);
   }
   
@@ -36,7 +54,6 @@ function initThemeToggle() {
   
   // 切换主题
   themeToggle.addEventListener('click', function() {
-    console.log('Theme toggle clicked');
     const currentTheme = root.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     applyTheme(newTheme);

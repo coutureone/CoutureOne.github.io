@@ -66,7 +66,6 @@ blockquote {
   position: relative;
   transform: scale(1);
   transition: transform 0.2s ease;
-  color: var(--text-color);
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -85,7 +84,7 @@ blockquote {
   line-height: 24px;
 }
 
-:root[data-theme="dark"] #theme-toggle::before {
+[data-theme="dark"] #theme-toggle::before {
   content: '🌙';
 }
 
