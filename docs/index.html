@@ -8,9 +8,11 @@
   <title> Couture's Blog </title>
   <script>
     // 初始化主题并设置到全局变量
-    window.theme = localStorage.getItem('theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', window.theme);
+    document.addEventListener('DOMContentLoaded', () => {
+      window.theme = localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', window.theme);
+    });
 
     // 创建一个 MutationObserver 来监听属性变化
     const observer = new MutationObserver((mutations) => {
