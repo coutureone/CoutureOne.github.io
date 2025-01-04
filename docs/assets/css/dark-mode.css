@@ -21,32 +21,32 @@
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
-  color: var(--link-color);
+  color: var(--link-color) !important;
 }
 
 pre, code {
-  background-color: var(--code-bg);
+  background-color: var(--code-bg) !important;
 }
 
 blockquote {
-  color: var(--blockquote-color);
-  border-left-color: var(--border-color);
+  color: var(--blockquote-color) !important;
+  border-left-color: var(--border-color) !important;
 }
 
 .card {
-  background-color: var(--card-bg);
-  border-color: var(--border-color);
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
 }
 
 #bar {
-  background-color: var(--header-bg);
-  border-bottom-color: var(--border-color);
+  background-color: var(--header-bg) !important;
+  border-bottom-color: var(--border-color) !important;
 }
 
 .theme-switch {
@@ -75,12 +75,10 @@ blockquote {
   transform: scale(1.1);
 }
 
-/* 隐藏默认的 emoji */
 #theme-toggle span {
   display: none;
 }
 
-/* 使用伪元素显示图标 */
 #theme-toggle::before {
   content: '☀️';
   font-size: 20px;
