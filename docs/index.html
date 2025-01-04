@@ -2,18 +2,38 @@
 <html lang="en" class="loading">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="shortcut icon" href="https://fav.farm/👨🏻‍💻" />
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Couture's Blog</title>
+  <title> Couture's Blog </title>
   <script>
-    // 立即初始化主题
-    (function() {
-      const savedTheme = localStorage.getItem('theme');
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      window.theme = savedTheme || systemTheme;
+    // 初始化主题并设置到全局变量
+    document.addEventListener('DOMContentLoaded', () => {
+      window.theme = localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', window.theme);
-    })();
+    });
+
+    // 创建一个 MutationObserver 来监听属性变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          // 当 loading 类被移除时，重新应用主题
+          if (!document.documentElement.classList.contains('loading')) {
+            document.documentElement.setAttribute('data-theme', window.theme);
+          }
+        }
+      });
+    });
+
+    // 开始观察 html 元素的属性变化
+    window.addEventListener('load', () => {
+      observer.observe(document.documentElement, {
+        attributes: true
+      });
+      // 确保在页面加载完成后移除 loading 类
+      document.documentElement.classList.remove('loading');
+    });
   </script>
   <link rel="preload" href="LXGWWenKaiGB-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <script>
@@ -255,7 +275,7 @@
   </svg>
 </button>
 <div id="bar"></div>
-<div class="page home">
+<div class="page home" style="background: var(--bg-color);">
   <div>
     <div id="user"></div>
     <div id="posts"></div>
