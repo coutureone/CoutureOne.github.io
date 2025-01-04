@@ -7,10 +7,29 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> Couture's Blog </title>
   <script>
-    // 初始化主题
-    const theme = localStorage.getItem('theme') || 
+    // 初始化主题并设置到全局变量
+    window.theme = localStorage.getItem('theme') || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', window.theme);
+    
+    // 创建一个 MutationObserver 来监听属性变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          // 当 loading 类被移除时，重新应用主题
+          if (!document.documentElement.classList.contains('loading')) {
+            document.documentElement.setAttribute('data-theme', window.theme);
+          }
+        }
+      });
+    });
+
+    // 开始观察 html 元素的属性变化
+    window.addEventListener('load', () => {
+      observer.observe(document.documentElement, {
+        attributes: true
+      });
+    });
   </script>
   <link rel="preload" href="LXGWWenKaiGB-Regular.ttf" as="font" type="font/ttf" crossorigin>
   <script>
@@ -270,6 +289,7 @@
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    window.theme = newTheme; // 更新全局主题变量
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
   }
@@ -277,8 +297,15 @@
   // 监听系统主题变化
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('theme')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      const newTheme = e.matches ? 'dark' : 'light';
+      window.theme = newTheme;
+      document.documentElement.setAttribute('data-theme', newTheme);
     }
+  });
+
+  // 确保在页面加载完成后应用主题
+  window.addEventListener('load', () => {
+    document.documentElement.setAttribute('data-theme', window.theme);
   });
 </script>
 </body>
