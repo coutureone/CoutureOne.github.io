@@ -3,7 +3,7 @@ function initThemeToggle() {
   const bar = document.getElementById('bar');
   const themeSwitch = document.createElement('div');
   themeSwitch.className = 'theme-switch';
-  themeSwitch.innerHTML = '<button id="theme-toggle" aria-label="切换主题">🌓</button>';
+  themeSwitch.innerHTML = '<button id="theme-toggle" aria-label="切换主题"><span>切换主题</span></button>';
   bar.parentNode.insertBefore(themeSwitch, bar.nextSibling);
 
   const themeToggle = document.getElementById('theme-toggle');
@@ -22,29 +22,22 @@ function initThemeToggle() {
     if (!localStorage.getItem('theme')) {
       const newTheme = e.matches ? 'dark' : 'light';
       root.setAttribute('data-theme', newTheme);
-      updateLoaderBackground(newTheme);
     }
   });
   
-  // 切换主题并更新一些特定元素的样式
-  themeToggle.addEventListener('click', () => {
-    const currentTheme = root.getAttribute('data-theme');
+  // 切换主题
+  themeToggle.addEventListener('click', function() {
+    console.log('Theme toggle clicked'); // 添加调试日志
+    const currentTheme = root.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     root.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    updateLoaderBackground(newTheme);
   });
 }
 
-// 更新加载动画背景
-function updateLoaderBackground(theme) {
-  const loader = document.getElementById('loader');
-  if (loader) {
-    loader.style.backgroundColor = theme === 'dark' 
-      ? 'rgba(26, 26, 26, .95)' 
-      : 'rgba(255, 255, 255, .95)';
-  }
-}
-
-// 页面加载完成后初始化
-document.addEventListener('DOMContentLoaded', initThemeToggle); 
+// 确保在 DOM 完全加载后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initThemeToggle);
+} else {
+  initThemeToggle();
+} 

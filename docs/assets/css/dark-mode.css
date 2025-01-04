@@ -51,25 +51,44 @@ blockquote {
 
 .theme-switch {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 999;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 9999;
 }
 
 #theme-toggle {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-  opacity: 0.8;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+  color: var(--text-color);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #theme-toggle:hover {
-  opacity: 1;
-  background-color: var(--border-color);
+  transform: scale(1.1);
+}
+
+/* 隐藏默认的 emoji */
+#theme-toggle span {
+  display: none;
+}
+
+/* 使用伪元素显示图标 */
+#theme-toggle::before {
+  content: '☀️';
+  font-size: 20px;
+  line-height: 24px;
+}
+
+:root[data-theme="dark"] #theme-toggle::before {
+  content: '🌙';
 }
 
 .loading #loader div {
