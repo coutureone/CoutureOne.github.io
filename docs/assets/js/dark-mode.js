@@ -1,68 +1,40 @@
-function initThemeToggle() {
-  // 创建主题切换按钮并插入到 #bar 元素后面
-  const bar = document.getElementById('bar');
-  const themeSwitch = document.createElement('div');
-  themeSwitch.className = 'theme-switch';
-  themeSwitch.innerHTML = '<button id="theme-toggle" aria-label="切换主题"><span>切换主题</span></button>';
-  bar.parentNode.insertBefore(themeSwitch, bar.nextSibling);
+(function() {
+  // 初始化主题
+  function initTheme() {
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
 
-  const themeToggle = document.getElementById('theme-toggle');
-  const root = document.documentElement;
-  
-  // 应用主题
-  function applyTheme(theme) {
-    // 设置根元素属性
-    root.setAttribute('data-theme', theme);
-    
-    // 直接设置样式
-    document.body.style.setProperty('background-color', theme === 'dark' ? '#1a1a1a' : '#ffffff');
-    document.body.style.setProperty('color', theme === 'dark' ? '#e0e0e0' : '#24292f');
-    
-    // 设置链接颜色
-    const links = document.getElementsByTagName('a');
-    const linkColor = theme === 'dark' ? '#6ea8fe' : '#0969da';
-    for (let link of links) {
-      link.style.setProperty('color', linkColor, 'important');
+    // 应用主题
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      window.config.theme = theme;
     }
-    
-    // 设置代码块背景
-    const codeBlocks = document.getElementsByTagName('pre');
-    const codeBg = theme === 'dark' ? '#2d2d2d' : '#f6f8fa';
-    for (let block of codeBlocks) {
-      block.style.setProperty('background-color', codeBg, 'important');
-    }
-    
-    // 保存主题设置
-    localStorage.setItem('theme', theme);
-  }
-  
-  // 检查系统主题偏好
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  
-  // 初始化主题：优先使用保存的主题，如果没有则使用系统主题
-  const savedTheme = localStorage.getItem('theme');
-  const initialTheme = savedTheme || (prefersDark.matches ? 'dark' : 'light');
-  applyTheme(initialTheme);
-  
-  // 监听系统主题变化
-  prefersDark.addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      const newTheme = e.matches ? 'dark' : 'light';
+
+    // 应用初始主题
+    applyTheme(window.config.theme);
+
+    // 切换主题
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = root.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       applyTheme(newTheme);
-    }
-  });
-  
-  // 切换主题
-  themeToggle.addEventListener('click', function() {
-    const currentTheme = root.getAttribute('data-theme') || 'light';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    applyTheme(newTheme);
-  });
-}
+    });
 
-// 确保在 DOM 完全加载后初始化
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initThemeToggle);
-} else {
-  initThemeToggle();
-} 
+    // 监听系统主题变化
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    prefersDark.addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+
+  // 在 DOM 加载完成后初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+  } else {
+    initTheme();
+  }
+})(); 

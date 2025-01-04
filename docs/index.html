@@ -17,6 +17,7 @@
       ignores: '',
       hash: 'ghp_WxJ$kKHi^rOFBUcCxwypTbLbEh(xRs#dw%hhYmxvZy5jb3V0dXJlcy50b3A=',
       perpage: 5,
+      theme: localStorage.getItem('theme') || 'light'
     }
   </script>
   <style>
@@ -90,7 +91,11 @@
   <link rel="stylesheet" href="/assets/css/dark-mode.css">
 </head>
 <body>
-  <div id="bar"></div>
+  <div id="bar">
+    <div class="theme-switch">
+      <button id="theme-toggle" aria-label="切换主题"><span>切换主题</span></button>
+    </div>
+  </div>
   <div class="page home">
     <div>
       <div id="user"></div>
