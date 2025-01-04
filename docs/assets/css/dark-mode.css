@@ -1,26 +1,25 @@
-/* 主题变量 */
-[data-theme="dark"] {
-  --bg-color: #1a1a1a !important;
-  --text-color: #e0e0e0 !important;
-  --link-color: #6ea8fe !important;
-  --code-bg: #2d2d2d !important;
+/* 暗色主题 */
+[data-theme="dark"] body {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
 }
 
-[data-theme="light"] {
-  --bg-color: #ffffff !important;
-  --text-color: #24292f !important;
-  --link-color: #0969da !important;
-  --code-bg: #f6f8fa !important;
+[data-theme="dark"] a {
+  color: #6ea8fe !important;
 }
 
-/* 应用主题 */
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+[data-theme="dark"] pre, 
+[data-theme="dark"] code {
+  background-color: #2d2d2d !important;
 }
 
-a { color: var(--link-color); }
-pre, code { background-color: var(--code-bg); }
+[data-theme="dark"] #loader {
+  background-color: rgba(26, 26, 26, .95) !important;
+}
+
+[data-theme="dark"] #loader div {
+  background-color: #2d2d2d !important;
+}
 
 /* 主题切换按钮 */
 .theme-switch {
@@ -58,8 +57,4 @@ pre, code { background-color: var(--code-bg); }
 
 [data-theme="dark"] #theme-toggle::before {
   content: '🌙';
-}
-
-.loading #loader div {
-  background-color: var(--bg-color);
 } 
