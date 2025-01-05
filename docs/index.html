@@ -73,6 +73,10 @@
       --code-red: #ff002b;
       --code-green: #00a753;
       --code-yellow: #ffa900;
+      --loader-color-1: #0089fa;    /* 蓝色 */
+      --loader-color-2: #ff002b;    /* 红色 */
+      --loader-color-3: #ffa900;    /* 黄色 */
+      --loader-color-4: #00a753;    /* 绿色 */
     }
 
     [data-theme="dark"] {
@@ -133,6 +137,12 @@
       --code-cyan: #a5d6ff;
       --code-white: #c9d1d9;
       --code-comment: #8b949e;
+
+      /* 在暗色主题中定义对应的颜色 */
+      --loader-color-1: #58a6ff;    /* 暗色主题蓝色 */
+      --loader-color-2: #ff7b72;    /* 暗色主题红色 */
+      --loader-color-3: #ffa657;    /* 暗色主题黄色 */
+      --loader-color-4: #7ee787;    /* 暗色主题绿色 */
     }
 
     /* 添加选中文本的样式 */
@@ -252,10 +262,10 @@
       border-radius: 20px;
       -webkit-animation: loading .5s linear forwards infinite;
       animation: loading .5s linear forwards infinite;
-      border-top: 4px solid var(--link-color);
-      border-right: 4px solid var(--code-red);
-      border-bottom: 4px solid var(--code-yellow);
-      border-left: 4px solid var(--code-green);
+      border-top: 4px solid var(--loader-color-1);
+      border-right: 4px solid var(--loader-color-2);
+      border-bottom: 4px solid var(--loader-color-3);
+      border-left: 4px solid var(--loader-color-4);
     }
     .loading #loader:after {
       content: '';
