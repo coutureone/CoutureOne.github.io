@@ -73,63 +73,29 @@
     }
 
     [data-theme="dark"] {
-      /* 主要背景和文字 - 使用更柔和的深色调 */
-      --bg-color: #222222;          /* 深灰背景 */
-      --text-color: #adbac7;        /* 柔和的文字颜色 */
-      --link-color: #539bf5;        /* GitHub暗色主题风格的链接色 */
-      --border-color: #373e47;      /* 柔和的边框色 */
-      --loader-bg: rgba(34, 34, 34, .95);
+      /* 主要背景和文字 */
+      --bg-color: #0d1117;          /* GitHub Dark 默认背景色 */
+      --text-color: #c9d1d9;        /* 更柔和的主文字颜色 */
+      --link-color: #58a6ff;        /* 更柔和的链接颜色 */
+      --border-color: #30363d;      /* 柔和的边框颜色 */
+      --loader-bg: rgba(13, 17, 23, .95);  /* 与背景色匹配的加载背景 */
 
-      /* 内容区域 - 与背景色微妙区分 */
-      --card-bg: #2d333b;           /* 稍微浅一点的背景色 */
-      --card-border: #373e47;
-      --post-bg: #2d333b;
-      --post-title: #adbac7;        /* 与文字颜色保持一致 */
-      --post-time: #768390;         /* 稍微淡一点的次要文字 */
-      --post-content: #adbac7;      /* 与主文字颜色一致 */
-      --bar-bg: #2d333b;
-      --bar-border: #373e47;
+      /* 内容区域 */
+      --card-bg: #161b22;           /* 略微浅一点的卡片背景 */
+      --card-border: #30363d;
+      --post-bg: #161b22;
+      --post-title: #c9d1d9;
+      --post-time: #8b949e;
+      --post-content: #c9d1d9;
+      --bar-bg: #161b22;
+      --bar-border: #30363d;
 
-      /* 文章样式 */
-      --title-color: #adbac7;
-      --meta-color: #768390;
-      --content-color: #adbac7;
-      --heading-color: #adbac7;
-      --blockquote-color: #768390;
-      --blockquote-border: #373e47;
-
-      /* 代码块 - 使用稍微不同的色调来区分 */
-      --code-bg: #22272e;           /* 比内容区域稍暗 */
-      --code-color: #adbac7;
-      --pre-bg: #22272e;
-      --pre-color: #adbac7;
-      --hr-color: #373e47;
-
-      /* 导航和用户信息 */
-      --nav-bg: #2d333b;
-      --nav-border: #373e47;
-      --user-border: #373e47;
-      --avatar-border: #373e47;
-
-      /* 评论区 */
-      --comment-bg: #2d333b;
-      --comment-border: #373e47;
-      --comment-meta: #768390;
-
-      /* 其他元素 */
-      --shadow-color: rgba(0, 0, 0, 0.1);
-      --selection-bg: #264f78;      /* VS Code 风格的选中背景 */
-      --selection-color: #adbac7;
-
-      /* 代码高亮 - GitHub Dark 主题风格 */
-      --code-red: #f47067;          /* 红色 */
-      --code-green: #8ddb8c;        /* 绿色 */
-      --code-yellow: #d4a72c;       /* 黄色 */
-      --code-blue: #6cb6ff;         /* 蓝色 */
-      --code-purple: #dcbdfb;       /* 紫色 */
-      --code-cyan: #96d0ff;         /* 青色 */
-      --code-white: #adbac7;        /* 基础文字 */
-      --code-comment: #768390;      /* 注释 */
+      /* 代码块 */
+      --code-bg: #0d1117;           /* 与主背景色一致 */
+      --code-color: #c9d1d9;
+      --pre-bg: #0d1117;
+      --pre-color: #c9d1d9;
+      --hr-color: #30363d;
     }
 
     /* 添加选中文本的样式 */
@@ -276,15 +242,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      box-shadow: 0 2px 4px var(--shadow-color);
+      background-color: #161b22;    /* 使用卡片背景色 */
+      border: 1px solid #30363d;    /* 使用边框颜色 */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       transition: all 0.3s ease;
     }
 
     .theme-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 8px var(--shadow-color);
+      background-color: #1c2129;    /* 稍微亮一点的悬停颜色 */
+      border-color: #3d444c;
     }
 
     .theme-toggle:active {
@@ -298,11 +264,11 @@
     }
 
     [data-theme="dark"] .theme-toggle .moon {
-      fill: #a6b5d0;
+      fill: #c9d1d9;               /* 与文字颜色一致 */
     }
 
     [data-theme="light"] .theme-toggle .sun {
-      fill: #ffd700;
+      fill: #faa356;               /* 暖色调的太阳 */
     }
 
     /* 添加太阳和月亮的专属颜色 */
