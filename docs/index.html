@@ -487,7 +487,7 @@
   </style>
 </head>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/>
   </svg>
@@ -511,26 +511,68 @@
 <div id="loader"><div></div><div></div><div></div><div></div></div>
 <script src="./index.92ae90d1.js"></script>
 <script>
-  function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    window.theme = newTheme; // 更新全局主题变量
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+  // 主题切换
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  
+  // 获取当前主题
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  body.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  // 更新主题图标
+  function updateThemeIcon(theme) {
+    const moonIcon = document.querySelector('.moon');
+    const sunIcon = document.querySelector('.sun');
+    if (theme === 'dark') {
+      moonIcon.style.display = 'none';
+      sunIcon.style.display = 'block';
+    } else {
+      moonIcon.style.display = 'block';
+      sunIcon.style.display = 'none';
+    }
   }
 
-  // 监听系统主题变化
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('theme')) {
-      const newTheme = e.matches ? 'dark' : 'light';
-      window.theme = newTheme;
-      document.documentElement.setAttribute('data-theme', newTheme);
-    }
+  // 切换主题
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
   });
 
-  // 确保在页面加载完成后应用主题
+  // 进度条
+  const progress = document.getElementById('progress');
+  const progressBar = document.getElementById('progress-bar');
+  
+  window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+  });
+
+  // 页面加载
   window.addEventListener('load', () => {
-    document.documentElement.setAttribute('data-theme', window.theme);
+    document.body.classList.remove('loading');
+    progressBar.style.width = '100%';
+    
+    // 确保所有按钮使用正确的主题颜色
+    const buttons = document.querySelectorAll('button, input[type="button"]');
+    buttons.forEach(button => {
+      button.style.backgroundColor = 'var(--button-bg)';
+      button.style.color = 'var(--button-text)';
+      button.style.border = '1px solid var(--button-border)';
+    });
+  });
+
+  // 代码块样式
+  document.querySelectorAll('pre code').forEach(block => {
+    block.style.backgroundColor = 'var(--code-bg)';
+    block.style.color = 'var(--code-text)';
+    block.style.borderRadius = '6px';
+    block.style.padding = '1em';
   });
 </script>
 </body>
