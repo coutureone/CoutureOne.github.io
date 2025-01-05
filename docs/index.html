@@ -70,6 +70,9 @@
       --post-content: #333333;
       --bar-bg: #ffffff;
       --bar-border: #eaeaea;
+      --code-red: #ff002b;
+      --code-green: #00a753;
+      --code-yellow: #ffa900;
     }
 
     [data-theme="dark"] {
@@ -249,10 +252,10 @@
       border-radius: 20px;
       -webkit-animation: loading .5s linear forwards infinite;
       animation: loading .5s linear forwards infinite;
-      border-top: 4px solid #0089fa;
-      border-right: 4px solid #ff002b;
-      border-bottom: 4px solid #ffa900;
-      border-left: 4px solid #00a753;
+      border-top: 4px solid var(--link-color);
+      border-right: 4px solid var(--code-red);
+      border-bottom: 4px solid var(--code-yellow);
+      border-left: 4px solid var(--code-green);
     }
     .loading #loader:after {
       content: '';
