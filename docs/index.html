@@ -248,10 +248,16 @@
       vertical-align: middle;
       -webkit-border-radius: 3px;
       border-radius: 3px;
-      background-color: var(--card-bg);
+      background-color: #ffffff;     /* 默认白色背景 */
       -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
       box-shadow: 0 0 3px rgba(0, 0, 0, .15);
     }
+
+    /* 添加暗色主题下的加载条背景色 */
+    [data-theme="dark"] .loading #loader div {
+      background-color: #161b22;    /* 暗色主题下的背景色 */
+    }
+
     .loading #loader div:before {
       content: '';
       width: 26px;
@@ -267,6 +273,7 @@
       border-bottom: 4px solid var(--loader-color-3);
       border-left: 4px solid var(--loader-color-4);
     }
+
     .loading #loader:after {
       content: '';
       display: inline-block;
