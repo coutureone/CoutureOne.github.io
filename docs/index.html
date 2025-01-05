@@ -236,10 +236,26 @@
       display: inline-block;
       width: 50px;
       height: 50px;
-      border: 3px solid;
+      border: 3px solid transparent;
       border-radius: 50%;
-      border-color: var(--loader-color-1) var(--loader-color-2) var(--loader-color-3) var(--loader-color-4);
       animation: spin 1.2s linear infinite;
+    }
+
+    /* 根据主题设置加载进度条颜色 */
+    [data-theme="light"] .loading #loader div {
+      border-color: transparent;
+      border-top-color: var(--loader-color-1);
+      border-right-color: var(--loader-color-2);
+      border-bottom-color: var(--loader-color-3);
+      border-left-color: var(--loader-color-4);
+    }
+
+    [data-theme="dark"] .loading #loader div {
+      border-color: transparent;
+      border-top-color: var(--loader-color-1);
+      border-right-color: var(--loader-color-2);
+      border-bottom-color: var(--loader-color-3);
+      border-left-color: var(--loader-color-4);
     }
 
     @keyframes spin {
@@ -328,7 +344,6 @@
     .theme-toggle svg {
       width: 24px;
       height: 24px;
-      fill: var(--text-color);
       transition: fill 0.3s ease;
     }
 
@@ -337,10 +352,21 @@
       display: none;
     }
 
-    [data-theme="dark"] .theme-toggle .sun { display: block; }
-    [data-theme="dark"] .theme-toggle .moon { display: none; }
-    [data-theme="light"] .theme-toggle .sun { display: none; }
-    [data-theme="light"] .theme-toggle .moon { display: block; }
+    /* 主题图标颜色 */
+    [data-theme="dark"] .theme-toggle .sun { 
+      display: block; 
+      fill: #ffd700; /* 太阳图标使用金黄色 */
+    }
+    [data-theme="dark"] .theme-toggle .moon { 
+      display: none; 
+    }
+    [data-theme="light"] .theme-toggle .sun { 
+      display: none; 
+    }
+    [data-theme="light"] .theme-toggle .moon { 
+      display: block;
+      fill: #6e7681; /* 月亮图标使用柔和的灰色 */
+    }
   </style>
 </head>
 <body>
