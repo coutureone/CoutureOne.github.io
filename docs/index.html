@@ -95,39 +95,40 @@
 
     [data-theme="dark"] {
       /* 基础颜色 */
-      --bg-color: #0d1117;          /* GitHub Dark 默认背景色 */
-      --text-color: #c9d1d9;        /* 更柔和的主文字颜色 */
-      --link-color: #58a6ff;        /* 更柔和的链接颜色 */
-      --border-color: #30363d;      /* 柔和的边框颜色 */
+      --bg-color: #0d1117;          /* 深色背景 */
+      --text-color: #e6edf3;        /* 高对比度文本 */
+      --link-color: #58a6ff;        /* 醒目的链接颜色 */
+      --border-color: #30363d;      /* 柔和的边框 */
       --shadow-color: rgba(0, 0, 0, 0.3);
       
       /* 内容区域 */
-      --card-bg: #161b22;           /* 略微浅一点的卡片背景 */
+      --card-bg: #161b22;           /* 稍浅的卡片背景 */
       --card-border: #30363d;
       --post-bg: #161b22;
-      --post-title: #c9d1d9;
-      --post-time: #8b949e;
-      --post-content: #c9d1d9;
+      --post-title: #e6edf3;        /* 醒目的标题 */
+      --post-time: #8b949e;         /* 柔和的时间戳 */
+      --post-content: #e6edf3;      /* 清晰的正文 */
       --bar-bg: #161b22;
       --bar-border: #30363d;
 
       /* 代码块样式 */
-      --code-bg: #1f2428;           /* 代码块背景色 */
-      --code-text: #e1e4e8;         /* 代码文本颜色 */
-      --code-border: #30363d;       /* 代码块边框颜色 */
-      --inline-code-bg: #2d333b;    /* 行内代码背景色 */
-      --inline-code-text: #e1e4e8;  /* 行内代码文本颜色 */
-      
-      /* 加载进度条颜色 */
-      --loader-bg: rgba(13, 17, 23, .95);
-      --loader-color-1: #58a6ff;    /* 蓝色 - 暗色主题 */
-      --loader-color-2: #f85149;    /* 红色 - 暗色主题 */
-      --loader-color-3: #d29922;    /* 黄色 - 暗色主题 */
-      --loader-color-4: #3fb950;    /* 绿色 - 暗色主题 */
+      --code-bg: #1f2428;           /* 代码背景 */
+      --code-text: #e6edf3;         /* 高对比度代码 */
+      --code-border: #30363d;
+      --inline-code-bg: #1f2428;
+      --inline-code-text: #e6edf3;
+    }
 
-      /* 选中文本 */
-      --selection-bg: #264f78;
-      --selection-color: #c9d1d9;
+    /* 全局过渡效果 */
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* 统一边框样式 */
+    .card, .post, .bar {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
     }
 
     /* 添加选中文本的样式 */
@@ -211,56 +212,62 @@
       height: 100%;
     }
 
+    /* 加载动画容器 */
     #loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      display: flex;
+      background: var(--loader-bg);
+      display: none;
       justify-content: center;
       align-items: center;
-      background-color: var(--loader-bg);
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 9999;
     }
 
     .loading #loader {
-      opacity: 1;
-      visibility: visible;
+      display: flex;
     }
 
-    .loading #loader div {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
+    /* 加载动画 */
+    #loader div {
+      position: absolute;
+      width: 40px;
+      height: 40px;
       border: 3px solid transparent;
       border-radius: 50%;
-      animation: spin 1.2s linear infinite;
     }
 
-    /* 根据主题设置加载进度条颜色 */
-    [data-theme="light"] .loading #loader div {
-      border-color: transparent;
+    #loader div:nth-child(1) {
       border-top-color: var(--loader-color-1);
-      border-right-color: var(--loader-color-2);
-      border-bottom-color: var(--loader-color-3);
-      border-left-color: var(--loader-color-4);
+      animation: spin 1s linear infinite;
     }
 
-    [data-theme="dark"] .loading #loader div {
-      border-color: transparent;
-      border-top-color: var(--loader-color-1);
+    #loader div:nth-child(2) {
+      width: 55px;
+      height: 55px;
       border-right-color: var(--loader-color-2);
+      animation: spin 1.2s linear infinite reverse;
+    }
+
+    #loader div:nth-child(3) {
+      width: 70px;
+      height: 70px;
       border-bottom-color: var(--loader-color-3);
+      animation: spin 1.4s linear infinite;
+    }
+
+    #loader div:nth-child(4) {
+      width: 85px;
+      height: 85px;
       border-left-color: var(--loader-color-4);
+      animation: spin 1.6s linear infinite reverse;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     /* 内容区域样式 */
@@ -367,6 +374,23 @@
       display: block;
       fill: #6e7681; /* 月亮图标使用柔和的灰色 */
     }
+
+    /* 平滑过渡 */
+    body, .card, .post, .bar {
+      transition: all 0.3s ease;
+    }
+
+    /* 代码块样式优化 */
+    pre, code {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+    }
+
+    pre code {
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -391,7 +415,7 @@
     <div id="comments"></div>
   </div>
 </div>
-<div id="loader"><div></div></div>
+<div id="loader"><div></div><div></div><div></div><div></div></div>
 <script src="./index.92ae90d1.js"></script>
 <script>
   function toggleTheme() {
