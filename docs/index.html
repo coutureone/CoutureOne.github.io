@@ -64,6 +64,12 @@
       --loader-bg: rgba(255, 255, 255, .95);
       --card-bg: #ffffff;
       --card-border: #eaeaea;
+      --post-bg: #ffffff;
+      --post-title: #333333;
+      --post-time: #666666;
+      --post-content: #333333;
+      --bar-bg: #ffffff;
+      --bar-border: #eaeaea;
     }
 
     [data-theme="dark"] {
@@ -74,6 +80,12 @@
       --loader-bg: rgba(26, 26, 26, .95);
       --card-bg: #2a2a2a;
       --card-border: #333333;
+      --post-bg: #2a2a2a;
+      --post-title: #ffffff;
+      --post-time: #888888;
+      --post-content: #dddddd;
+      --bar-bg: #2a2a2a;
+      --bar-border: #333333;
 
       /* 文章相关样式 */
       --title-color: #ffffff;
@@ -271,6 +283,59 @@
     [data-theme="dark"] .theme-toggle .moon { display: block; }
     [data-theme="light"] .theme-toggle .sun { display: block; }
     [data-theme="light"] .theme-toggle .moon { display: none; }
+
+    /* 添加内容区域的样式 */
+    #posts .post {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
+    }
+
+    #posts .post .title {
+      color: var(--post-title);
+    }
+
+    #posts .post .time {
+      color: var(--post-time);
+    }
+
+    #posts .post .preview {
+      color: var(--post-content);
+    }
+
+    #bar {
+      background-color: var(--bar-bg);
+      border-color: var(--bar-border);
+    }
+
+    /* 文章详情页样式 */
+    .single #post {
+      background-color: var(--post-bg);
+      color: var(--post-content);
+    }
+
+    .single #post .title {
+      color: var(--post-title);
+    }
+
+    .single #post .time {
+      color: var(--post-time);
+    }
+
+    /* 代码块样式 */
+    .single #post pre {
+      background-color: var(--code-bg);
+      border-color: var(--border-color);
+    }
+
+    .single #post code {
+      color: var(--code-color);
+    }
+
+    /* 评论区样式 */
+    #comments {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
+    }
   </style>
 </head>
 <body>
