@@ -366,31 +366,30 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 20px;
+      line-height: 1;
     }
 
-    .theme-toggle svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--text-color);
-      stroke-width: 1.5;
-      fill: none;
-      transition: transform 0.3s ease;
+    .theme-toggle .sun,
+    .theme-toggle .moon {
+      position: absolute;
+      transition: opacity 0.3s ease;
     }
 
     .theme-toggle .sun {
-      display: none;
+      opacity: 0;
     }
 
     .theme-toggle .moon {
-      display: block;
+      opacity: 1;
     }
 
     [data-theme="dark"] .theme-toggle .sun {
-      display: block;
+      opacity: 1;
     }
 
     [data-theme="dark"] .theme-toggle .moon {
-      display: none;
+      opacity: 0;
     }
 
     /* 代码块基础样式 */
@@ -538,12 +537,8 @@
 </head>
 <body>
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-  <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="5"/>
-  </svg>
-  <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M12 3C7.03 3 3 7.03 3 12C3 16.97 7.03 21 12 21C12.39 21 12.77 20.97 13.14 20.91C9.04 18.99 7 14.86 7 10C7 8.08 7.47 6.27 8.33 4.68C9.36 3.63 10.62 3 12 3Z"/>
-  </svg>
+  <span class="sun">☀️</span>
+  <span class="moon">🌙</span>
 </button>
 <div id="bar"></div>
 <div class="page home" style="background: var(--bg-color);">
@@ -575,11 +570,11 @@
     const moonIcon = document.querySelector('.moon');
     const sunIcon = document.querySelector('.sun');
     if (theme === 'dark') {
-      moonIcon.style.display = 'none';
-      sunIcon.style.display = 'block';
+      moonIcon.style.opacity = 0;
+      sunIcon.style.opacity = 1;
     } else {
-      moonIcon.style.display = 'block';
-      sunIcon.style.display = 'none';
+      moonIcon.style.opacity = 1;
+      sunIcon.style.opacity = 0;
     }
   }
 
