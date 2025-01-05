@@ -86,6 +86,13 @@
       --code-border: #e1e4e8;       /* 代码块边框颜色 */
       --inline-code-bg: #f6f8fa;    /* 行内代码背景色 */
       --inline-code-text: #24292e;  /* 行内代码文本颜色 */
+      --code-comment: #6e7781;      /* 注释 */
+      --code-keyword: #cf222e;      /* 关键字 */
+      --code-string: #0a3069;       /* 字符串 */
+      --code-number: #0550ae;       /* 数字 */
+      --code-function: #8250df;     /* 函数 */
+      --code-variable: #953800;     /* 变量 */
+      --code-operator: #24292f;     /* 操作符 */
       
       /* 加载进度条颜色 */
       --loader-bg: rgba(255, 255, 255, .95);
@@ -128,22 +135,16 @@
       --bar-border: #30363d;
 
       /* 代码块样式 */
-      --code-bg: #1e1e1e;            /* VS Code 暗色主题背景色 */
-      --code-text: #d4d4d4;          /* 基础文本颜色 */
-      --code-comment: #6a9955;       /* 注释 */
-      --code-keyword: #569cd6;       /* 关键字 */
-      --code-string: #ce9178;        /* 字符串 */
-      --code-number: #b5cea8;        /* 数字 */
-      --code-function: #dcdcaa;      /* 函数 */
-      --code-variable: #9cdcfe;      /* 变量 */
-      --code-operator: #d4d4d4;      /* 操作符 */
+      --code-bg: #161b22;           /* 更深的背景色 */
+      --code-text: #e6edf3;         /* 更亮的文本 */
       --code-border: #30363d;
-      --inline-code-bg: #1e1e1e;
-      --inline-code-text: #d4d4d4;
-
-      /* 进度条颜色 - 暗色模式 */
-      --progress-bg: transparent;
-      --progress-color: #58a6ff;
+      --code-comment: #8b949e;      /* 注释 */
+      --code-keyword: #ff7b72;      /* 关键字 */
+      --code-string: #a5d6ff;       /* 字符串 */
+      --code-number: #79c0ff;       /* 数字 */
+      --code-function: #d2a8ff;     /* 函数 */
+      --code-variable: #ffa657;     /* 变量 */
+      --code-operator: #e6edf3;     /* 操作符 */
     }
 
     /* 全局过渡效果 */
@@ -355,20 +356,23 @@
       position: fixed;
       top: 1rem;
       right: 1rem;
-      width: 40px;
-      height: 40px;
-      padding: 8px;
+      width: 32px;
+      height: 32px;
+      padding: 4px;
       background: transparent;
       border: none;
       cursor: pointer;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .theme-toggle svg {
       width: 24px;
       height: 24px;
       stroke: var(--text-color);
-      stroke-width: 2;
+      stroke-width: 1.5;
       fill: none;
       transition: transform 0.3s ease;
     }
@@ -389,30 +393,59 @@
       display: none;
     }
 
-    /* 简化的图标 */
-    .theme-toggle .moon path {
-      d: path('M 12,3 C 7.03,3 3,7.03 3,12 c 0,4.97 4.03,9 9,9 2.39,0 4.68,-0.94 6.36,-2.62 C 16.94,16.68 16,14.39 16,12 16,7.03 11.97,3 7,3');
+    /* 代码块基础样式 */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .theme-toggle .sun path {
-      d: path('M12 3c.132 0 .263 0 .393 0a8.968 8.968 0 0 0-3.72 6.467c-.132.537-.198 1.093-.198 1.66 0 3.863 3.137 7 7 7 .567 0 1.123-.066 1.66-.198a8.968 8.968 0 0 0 6.467-3.72A8.968 8.968 0 0 1 12 21a9 9 0 0 1 0-18z');
+    pre code {
+      color: var(--code-text);
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+
+    /* 代码高亮 */
+    .token.comment { color: var(--code-comment); }
+    .token.keyword { color: var(--code-keyword); }
+    .token.string { color: var(--code-string); }
+    .token.number { color: var(--code-number); }
+    .token.function { color: var(--code-function); }
+    .token.variable { color: var(--code-variable); }
+    .token.operator { color: var(--code-operator); }
+
+    /* 行内代码样式 */
+    :not(pre) > code {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--code-border);
+    }
+
+    /* 代码块滚动条样式 */
+    pre::-webkit-scrollbar {
+      height: 8px;
+      background-color: var(--code-bg);
+    }
+
+    pre::-webkit-scrollbar-thumb {
+      background-color: var(--border-color);
+      border-radius: 4px;
     }
 
     /* 平滑过渡 */
     body, .card, .post, .bar {
       transition: all 0.3s ease;
-    }
-
-    /* 代码块样式优化 */
-    pre, code {
-      background: var(--code-bg);
-      color: var(--code-text);
-      border: 1px solid var(--code-border);
-      border-radius: 6px;
-    }
-
-    pre code {
-      border: none;
     }
 
     /* 进度条样式 */
@@ -501,91 +534,15 @@
       background-color: var(--bg-color);
       color: var(--text-color);
     }
-
-    /* 代码块基础样式 */
-    pre {
-      background: var(--code-bg);
-      border: 1px solid var(--code-border);
-      border-radius: 6px;
-      padding: 16px;
-      margin: 16px 0;
-      overflow-x: auto;
-    }
-
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--code-text);
-    }
-
-    /* 代码高亮颜色 - 暗色模式 */
-    [data-theme="dark"] {
-      --code-comment: #6a9955;       /* 注释 */
-      --code-keyword: #569cd6;       /* 关键字 */
-      --code-string: #ce9178;        /* 字符串 */
-      --code-number: #b5cea8;        /* 数字 */
-      --code-function: #dcdcaa;      /* 函数 */
-      --code-variable: #9cdcfe;      /* 变量 */
-      --code-operator: #d4d4d4;      /* 操作符 */
-    }
-
-    /* 代码语法高亮 */
-    .token.comment { color: var(--code-comment); }
-    .token.keyword { color: var(--code-keyword); }
-    .token.string { color: var(--code-string); }
-    .token.number { color: var(--code-number); }
-    .token.function { color: var(--code-function); }
-    .token.variable { color: var(--code-variable); }
-    .token.operator { color: var(--code-operator); }
-
-    /* 代码块内的特殊标记 */
-    .hljs-comment { color: var(--code-comment); }
-    .hljs-keyword { color: var(--code-keyword); }
-    .hljs-string { color: var(--code-string); }
-    .hljs-number { color: var(--code-number); }
-    .hljs-function { color: var(--code-function); }
-    .hljs-variable { color: var(--code-variable); }
-    .hljs-operator { color: var(--code-operator); }
-
-    /* 确保代码块内的所有文本都有足够的对比度 */
-    pre code {
-      color: var(--code-text);
-      background: transparent;
-      padding: 0;
-      border: none;
-      font-size: 14px;
-      line-height: 1.6;
-      tab-size: 4;
-    }
-
-    /* 代码块滚动条样式 */
-    pre::-webkit-scrollbar {
-      height: 8px;
-      background-color: var(--code-bg);
-    }
-
-    pre::-webkit-scrollbar-thumb {
-      background-color: var(--border-color);
-      border-radius: 4px;
-    }
-
-    /* 行内代码样式 */
-    :not(pre) > code {
-      background: var(--inline-code-bg);
-      color: var(--inline-code-text);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.9em;
-      border: 1px solid var(--code-border);
-    }
   </style>
 </head>
 <body>
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M12 3c.132 0 .263 0 .393 0a8.968 8.968 0 0 0-3.72 6.467c-.132.537-.198 1.093-.198 1.66 0 3.863 3.137 7 7 7 .567 0 1.123-.066 1.66-.198a8.968 8.968 0 0 0 6.467-3.72A8.968 8.968 0 0 1 12 21a9 9 0 0 1 0-18z"/>
+    <path d="M12 3a9 9 0 1 0 9 9 9 9 0 0 0-9-9zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7zm0-11a1 1 0 0 0 1-1V5a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1zm0 12a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm5.657-12.243a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707zM6.343 19.243a1 1 0 0 0-.707.293l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-.707-1.707zM5 12a1 1 0 0 0-1-1H2a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1zm17 0a1 1 0 0 0-1-1h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1zm-2.657 7.243a1 1 0 0 0-.707-.293 1 1 0 0 0-.707 1.707l1.414 1.414a1 1 0 1 0 1.414-1.414zM7.757 4.757a1 1 0 0 0-1.414 0L4.929 6.171A1 1 0 0 0 6.343 7.586l1.414-1.414a1 1 0 0 0 0-1.415z"/>
   </svg>
   <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M 12,3 C 7.03,3 3,7.03 3,12 c 0,4.97 4.03,9 9,9 2.39,0 4.68,-0.94 6.36,-2.62 C 16.94,16.68 16,14.39 16,12 16,7.03 11.97,3 7,3"/>
+    <path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.14 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 14 1 1 0 0 0-.36-3.36zM14 20.8a8.2 8.2 0 0 1-6.77-3.64 9.82 9.82 0 0 0 .52-2.71 10.15 10.15 0 0 0 9.93-9.93 10.06 10.06 0 0 0-2.71.52A8.18 8.18 0 0 1 14 20.8z"/>
   </svg>
 </button>
 <div id="bar"></div>
