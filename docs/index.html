@@ -95,28 +95,39 @@
 
     [data-theme="dark"] {
       /* 基础颜色 */
-      --bg-color: #0d1117;          /* 深色背景 */
-      --text-color: #e6edf3;        /* 高对比度文本 */
-      --link-color: #58a6ff;        /* 醒目的链接颜色 */
-      --border-color: #30363d;      /* 柔和的边框 */
+      --bg-color: #0d1117;
+      --text-color: #e6edf3;
+      --link-color: #58a6ff;
+      --border-color: #30363d;
       --shadow-color: rgba(0, 0, 0, 0.3);
       
       /* 内容区域 */
-      --card-bg: #161b22;           /* 稍浅的卡片背景 */
+      --card-bg: #161b22;
       --card-border: #30363d;
       --post-bg: #161b22;
-      --post-title: #e6edf3;        /* 醒目的标题 */
-      --post-time: #8b949e;         /* 柔和的时间戳 */
-      --post-content: #e6edf3;      /* 清晰的正文 */
+      --post-title: #e6edf3;
+      --post-time: #8b949e;
+      --post-content: #e6edf3;
       --bar-bg: #161b22;
       --bar-border: #30363d;
 
       /* 代码块样式 */
-      --code-bg: #1f2428;           /* 代码背景 */
-      --code-text: #e6edf3;         /* 高对比度代码 */
+      --code-bg: #1f2428;
+      --code-text: #e6edf3;
       --code-border: #30363d;
       --inline-code-bg: #1f2428;
       --inline-code-text: #e6edf3;
+
+      /* 按钮和交互元素 */
+      --button-bg: #21262d;
+      --button-text: #e6edf3;
+      --button-border: #30363d;
+      --button-hover-bg: #30363d;
+      
+      /* 进度条和加载器 */
+      --progress-bg: transparent;
+      --progress-color: #58a6ff;
+      --loader-bg: rgba(13, 17, 23, 0.95);
     }
 
     /* 全局过渡效果 */
@@ -390,6 +401,88 @@
 
     pre code {
       border: none;
+    }
+
+    /* 进度条样式 */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: transparent;
+      z-index: 9999;
+    }
+
+    #progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--link-color);
+      transition: width 0.2s ease;
+    }
+
+    /* 评论按钮样式 */
+    .comment-button {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .comment-button:hover {
+      background: var(--border-color);
+      color: var(--text-color);
+    }
+
+    /* 代码块和内容背景 */
+    .post-content {
+      background: var(--post-bg);
+      border-radius: 6px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--code-text);
+    }
+
+    /* 标签样式 */
+    .tag {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.9em;
+    }
+
+    /* 确保所有元素使用变量 */
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    button, input[type="button"] {
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: 1px solid var(--button-border);
+    }
+
+    button:hover, input[type="button"]:hover {
+      background: var(--button-hover-bg);
     }
   </style>
 </head>
