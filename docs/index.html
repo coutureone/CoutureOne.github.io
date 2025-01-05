@@ -57,11 +57,14 @@
     }
 
     :root {
+      /* 基础颜色 */
       --bg-color: #ffffff;
       --text-color: #333333;
       --link-color: #0089fa;
       --border-color: #eaeaea;
-      --loader-bg: rgba(255, 255, 255, .95);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      
+      /* 内容区域 */
       --card-bg: #ffffff;
       --card-border: #eaeaea;
       --post-bg: #ffffff;
@@ -70,23 +73,34 @@
       --post-content: #333333;
       --bar-bg: #ffffff;
       --bar-border: #eaeaea;
-      --code-red: #ff002b;
-      --code-green: #00a753;
-      --code-yellow: #ffa900;
+      
+      /* 代码块样式 */
+      --code-bg: #f6f8fa;           /* 代码块背景色 */
+      --code-text: #24292e;         /* 代码文本颜色 */
+      --code-border: #e1e4e8;       /* 代码块边框颜色 */
+      --inline-code-bg: #f6f8fa;    /* 行内代码背景色 */
+      --inline-code-text: #24292e;  /* 行内代码文本颜色 */
+      
+      /* 加载进度条颜色 */
+      --loader-bg: rgba(255, 255, 255, .95);
       --loader-color-1: #0089fa;    /* 蓝色 */
       --loader-color-2: #ff002b;    /* 红色 */
       --loader-color-3: #ffa900;    /* 黄色 */
       --loader-color-4: #00a753;    /* 绿色 */
+
+      /* 选中文本 */
+      --selection-bg: #b3d4fc;
+      --selection-color: #333333;
     }
 
     [data-theme="dark"] {
-      /* 主要背景和文字 */
+      /* 基础颜色 */
       --bg-color: #0d1117;          /* GitHub Dark 默认背景色 */
       --text-color: #c9d1d9;        /* 更柔和的主文字颜色 */
       --link-color: #58a6ff;        /* 更柔和的链接颜色 */
       --border-color: #30363d;      /* 柔和的边框颜色 */
-      --loader-bg: rgba(13, 17, 23, .95);
-
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      
       /* 内容区域 */
       --card-bg: #161b22;           /* 略微浅一点的卡片背景 */
       --card-border: #30363d;
@@ -97,52 +111,23 @@
       --bar-bg: #161b22;
       --bar-border: #30363d;
 
-      /* 文章样式 */
-      --title-color: #c9d1d9;
-      --meta-color: #8b949e;
-      --content-color: #c9d1d9;
-      --heading-color: #c9d1d9;
-      --blockquote-color: #8b949e;
-      --blockquote-border: #30363d;
+      /* 代码块样式 */
+      --code-bg: #1f2428;           /* 代码块背景色 */
+      --code-text: #e1e4e8;         /* 代码文本颜色 */
+      --code-border: #30363d;       /* 代码块边框颜色 */
+      --inline-code-bg: #2d333b;    /* 行内代码背景色 */
+      --inline-code-text: #e1e4e8;  /* 行内代码文本颜色 */
+      
+      /* 加载进度条颜色 */
+      --loader-bg: rgba(13, 17, 23, .95);
+      --loader-color-1: #58a6ff;    /* 蓝色 - 暗色主题 */
+      --loader-color-2: #f85149;    /* 红色 - 暗色主题 */
+      --loader-color-3: #d29922;    /* 黄色 - 暗色主题 */
+      --loader-color-4: #3fb950;    /* 绿色 - 暗色主题 */
 
-      /* 代码块 */
-      --code-bg: #0d1117;
-      --code-color: #c9d1d9;
-      --pre-bg: #0d1117;
-      --pre-color: #c9d1d9;
-      --hr-color: #30363d;
-
-      /* 导航和用户信息 */
-      --nav-bg: #161b22;
-      --nav-border: #30363d;
-      --user-border: #30363d;
-      --avatar-border: #30363d;
-
-      /* 评论区 */
-      --comment-bg: #161b22;
-      --comment-border: #30363d;
-      --comment-meta: #8b949e;
-
-      /* 其他元素 */
-      --shadow-color: rgba(0, 0, 0, 0.15);
+      /* 选中文本 */
       --selection-bg: #264f78;
       --selection-color: #c9d1d9;
-
-      /* 代码高亮 */
-      --code-red: #ff7b72;
-      --code-green: #7ee787;
-      --code-yellow: #ffa657;
-      --code-blue: #79c0ff;
-      --code-purple: #d2a8ff;
-      --code-cyan: #a5d6ff;
-      --code-white: #c9d1d9;
-      --code-comment: #8b949e;
-
-      /* 在暗色主题中定义对应的颜色 */
-      --loader-color-1: #58a6ff;    /* 暗色主题蓝色 */
-      --loader-color-2: #ff7b72;    /* 暗色主题红色 */
-      --loader-color-3: #ffa657;    /* 暗色主题黄色 */
-      --loader-color-4: #7ee787;    /* 暗色主题绿色 */
     }
 
     /* 添加选中文本的样式 */
@@ -153,7 +138,7 @@
 
     /* 补充文章内容的样式 */
     .single .post {
-      color: var(--content-color);
+      color: var(--post-content);
     }
 
     .single .post h1,
@@ -162,45 +147,45 @@
     .single .post h4,
     .single .post h5,
     .single .post h6 {
-      color: var(--heading-color);
+      color: var(--post-title);
     }
 
     .single .post blockquote {
-      color: var(--blockquote-color);
-      border-left-color: var(--blockquote-border);
+      color: var(--post-content);
+      border-left-color: var(--border-color);
     }
 
     .single .post code {
       background-color: var(--code-bg);
-      color: var(--code-color);
+      color: var(--code-text);
     }
 
     .single .post pre {
-      background-color: var(--pre-bg);
-      color: var(--pre-color);
+      background-color: var(--code-bg);
+      color: var(--code-text);
     }
 
     .single .post hr {
-      border-color: var(--hr-color);
+      border-color: var(--border-color);
     }
 
     /* 用户信息和导航样式 */
     #user {
-      border-color: var(--user-border);
+      border-color: var(--border-color);
     }
 
     .avatar {
-      border-color: var(--avatar-border);
+      border-color: var(--border-color);
     }
 
     /* 评论区样式 */
     .comments {
-      background-color: var(--comment-bg);
-      border-color: var(--comment-border);
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
     }
 
     .comment-meta {
-      color: var(--comment-meta);
+      color: var(--post-time);
     }
 
     body {
@@ -213,124 +198,56 @@
       font-family: "LxgwWenkaiGB", serif;
     }
 
+    /* 加载状态样式 */
     .loading,
     .error,
     .transition {
       height: 100%;
     }
+    
     .loading body,
     .error body,
     .transition body {
       height: 100%;
     }
+
     #loader {
-      text-align: center;
       position: fixed;
-      z-index: 3;
-      left: 0;
       top: 0;
-      height: 100%;
+      left: 0;
       width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--loader-bg);
+      z-index: 1000;
       opacity: 0;
       visibility: hidden;
-      -webkit-transition: all .3s ease;
-      transition: all .3s ease;
-      background-color: var(--loader-bg);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
+
     .loading #loader {
       opacity: 1;
       visibility: visible;
     }
+
     .loading #loader div {
       display: inline-block;
       width: 50px;
       height: 50px;
-      vertical-align: middle;
-      -webkit-border-radius: 3px;
-      border-radius: 3px;
-      background-color: var(--bg-color);    /* 使用主题背景色 */
-      -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
-      box-shadow: 0 0 3px rgba(0, 0, 0, .15);
-    }
-
-    /* 添加暗色主题下的加载条背景色 */
-    [data-theme="dark"] .loading #loader div {
-      background-color: #161b22;    /* 暗色主题下的背景色 */
-    }
-
-    .loading #loader div:before {
-      content: '';
-      width: 26px;
-      height: 26px;
-      display: block;
-      margin: 8px auto 0;
-      -webkit-border-radius: 20px;
-      border-radius: 20px;
-      -webkit-animation: loading .5s linear forwards infinite;
-      animation: loading .5s linear forwards infinite;
-      border-top: 4px solid var(--loader-color-1);
-      border-right: 4px solid var(--loader-color-2);
-      border-bottom: 4px solid var(--loader-color-3);
-      border-left: 4px solid var(--loader-color-4);
-    }
-
-    .loading #loader:after {
-      content: '';
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-    }
-    @keyframes loading { 100% { transform: rotate(360deg) } }
-    @-webkit-keyframes loading { 100% { -webkit-transform: rotate(360deg) } }
-
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
+      border: 3px solid;
       border-radius: 50%;
-      cursor: pointer;
-      z-index: 999;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      box-shadow: 0 2px 4px var(--shadow-color);
-      transition: all 0.3s ease;
+      border-color: var(--loader-color-1) var(--loader-color-2) var(--loader-color-3) var(--loader-color-4);
+      animation: spin 1.2s linear infinite;
     }
 
-    .theme-toggle:hover {
-      background-color: var(--code-bg);
-      border-color: var(--border-color);
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    .theme-toggle:active {
-      transform: scale(0.95);
-    }
-
-    .theme-toggle svg {
-      width: 20px;
-      height: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .theme-toggle .sun {
-      fill: #ffd700;  /* 明亮的金黄色太阳 */
-    }
-    
-    .theme-toggle .moon {
-      fill: #a6b5d0;  /* 柔和的银灰色月亮 */
-    }
-
-    [data-theme="dark"] .theme-toggle .sun { display: none; }
-    [data-theme="dark"] .theme-toggle .moon { display: block; }
-    [data-theme="light"] .theme-toggle .sun { display: block; }
-    [data-theme="light"] .theme-toggle .moon { display: none; }
-
-    /* 添加内容区域的样式 */
+    /* 内容区域样式 */
     #posts .post {
       background-color: var(--post-bg);
       border-color: var(--border-color);
@@ -374,7 +291,7 @@
     }
 
     .single #post code {
-      color: var(--code-color);
+      color: var(--code-text);
     }
 
     /* 评论区样式 */
@@ -383,33 +300,47 @@
       border-color: var(--border-color);
     }
 
-    /* 添加代码块的语法高亮样式 */
-    [data-theme="dark"] .single #post pre {
-      background-color: var(--pre-bg);
-      color: var(--pre-color);
-      padding: 1em;
-      border-radius: 6px;
-      overflow: auto;
+    /* 主题切换按钮样式 */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px var(--shadow-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
     }
 
-    [data-theme="dark"] .single #post code {
-      color: var(--code-color);
-      background-color: var(--code-bg);
-      padding: 0.2em 0.4em;
-      border-radius: 3px;
-      font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px var(--shadow-color);
     }
 
-    /* 亮色主题下的代码块样式 */
-    :root {
-      /* ... 其他亮色主题变量保持不变 ... */
-      
-      /* 亮色主题代码块颜色 */
-      --code-bg: #f6f8fa;          /* GitHub 风格的浅灰背景 */
-      --code-color: #24292e;       /* GitHub 风格的深色文本 */
-      --pre-bg: #f6f8fa;
-      --pre-color: #24292e;
+    .theme-toggle svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-color);
+      transition: fill 0.3s ease;
     }
+
+    .theme-toggle .sun,
+    .theme-toggle .moon {
+      display: none;
+    }
+
+    [data-theme="dark"] .theme-toggle .sun { display: block; }
+    [data-theme="dark"] .theme-toggle .moon { display: none; }
+    [data-theme="light"] .theme-toggle .sun { display: none; }
+    [data-theme="light"] .theme-toggle .moon { display: block; }
   </style>
 </head>
 <body>
