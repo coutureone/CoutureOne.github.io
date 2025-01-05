@@ -73,58 +73,63 @@
     }
 
     [data-theme="dark"] {
-      --bg-color: #1e1e1e;
-      --text-color: #e0e0e0;
-      --link-color: #7eb6ff;
-      --border-color: #2d2d2d;
-      --loader-bg: rgba(30, 30, 30, .95);
-      --card-bg: #252525;
-      --card-border: #2d2d2d;
-      --post-bg: #252525;
-      --post-title: #e0e0e0;
-      --post-time: #999999;
-      --post-content: #d0d0d0;
-      --bar-bg: #252525;
-      --bar-border: #2d2d2d;
+      /* 主要背景和文字 - 使用更柔和的深色调 */
+      --bg-color: #222222;          /* 深灰背景 */
+      --text-color: #adbac7;        /* 柔和的文字颜色 */
+      --link-color: #539bf5;        /* GitHub暗色主题风格的链接色 */
+      --border-color: #373e47;      /* 柔和的边框色 */
+      --loader-bg: rgba(34, 34, 34, .95);
 
-      /* 文章相关样式 */
-      --title-color: #ffffff;
-      --meta-color: #888888;
-      --content-color: #dddddd;
-      --heading-color: #ffffff;
-      --blockquote-color: #888888;
-      --blockquote-border: #333333;
-      --code-bg: #2b2b2b;
-      --code-color: #d4d4d4;
-      --pre-bg: #2b2b2b;
-      --pre-color: #d4d4d4;
-      --hr-color: #333333;
+      /* 内容区域 - 与背景色微妙区分 */
+      --card-bg: #2d333b;           /* 稍微浅一点的背景色 */
+      --card-border: #373e47;
+      --post-bg: #2d333b;
+      --post-title: #adbac7;        /* 与文字颜色保持一致 */
+      --post-time: #768390;         /* 稍微淡一点的次要文字 */
+      --post-content: #adbac7;      /* 与主文字颜色一致 */
+      --bar-bg: #2d333b;
+      --bar-border: #373e47;
 
-      /* 导航和用户信息相关 */
-      --nav-bg: #2a2a2a;
-      --nav-border: #333333;
-      --user-border: #333333;
-      --avatar-border: #444444;
+      /* 文章样式 */
+      --title-color: #adbac7;
+      --meta-color: #768390;
+      --content-color: #adbac7;
+      --heading-color: #adbac7;
+      --blockquote-color: #768390;
+      --blockquote-border: #373e47;
 
-      /* 评论区相关 */
-      --comment-bg: #2a2a2a;
-      --comment-border: #333333;
-      --comment-meta: #888888;
+      /* 代码块 - 使用稍微不同的色调来区分 */
+      --code-bg: #22272e;           /* 比内容区域稍暗 */
+      --code-color: #adbac7;
+      --pre-bg: #22272e;
+      --pre-color: #adbac7;
+      --hr-color: #373e47;
+
+      /* 导航和用户信息 */
+      --nav-bg: #2d333b;
+      --nav-border: #373e47;
+      --user-border: #373e47;
+      --avatar-border: #373e47;
+
+      /* 评论区 */
+      --comment-bg: #2d333b;
+      --comment-border: #373e47;
+      --comment-meta: #768390;
 
       /* 其他元素 */
       --shadow-color: rgba(0, 0, 0, 0.1);
-      --selection-bg: #3b3b3b;
-      --selection-color: #e0e0e0;
+      --selection-bg: #264f78;      /* VS Code 风格的选中背景 */
+      --selection-color: #adbac7;
 
-      /* 代码语法高亮颜色 */
-      --code-red: #ce9178;
-      --code-green: #b5cea8;
-      --code-yellow: #dcdcaa;
-      --code-blue: #9cdcfe;
-      --code-purple: #c586c0;
-      --code-cyan: #4ec9b0;
-      --code-white: #d4d4d4;
-      --code-comment: #6a9955;
+      /* 代码高亮 - GitHub Dark 主题风格 */
+      --code-red: #f47067;          /* 红色 */
+      --code-green: #8ddb8c;        /* 绿色 */
+      --code-yellow: #d4a72c;       /* 黄色 */
+      --code-blue: #6cb6ff;         /* 蓝色 */
+      --code-purple: #dcbdfb;       /* 紫色 */
+      --code-cyan: #96d0ff;         /* 青色 */
+      --code-white: #adbac7;        /* 基础文字 */
+      --code-comment: #768390;      /* 注释 */
     }
 
     /* 添加选中文本的样式 */
@@ -265,19 +270,39 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: none;
-      border: none;
       cursor: pointer;
       z-index: 999;
       padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px var(--shadow-color);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px var(--shadow-color);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.95);
     }
 
     .theme-toggle svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .theme-toggle .moon {
+      fill: #a6b5d0;
+    }
+
+    [data-theme="light"] .theme-toggle .sun {
+      fill: #ffd700;
     }
 
     /* 添加太阳和月亮的专属颜色 */
