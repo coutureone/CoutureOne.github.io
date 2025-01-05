@@ -94,10 +94,10 @@
       --heading-color: #ffffff;
       --blockquote-color: #888888;
       --blockquote-border: #333333;
-      --code-bg: #2a2a2a;
-      --code-color: #dddddd;
-      --pre-bg: #2a2a2a;
-      --pre-color: #dddddd;
+      --code-bg: #282c34;
+      --code-color: #abb2bf;
+      --pre-bg: #282c34;
+      --pre-color: #abb2bf;
       --hr-color: #333333;
 
       /* 导航和用户信息相关 */
@@ -115,6 +115,16 @@
       --shadow-color: rgba(0, 0, 0, 0.2);
       --selection-bg: #666666;
       --selection-color: #ffffff;
+
+      /* 代码语法高亮颜色 */
+      --code-red: #e06c75;
+      --code-green: #98c379;
+      --code-yellow: #e5c07b;
+      --code-blue: #61afef;
+      --code-purple: #c678dd;
+      --code-cyan: #56b6c2;
+      --code-white: #abb2bf;
+      --code-comment: #7f848e;
     }
 
     /* 添加选中文本的样式 */
@@ -335,6 +345,43 @@
     #comments {
       background-color: var(--post-bg);
       border-color: var(--border-color);
+    }
+
+    /* 添加代码块的语法高亮样式 */
+    [data-theme="dark"] .single #post pre {
+      background-color: var(--pre-bg);
+      color: var(--pre-color);
+      padding: 1em;
+      border-radius: 6px;
+      overflow: auto;
+    }
+
+    [data-theme="dark"] .single #post code {
+      color: var(--code-color);
+      background-color: var(--code-bg);
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    }
+
+    /* 代码语法高亮颜色 */
+    [data-theme="dark"] .single #post pre .keyword { color: var(--code-purple); }
+    [data-theme="dark"] .single #post pre .string { color: var(--code-green); }
+    [data-theme="dark"] .single #post pre .number { color: var(--code-cyan); }
+    [data-theme="dark"] .single #post pre .function { color: var(--code-blue); }
+    [data-theme="dark"] .single #post pre .comment { color: var(--code-comment); }
+    [data-theme="dark"] .single #post pre .variable { color: var(--code-yellow); }
+    [data-theme="dark"] .single #post pre .operator { color: var(--code-red); }
+
+    /* 亮色主题下的代码块样式 */
+    :root {
+      /* ... 其他亮色主题变量保持不变 ... */
+      
+      /* 亮色主题代码块颜色 */
+      --code-bg: #f6f8fa;          /* GitHub 风格的浅灰背景 */
+      --code-color: #24292e;       /* GitHub 风格的深色文本 */
+      --pre-bg: #f6f8fa;
+      --pre-color: #24292e;
     }
   </style>
 </head>
