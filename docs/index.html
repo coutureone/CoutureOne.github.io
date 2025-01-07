@@ -7,20 +7,43 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> Couture's Blog </title>
   <script>
-    // 初始化主题并设置到全局变量
+    // 初始化主题
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      
+      document.documentElement.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-theme', theme);
+      document.documentElement.style.setProperty('color-scheme', theme);
+      
+      // 更新图标
+      const moonIcon = document.querySelector('.moon');
+      const sunIcon = document.querySelector('.sun');
+      if (moonIcon && sunIcon) {
+        if (theme === 'dark') {
+          moonIcon.style.opacity = '0';
+          sunIcon.style.opacity = '1';
+        } else {
+          moonIcon.style.opacity = '1';
+          sunIcon.style.opacity = '0';
+        }
+      }
+      
+      return theme;
+    };
+
+    // 页面加载完成后初始化主题
     document.addEventListener('DOMContentLoaded', () => {
-      window.theme = localStorage.getItem('theme') ||
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', window.theme);
+      window.theme = initTheme();
     });
 
-    // 创建一个 MutationObserver 来监听属性变化
+    // 监听主题变化
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          // 当 loading 类被移除时，重新应用主题
           if (!document.documentElement.classList.contains('loading')) {
-            document.documentElement.setAttribute('data-theme', window.theme);
+            initTheme();
           }
         }
       });
@@ -31,7 +54,6 @@
       observer.observe(document.documentElement, {
         attributes: true
       });
-      // 确保在页面加载完成后移除 loading 类
       document.documentElement.classList.remove('loading');
     });
   </script>
@@ -299,97 +321,54 @@
     }
 
     /* 内容区域样式 */
-    #posts .post {
-      background-color: var(--post-bg);
-      border-color: var(--border-color);
+    #post {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    #posts .post .title {
-      color: var(--post-title);
+    #post h1, #post h2, #post h3 {
+      color: var(--text-color);
     }
 
-    #posts .post .time {
-      color: var(--post-time);
+    #post a {
+      color: var(--link-color);
     }
 
-    #posts .post .preview {
-      color: var(--post-content);
-    }
-
-    #bar {
-      background-color: var(--bar-bg);
-      border-color: var(--bar-border);
-    }
-
-    /* 文章详情页样式 */
-    .single #post {
-      background-color: var(--post-bg);
-      color: var(--post-content);
-    }
-
-    .single #post .title {
-      color: var(--post-title);
-    }
-
-    .single #post .time {
-      color: var(--post-time);
-    }
-
-    /* 代码块样式 */
-    .single #post pre {
+    #post pre {
       background-color: var(--code-bg);
-      border-color: var(--border-color);
-    }
-
-    .single #post code {
       color: var(--code-text);
-    }
-
-    /* 评论区样式 */
-    #comments {
-      background-color: var(--post-bg);
-      border-color: var(--border-color);
+      border: 1px solid var(--code-border);
     }
 
     /* 主题切换按钮样式 */
     .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      width: 32px;
-      height: 32px;
-      padding: 4px;
-      background: transparent;
-      border: none;
       cursor: pointer;
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 20px;
+      right: 20px;
       z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      line-height: 1;
+      padding: 8px;
+      border-radius: 50%;
+      background: var(--button-bg);
+      border: 1px solid var(--button-border);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      background: var(--button-hover-bg);
     }
 
     .theme-toggle .sun,
     .theme-toggle .moon {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       transition: opacity 0.3s ease;
-    }
-
-    .theme-toggle .sun {
-      opacity: 0;
-    }
-
-    .theme-toggle .moon {
-      opacity: 1;
-    }
-
-    [data-theme="dark"] .theme-toggle .sun {
-      opacity: 1;
-    }
-
-    [data-theme="dark"] .theme-toggle .moon {
-      opacity: 0;
+      font-size: 20px;
     }
 
     /* 代码块基础样式 */
@@ -558,38 +537,31 @@
 <script>
   // 主题切换
   const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
-  const html = document.documentElement;
   
-  // 获取当前主题
-  const currentTheme = localStorage.getItem('theme') || 'light';
-  body.setAttribute('data-theme', currentTheme);
-  html.setAttribute('data-theme', currentTheme);
-  updateThemeIcon(currentTheme);
-
-  // 更新主题图标
-  function updateThemeIcon(theme) {
-    const moonIcon = document.querySelector('.moon');
-    const sunIcon = document.querySelector('.sun');
-    if (theme === 'dark') {
-      moonIcon.style.opacity = 0;
-      sunIcon.style.opacity = 1;
-    } else {
-      moonIcon.style.opacity = 1;
-      sunIcon.style.opacity = 0;
-    }
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      document.body.setAttribute('data-theme', newTheme);
+      document.documentElement.style.setProperty('color-scheme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // 更新图标
+      const moonIcon = document.querySelector('.moon');
+      const sunIcon = document.querySelector('.sun');
+      if (moonIcon && sunIcon) {
+        if (newTheme === 'dark') {
+          moonIcon.style.opacity = '0';
+          sunIcon.style.opacity = '1';
+        } else {
+          moonIcon.style.opacity = '1';
+          sunIcon.style.opacity = '0';
+        }
+      }
+    });
   }
-
-  // 切换主题
-  themeToggle.addEventListener('click', () => {
-    const currentTheme = body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    body.setAttribute('data-theme', newTheme);
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-  });
 
   // 进度条
   const progress = document.getElementById('progress');
