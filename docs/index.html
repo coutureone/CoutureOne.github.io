@@ -14,16 +14,16 @@
       document.documentElement.style.setProperty('color-scheme', theme);
       localStorage.setItem('theme', theme);
       
-      // 更新图标
+      // 更新图标显示
       const moonIcon = document.querySelector('.moon');
       const sunIcon = document.querySelector('.sun');
       if (moonIcon && sunIcon) {
         if (theme === 'dark') {
-          moonIcon.style.opacity = '0';  // 夜间模式隐藏月亮
-          sunIcon.style.opacity = '1';   // 夜间模式显示太阳
+          moonIcon.style.display = 'none';    // 夜间模式隐藏月亮
+          sunIcon.style.display = 'inline';   // 夜间模式显示太阳
         } else {
-          moonIcon.style.opacity = '1';  // 白天模式显示月亮
-          sunIcon.style.opacity = '0';   // 白天模式隐藏太阳
+          moonIcon.style.display = 'inline';  // 白天模式显示月亮
+          sunIcon.style.display = 'none';     // 白天模式隐藏太阳
         }
       }
     }
@@ -40,6 +40,16 @@
     // 页面加载完成后初始化主题
     document.addEventListener('DOMContentLoaded', () => {
       window.theme = initTheme();
+      
+      // 添加主题切换按钮点击事件
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          updateTheme(newTheme);
+        });
+      }
     });
 
     // 监听主题变化
@@ -83,94 +93,119 @@
     }
 
     :root {
-      /* 基础颜色 */
+      /* 基础颜色 - 白天模式 */
       --bg-color: #ffffff;
-      --text-color: #24292f;
+      --text-color: #000000;
       --link-color: #0969da;
       --border-color: #d0d7de;
       --shadow-color: rgba(0, 0, 0, 0.1);
-      
-      /* 按钮样式 */
-      --button-bg: #f6f8fa;
-      --button-text: #24292f;
-      --button-border: #d0d7de;
-      --button-hover-bg: #f3f4f6;
-      
-      /* 内容区域 */
-      --card-bg: #ffffff;
-      --card-border: #d0d7de;
+
+      /* 选中文本颜色 */
+      --selection-bg: #b3d4fc;
+      --selection-color: #000000;
+
+      /* 文章样式 */
       --post-bg: #ffffff;
-      --post-title: #24292f;
+      --post-title: #000000;
       --post-time: #57606a;
-      --post-content: #24292f;
-      --bar-bg: #ffffff;
-      --bar-border: #d0d7de;
-      
+      --post-content: #000000;
+
       /* 代码块样式 */
-      --code-bg: #f6f8fa;           /* 代码块背景色 */
-      --code-text: #24292e;         /* 代码文本颜色 */
-      --code-border: #e1e4e8;       /* 代码块边框颜色 */
-      --inline-code-bg: #f6f8fa;    /* 行内代码背景色 */
-      --inline-code-text: #24292e;  /* 行内代码文本颜色 */
-      --code-comment: #6e7781;      /* 注释 */
-      --code-keyword: #cf222e;      /* 关键字 */
-      --code-string: #0a3069;       /* 字符串 */
-      --code-number: #0550ae;       /* 数字 */
-      --code-function: #8250df;     /* 函数 */
-      --code-variable: #953800;     /* 变量 */
-      --code-operator: #24292f;     /* 操作符 */
-      
-      /* 加载进度条颜色 */
+      --code-bg: #f6f8fa;
+      --code-text: #24292e;
+      --code-border: #e1e4e8;
+
+      /* 加载器颜色 */
       --loader-bg: rgba(255, 255, 255, .95);
-      --loader-color-1: #0089fa;    /* 蓝色 */
-      --loader-color-2: #ff002b;    /* 红色 */
-      --loader-color-3: #ffa900;    /* 黄色 */
-      --loader-color-4: #00a753;    /* 绿色 */
+      --loader-color-1: #0089fa;
+      --loader-color-2: #ff002b;
+      --loader-color-3: #ffa900;
+      --loader-color-4: #00a753;
+
+      /* 按钮颜色 */
+      --button-bg: #ffffff;
+      --button-text: #000000;
+      --button-border: #d0d7de;
+      --button-hover-bg: #f6f8fa;
 
       /* 进度条颜色 */
-      --progress-bg: transparent;
+      --progress-bg: #ffffff;
       --progress-color: #0969da;
 
-      /* 选中文本 */
-      --selection-bg: #b3d4fc;
-      --selection-color: #333333;
+      /* 评论颜色 */
+      --comment-bg: #ffffff;
+      --comment-text: #000000;
+      --comment-border: #d0d7de;
+
+      /* 代码高亮颜色 - 白天模式 */
+      --code-comment: #6e7781;    /* 注释 */
+      --code-keyword: #cf222e;    /* 关键字 */
+      --code-string: #0a3069;     /* 字符串 */
+      --code-number: #0550ae;     /* 数字 */
+      --code-function: #8250df;   /* 函数 */
+      --code-variable: #953800;   /* 变量 */
+      --code-operator: #24292f;   /* 操作符 */
+
+      /* 卡片样式 */
+      --card-bg: #ffffff;
     }
 
     [data-theme="dark"] {
-      /* 基础颜色 */
-      --bg-color: #0d1117;
-      --text-color: #c9d1d9;
+      /* 基础颜色 - 夜间模式 */
+      --bg-color: #000000;
+      --text-color: #e6edf3;
       --link-color: #58a6ff;
       --border-color: #30363d;
       --shadow-color: rgba(0, 0, 0, 0.3);
-      
-      /* 按钮样式 - 暗色模式 */
-      --button-bg: #21262d;
-      --button-text: #c9d1d9;
-      --button-border: #30363d;
-      --button-hover-bg: #30363d;
-      
-      /* 内容区域 - 暗色模式 */
-      --card-bg: #0d1117;
-      --card-border: #30363d;
-      --post-bg: #0d1117;
-      --post-title: #c9d1d9;
+
+      /* 选中文本颜色 */
+      --selection-bg: #264f78;
+      --selection-color: #ffffff;
+
+      /* 文章样式 */
+      --post-bg: #000000;
+      --post-title: #e6edf3;
       --post-time: #8b949e;
-      --post-content: #c9d1d9;
-      --bar-bg: #0d1117;
-      --bar-border: #30363d;
+      --post-content: #e6edf3;
 
       /* 代码块样式 */
-      --code-bg: #161b22;           /* 更深的背景色 */
-      --code-text: #e6edf3;         /* 更亮的文本 */
+      --code-bg: #161b22;
+      --code-text: #e6edf3;
       --code-border: #30363d;
-      --code-comment: #8b949e;      /* 注释 */
-      --code-keyword: #ff7b72;      /* 关键字 */
-      --code-string: #a5d6ff;       /* 字符串 */
-      --code-number: #79c0ff;       /* 数字 */
-      --code-function: #d2a8ff;     /* 函数 */
-      --code-variable: #ffa657;     /* 变量 */
-      --code-operator: #e6edf3;     /* 操作符 */
+
+      /* 加载器颜色 */
+      --loader-bg: rgba(0, 0, 0, .95);
+      --loader-color-1: #58a6ff;
+      --loader-color-2: #ff7b72;
+      --loader-color-3: #d29922;
+      --loader-color-4: #3fb950;
+
+      /* 按钮颜色 */
+      --button-bg: #161b22;
+      --button-text: #e6edf3;
+      --button-border: #30363d;
+      --button-hover-bg: #1a1d23;
+
+      /* 进度条颜色 */
+      --progress-bg: #000000;
+      --progress-color: #58a6ff;
+
+      /* 评论颜色 */
+      --comment-bg: #161b22;
+      --comment-text: #e6edf3;
+      --comment-border: #30363d;
+
+      /* 代码高亮颜色 - 夜间模式 */
+      --code-comment: #8b949e;    /* 注释 */
+      --code-keyword: #ff7b72;    /* 关键字 */
+      --code-string: #a5d6ff;     /* 字符串 */
+      --code-number: #79c0ff;     /* 数字 */
+      --code-function: #d2a8ff;   /* 函数 */
+      --code-variable: #ffa657;   /* 变量 */
+      --code-operator: #e6edf3;   /* 操作符 */
+
+      /* 卡片样式 */
+      --card-bg: #0d1117;
     }
 
     /* 全局样式 */
@@ -188,8 +223,8 @@
     }
 
     .post {
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: var(--post-bg);
+      color: var(--post-content);
       border: 1px solid var(--border-color);
       transition: all 0.3s ease;
     }
@@ -363,32 +398,26 @@
 
     /* 主题切换按钮样式 */
     .theme-toggle {
-      cursor: pointer;
-      transition: all 0.3s ease;
       position: fixed;
-      top: 20px;
       right: 20px;
-      z-index: 1000;
+      top: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
       padding: 8px;
+      font-size: 24px;
+      z-index: 1000;
+      transition: transform 0.3s ease;
       border-radius: 50%;
-      background: var(--button-bg);
-      border: 1px solid var(--button-border);
-      box-shadow: 0 2px 4px var(--shadow-color);
     }
 
     .theme-toggle:hover {
       transform: scale(1.1);
-      background: var(--button-hover-bg);
     }
 
     .theme-toggle .sun,
     .theme-toggle .moon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      transition: opacity 0.3s ease;
-      font-size: 20px;
+      transition: display 0.3s ease;
     }
 
     /* 代码块基础样式 */
@@ -527,16 +556,31 @@
       font-size: 0.9em;
     }
 
-    /* 确保所有元素使用变量 */
+    /* 确保所有元素使用正确的颜色变量 */
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
+    }
+
+    article, .markdown-body {
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+
+    a {
+      color: var(--link-color);
+    }
+
+    button {
+      color: var(--button-text);
+      background-color: var(--button-bg);
+      border-color: var(--button-border);
     }
   </style>
 </head>
 <body>
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-  <span class="sun">☀️</span>
+  <span class="sun" style="display: none;">☀️</span>
   <span class="moon">🌙</span>
 </button>
 <div id="bar"></div>
@@ -560,7 +604,7 @@
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       updateTheme(newTheme);
     });
   }
