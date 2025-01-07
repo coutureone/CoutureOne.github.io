@@ -11,10 +11,23 @@
   <link rel="preload" href="./LXGWWenKaiGB-Regular.ttf" as="font" type="font/ttf" crossorigin>
 
   <script>
+    // 监听系统主题变化
+    const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    function handleSystemThemeChange(e) {
+      if (!localStorage.getItem('theme')) {
+        const newTheme = e.matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateThemeIcon(newTheme);
+        window.theme = newTheme;
+      }
+    }
+    systemThemeMedia.addListener(handleSystemThemeChange);
+
     // 初始化主题
     document.addEventListener('DOMContentLoaded', () => {
-      window.theme = localStorage.getItem('theme') ||
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      window.theme = savedTheme || systemTheme;
       document.documentElement.setAttribute('data-theme', window.theme);
     });
 
@@ -186,6 +199,53 @@
       color: var(--text-color);
     }
 
+    /* 文章内容样式统一 */
+    .post-content,
+    .single .post,
+    #posts .post,
+    .post-content *,
+    .single .post *,
+    #posts .post * {
+      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* 确保文章内容颜色跟随主题 */
+    .post-content,
+    .single .post,
+    #posts .post {
+      background-color: var(--post-bg);
+      color: var(--text-color) !important;
+      padding: 2rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px var(--shadow-color);
+      line-height: 1.8;
+      letter-spacing: 0.5px;
+    }
+
+    /* 文章标题样式 */
+    .post-title,
+    .single .post .title,
+    #posts .post .title {
+      color: var(--post-title) !important;
+      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif !important;
+    }
+
+    /* 文章时间样式 */
+    .post-time,
+    .single .post .time,
+    #posts .post .time {
+      color: var(--post-time) !important;
+      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    /* 文章预览内容样式 */
+    .post-preview,
+    #posts .post .preview {
+      color: var(--text-color) !important;
+      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
     /* 进度条样式 */
     #progress {
       position: fixed;
@@ -205,29 +265,6 @@
       transition: width 0.2s ease;
       border-radius: 0 1px 1px 0;
     }
-
-    /* 文章内容样式 */
-    .single .post,
-    #posts .post {
-      background-color: var(--post-bg);
-      color: var(--post-content);
-      padding: 2rem;
-      margin: 1rem 0;
-      border-radius: 6px;
-      box-shadow: 0 1px 3px var(--shadow-color);
-      line-height: 1.8;
-      letter-spacing: 0.5px;
-    }
-
-    .post-content p,
-    .single .post p,
-    #posts .post .preview p {
-      margin: 1em 0;
-      line-height: 1.8;
-      color: var(--text-color);
-      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-    }
-
     /* 链接样式 */
     .post-content a,
     .single .post a,
@@ -389,7 +426,8 @@
   const body = document.body;
 
   // 获取当前主题
-  const currentTheme = localStorage.getItem('theme') || 'light';
+  const currentTheme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', currentTheme);
   updateThemeIcon(currentTheme);
 
@@ -405,12 +443,35 @@
     }
   }
 
+  // 监听系统主题变化
+  const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+  systemThemeMedia.addListener((e) => {
+    if (!localStorage.getItem('theme')) {
+      const newTheme = e.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+  });
+
   themeToggle.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
+
+    // 强制更新所有内容的颜色
+    document.body.style.backgroundColor = getComputedStyle(document.documentElement)
+            .getPropertyValue('--bg-color');
+
+    // 更新文章内容样式
+    const posts = document.querySelectorAll('.post, .post-content, .preview');
+    posts.forEach(post => {
+      post.style.backgroundColor = getComputedStyle(document.documentElement)
+              .getPropertyValue('--post-bg');
+      post.style.color = getComputedStyle(document.documentElement)
+              .getPropertyValue('--text-color');
+    });
   });
 
   // 进度条逻辑
@@ -425,6 +486,12 @@
   // 字体加载检测
   document.fonts.ready.then(() => {
     document.body.classList.add('fonts-loaded');
+
+    // 确保所有内容使用正确的字体
+    const allContent = document.querySelectorAll('.post, .post-content, .preview, .title, .time');
+    allContent.forEach(element => {
+      element.style.fontFamily = '"LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    });
   });
 
   // 字体加载超时处理
