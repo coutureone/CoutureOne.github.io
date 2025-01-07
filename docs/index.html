@@ -7,29 +7,33 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> Couture's Blog </title>
   <script>
-    // 初始化主题
-    const initTheme = () => {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-      
+    // 主题切换函数
+    function updateTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       document.body.setAttribute('data-theme', theme);
       document.documentElement.style.setProperty('color-scheme', theme);
+      localStorage.setItem('theme', theme);
       
       // 更新图标
       const moonIcon = document.querySelector('.moon');
       const sunIcon = document.querySelector('.sun');
       if (moonIcon && sunIcon) {
         if (theme === 'dark') {
-          moonIcon.style.opacity = '0';
-          sunIcon.style.opacity = '1';
+          moonIcon.style.opacity = '0';  // 夜间模式隐藏月亮
+          sunIcon.style.opacity = '1';   // 夜间模式显示太阳
         } else {
-          moonIcon.style.opacity = '1';
-          sunIcon.style.opacity = '0';
+          moonIcon.style.opacity = '1';  // 白天模式显示月亮
+          sunIcon.style.opacity = '0';   // 白天模式隐藏太阳
         }
       }
-      
+    }
+
+    // 初始化主题
+    const initTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      updateTheme(theme);
       return theme;
     };
 
@@ -169,9 +173,25 @@
       --code-operator: #e6edf3;     /* 操作符 */
     }
 
-    /* 全局过渡效果 */
-    * {
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    /* 全局样式 */
+    body, .page {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* 内容区域样式 */
+    #post, #posts, #comments {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .post {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
     }
 
     /* 统一边框样式 */
@@ -520,13 +540,13 @@
   <span class="moon">🌙</span>
 </button>
 <div id="bar"></div>
-<div class="page home" style="background: var(--bg-color);">
+<div class="page home">
   <div>
     <div id="user"></div>
     <div id="posts"></div>
   </div>
 </div>
-<div class="page single" style="background: var(--bg-color);">
+<div class="page single">
   <div>
     <div id="post"></div>
     <div id="comments"></div>
@@ -535,31 +555,13 @@
 <div id="loader"><div></div><div></div><div></div><div></div></div>
 <script src="./index.92ae90d1.js"></script>
 <script>
-  // 主题切换
+  // 主题切换按钮事件
   const themeToggle = document.getElementById('theme-toggle');
-  
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      document.body.setAttribute('data-theme', newTheme);
-      document.documentElement.style.setProperty('color-scheme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      
-      // 更新图标
-      const moonIcon = document.querySelector('.moon');
-      const sunIcon = document.querySelector('.sun');
-      if (moonIcon && sunIcon) {
-        if (newTheme === 'dark') {
-          moonIcon.style.opacity = '0';
-          sunIcon.style.opacity = '1';
-        } else {
-          moonIcon.style.opacity = '1';
-          sunIcon.style.opacity = '0';
-        }
-      }
+      updateTheme(newTheme);
     });
   }
 
