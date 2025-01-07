@@ -76,7 +76,7 @@
       --post-bg: #ffffff;
       --post-title: #24292f;
       --post-time: #57606a;
-      --post-content: #24292f;
+      --post-content: #24292f; /* 白天模式下文章内容为黑色 */
       --bar-bg: #ffffff;
       --bar-border: #d0d7de;
 
@@ -130,7 +130,7 @@
       --post-bg: #0d1117;
       --post-title: #c9d1d9;
       --post-time: #8b949e;
-      --post-content: #c9d1d9;
+      --post-content: #c9d1d9; /* 暗色模式下文章内容为浅色 */
       --bar-bg: #0d1117;
       --bar-border: #30363d;
 
@@ -592,16 +592,22 @@
   const progress = document.getElementById('progress');
   const progressBar = document.getElementById('progress-bar');
 
-  window.addEventListener('scroll', () => {
-    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = (window.scrollY / windowHeight) * 100;
-    progressBar.style.width = scrolled + '%';
-  });
+  if (progressBar) {
+    window.addEventListener('scroll', () => {
+      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / windowHeight) * 100;
+      progressBar.style.width = scrolled + '%';
+    });
+  } else {
+    console.error('progressBar element not found');
+  }
 
   // 页面加载
   window.addEventListener('load', () => {
     document.body.classList.remove('loading');
-    progressBar.style.width = '100%';
+    if (progressBar) {
+      progressBar.style.width = '100%';
+    }
 
     // 确保所有按钮使用正确的主题颜色
     const buttons = document.querySelectorAll('button, input[type="button"]');
