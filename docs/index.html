@@ -7,57 +7,20 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> Couture's Blog </title>
   <script>
-    // 主题切换函数
-    function updateTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      document.body.setAttribute('data-theme', theme);
-      document.documentElement.style.setProperty('color-scheme', theme);
-      localStorage.setItem('theme', theme);
-      
-      // 更新图标显示
-      const moonIcon = document.querySelector('.moon');
-      const sunIcon = document.querySelector('.sun');
-      if (moonIcon && sunIcon) {
-        if (theme === 'dark') {
-          moonIcon.style.display = 'none';    // 夜间模式隐藏月亮
-          sunIcon.style.display = 'inline';   // 夜间模式显示太阳
-        } else {
-          moonIcon.style.display = 'inline';  // 白天模式显示月亮
-          sunIcon.style.display = 'none';     // 白天模式隐藏太阳
-        }
-      }
-    }
-
-    // 初始化主题
-    const initTheme = () => {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-      updateTheme(theme);
-      return theme;
-    };
-
-    // 页面加载完成后初始化主题
+    // 初始化主题并设置到全局变量
     document.addEventListener('DOMContentLoaded', () => {
-      window.theme = initTheme();
-      
-      // 添加主题切换按钮点击事件
-      const themeToggle = document.getElementById('theme-toggle');
-      if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-          updateTheme(newTheme);
-        });
-      }
+      window.theme = localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', window.theme);
     });
 
-    // 监听主题变化
+    // 创建一个 MutationObserver 来监听属性变化
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          // 当 loading 类被移除时，重新应用主题
           if (!document.documentElement.classList.contains('loading')) {
-            initTheme();
+            document.documentElement.setAttribute('data-theme', window.theme);
           }
         }
       });
@@ -68,6 +31,7 @@
       observer.observe(document.documentElement, {
         attributes: true
       });
+      // 确保在页面加载完成后移除 loading 类
       document.documentElement.classList.remove('loading');
     });
   </script>
@@ -93,140 +57,99 @@
     }
 
     :root {
-      /* 基础颜色 - 白天模式 */
+      /* 基础颜色 */
       --bg-color: #ffffff;
-      --text-color: #000000;
+      --text-color: #24292f;
       --link-color: #0969da;
       --border-color: #d0d7de;
       --shadow-color: rgba(0, 0, 0, 0.1);
 
-      /* 选中文本颜色 */
-      --selection-bg: #b3d4fc;
-      --selection-color: #000000;
+      /* 按钮样式 */
+      --button-bg: #f6f8fa;
+      --button-text: #24292f;
+      --button-border: #d0d7de;
+      --button-hover-bg: #f3f4f6;
 
-      /* 文章样式 */
+      /* 内容区域 */
+      --card-bg: #ffffff;
+      --card-border: #d0d7de;
       --post-bg: #ffffff;
-      --post-title: #000000;
+      --post-title: #24292f;
       --post-time: #57606a;
-      --post-content: #000000;
+      --post-content: #24292f;
+      --bar-bg: #ffffff;
+      --bar-border: #d0d7de;
 
       /* 代码块样式 */
-      --code-bg: #f6f8fa;
-      --code-text: #24292e;
-      --code-border: #e1e4e8;
+      --code-bg: #f6f8fa;           /* 代码块背景色 */
+      --code-text: #24292e;         /* 代码文本颜色 */
+      --code-border: #e1e4e8;       /* 代码块边框颜色 */
+      --inline-code-bg: #f6f8fa;    /* 行内代码背景色 */
+      --inline-code-text: #24292e;  /* 行内代码文本颜色 */
+      --code-comment: #6e7781;      /* 注释 */
+      --code-keyword: #cf222e;      /* 关键字 */
+      --code-string: #0a3069;       /* 字符串 */
+      --code-number: #0550ae;       /* 数字 */
+      --code-function: #8250df;     /* 函数 */
+      --code-variable: #953800;     /* 变量 */
+      --code-operator: #24292f;     /* 操作符 */
 
-      /* 加载器颜色 */
+      /* 加载进度条颜色 */
       --loader-bg: rgba(255, 255, 255, .95);
-      --loader-color-1: #0089fa;
-      --loader-color-2: #ff002b;
-      --loader-color-3: #ffa900;
-      --loader-color-4: #00a753;
-
-      /* 按钮颜色 */
-      --button-bg: #ffffff;
-      --button-text: #000000;
-      --button-border: #d0d7de;
-      --button-hover-bg: #f6f8fa;
+      --loader-color-1: #0089fa;    /* 蓝色 */
+      --loader-color-2: #ff002b;    /* 红色 */
+      --loader-color-3: #ffa900;    /* 黄色 */
+      --loader-color-4: #00a753;    /* 绿色 */
 
       /* 进度条颜色 */
-      --progress-bg: #ffffff;
+      --progress-bg: transparent;
       --progress-color: #0969da;
 
-      /* 评论颜色 */
-      --comment-bg: #ffffff;
-      --comment-text: #000000;
-      --comment-border: #d0d7de;
-
-      /* 代码高亮颜色 - 白天模式 */
-      --code-comment: #6e7781;    /* 注释 */
-      --code-keyword: #cf222e;    /* 关键字 */
-      --code-string: #0a3069;     /* 字符串 */
-      --code-number: #0550ae;     /* 数字 */
-      --code-function: #8250df;   /* 函数 */
-      --code-variable: #953800;   /* 变量 */
-      --code-operator: #24292f;   /* 操作符 */
-
-      /* 卡片样式 */
-      --card-bg: #ffffff;
+      /* 选中文本 */
+      --selection-bg: #b3d4fc;
+      --selection-color: #333333;
     }
 
     [data-theme="dark"] {
-      /* 基础颜色 - 夜间模式 */
-      --bg-color: #000000;
-      --text-color: #e6edf3;
+      /* 基础颜色 */
+      --bg-color: #0d1117;
+      --text-color: #c9d1d9;
       --link-color: #58a6ff;
       --border-color: #30363d;
       --shadow-color: rgba(0, 0, 0, 0.3);
 
-      /* 选中文本颜色 */
-      --selection-bg: #264f78;
-      --selection-color: #ffffff;
+      /* 按钮样式 - 暗色模式 */
+      --button-bg: #21262d;
+      --button-text: #c9d1d9;
+      --button-border: #30363d;
+      --button-hover-bg: #30363d;
 
-      /* 文章样式 */
-      --post-bg: #000000;
-      --post-title: #e6edf3;
+      /* 内容区域 - 暗色模式 */
+      --card-bg: #0d1117;
+      --card-border: #30363d;
+      --post-bg: #0d1117;
+      --post-title: #c9d1d9;
       --post-time: #8b949e;
-      --post-content: #e6edf3;
+      --post-content: #c9d1d9;
+      --bar-bg: #0d1117;
+      --bar-border: #30363d;
 
       /* 代码块样式 */
-      --code-bg: #161b22;
-      --code-text: #e6edf3;
+      --code-bg: #161b22;           /* 更深的背景色 */
+      --code-text: #e6edf3;         /* 更亮的文本 */
       --code-border: #30363d;
-
-      /* 加载器颜色 */
-      --loader-bg: rgba(0, 0, 0, .95);
-      --loader-color-1: #58a6ff;
-      --loader-color-2: #ff7b72;
-      --loader-color-3: #d29922;
-      --loader-color-4: #3fb950;
-
-      /* 按钮颜色 */
-      --button-bg: #161b22;
-      --button-text: #e6edf3;
-      --button-border: #30363d;
-      --button-hover-bg: #1a1d23;
-
-      /* 进度条颜色 */
-      --progress-bg: #000000;
-      --progress-color: #58a6ff;
-
-      /* 评论颜色 */
-      --comment-bg: #161b22;
-      --comment-text: #e6edf3;
-      --comment-border: #30363d;
-
-      /* 代码高亮颜色 - 夜间模式 */
-      --code-comment: #8b949e;    /* 注释 */
-      --code-keyword: #ff7b72;    /* 关键字 */
-      --code-string: #a5d6ff;     /* 字符串 */
-      --code-number: #79c0ff;     /* 数字 */
-      --code-function: #d2a8ff;   /* 函数 */
-      --code-variable: #ffa657;   /* 变量 */
-      --code-operator: #e6edf3;   /* 操作符 */
-
-      /* 卡片样式 */
-      --card-bg: #0d1117;
+      --code-comment: #8b949e;      /* 注释 */
+      --code-keyword: #ff7b72;      /* 关键字 */
+      --code-string: #a5d6ff;       /* 字符串 */
+      --code-number: #79c0ff;       /* 数字 */
+      --code-function: #d2a8ff;     /* 函数 */
+      --code-variable: #ffa657;     /* 变量 */
+      --code-operator: #e6edf3;     /* 操作符 */
     }
 
-    /* 全局样式 */
-    body, .page {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    /* 内容区域样式 */
-    #post, #posts, #comments {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .post {
-      background-color: var(--post-bg);
-      color: var(--post-content);
-      border: 1px solid var(--border-color);
-      transition: all 0.3s ease;
+    /* 全局过渡效果 */
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     /* 统一边框样式 */
@@ -310,7 +233,7 @@
     .transition {
       height: 100%;
     }
-    
+
     .loading body,
     .error body,
     .transition body {
@@ -376,48 +299,97 @@
     }
 
     /* 内容区域样式 */
-    #post {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
+    #posts .post {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
     }
 
-    #post h1, #post h2, #post h3 {
-      color: var(--text-color);
+    #posts .post .title {
+      color: var(--post-title);
     }
 
-    #post a {
-      color: var(--link-color);
+    #posts .post .time {
+      color: var(--post-time);
     }
 
-    #post pre {
+    #posts .post .preview {
+      color: var(--post-content);
+    }
+
+    #bar {
+      background-color: var(--bar-bg);
+      border-color: var(--bar-border);
+    }
+
+    /* 文章详情页样式 */
+    .single #post {
+      background-color: var(--post-bg);
+      color: var(--post-content);
+    }
+
+    .single #post .title {
+      color: var(--post-title);
+    }
+
+    .single #post .time {
+      color: var(--post-time);
+    }
+
+    /* 代码块样式 */
+    .single #post pre {
       background-color: var(--code-bg);
+      border-color: var(--border-color);
+    }
+
+    .single #post code {
       color: var(--code-text);
-      border: 1px solid var(--code-border);
+    }
+
+    /* 评论区样式 */
+    #comments {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
     }
 
     /* 主题切换按钮样式 */
     .theme-toggle {
       position: fixed;
-      right: 20px;
-      top: 20px;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      padding: 4px;
       background: transparent;
       border: none;
       cursor: pointer;
-      padding: 8px;
-      font-size: 24px;
       z-index: 1000;
-      transition: transform 0.3s ease;
-      border-radius: 50%;
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 1;
     }
 
     .theme-toggle .sun,
     .theme-toggle .moon {
-      transition: display 0.3s ease;
+      position: absolute;
+      transition: opacity 0.3s ease;
+    }
+
+    .theme-toggle .sun {
+      opacity: 0;
+    }
+
+    .theme-toggle .moon {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle .sun {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle .moon {
+      opacity: 0;
     }
 
     /* 代码块基础样式 */
@@ -556,41 +528,26 @@
       font-size: 0.9em;
     }
 
-    /* 确保所有元素使用正确的颜色变量 */
+    /* 确保所有元素使用变量 */
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
-    }
-
-    article, .markdown-body {
-      color: var(--text-color);
-      background-color: var(--bg-color);
-    }
-
-    a {
-      color: var(--link-color);
-    }
-
-    button {
-      color: var(--button-text);
-      background-color: var(--button-bg);
-      border-color: var(--button-border);
     }
   </style>
 </head>
 <body>
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-  <span class="sun" style="display: none;">☀️</span>
+  <span class="sun">☀️</span>
   <span class="moon">🌙</span>
 </button>
 <div id="bar"></div>
-<div class="page home">
+<div class="page home" style="background: var(--bg-color);">
   <div>
     <div id="user"></div>
     <div id="posts"></div>
   </div>
 </div>
-<div class="page single">
+<div class="page single" style="background: var(--bg-color);">
   <div>
     <div id="post"></div>
     <div id="comments"></div>
@@ -599,20 +556,42 @@
 <div id="loader"><div></div><div></div><div></div><div></div></div>
 <script src="./index.92ae90d1.js"></script>
 <script>
-  // 主题切换按钮事件
+  // 主题切换
   const themeToggle = document.getElementById('theme-toggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      updateTheme(newTheme);
-    });
+  const body = document.body;
+
+  // 获取当前主题
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  body.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  // 更新主题图标
+  function updateThemeIcon(theme) {
+    const moonIcon = document.querySelector('.moon');
+    const sunIcon = document.querySelector('.sun');
+    if (theme === 'dark') {
+      moonIcon.style.opacity = 0;
+      sunIcon.style.opacity = 1;
+    } else {
+      moonIcon.style.opacity = 1;
+      sunIcon.style.opacity = 0;
+    }
   }
+
+  // 切换主题
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+  });
 
   // 进度条
   const progress = document.getElementById('progress');
   const progressBar = document.getElementById('progress-bar');
-  
+
   window.addEventListener('scroll', () => {
     const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrolled = (window.scrollY / windowHeight) * 100;
@@ -623,7 +602,7 @@
   window.addEventListener('load', () => {
     document.body.classList.remove('loading');
     progressBar.style.width = '100%';
-    
+
     // 确保所有按钮使用正确的主题颜色
     const buttons = document.querySelectorAll('button, input[type="button"]');
     buttons.forEach(button => {
