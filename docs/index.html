@@ -10,20 +10,7 @@
   <!-- 预加载字体 -->
   <link rel="preload" href="./LXGWWenKaiGB-Regular.ttf" as="font" type="font/ttf" crossorigin>
 
-  <!-- 添加字体加载检测脚本 -->
   <script>
-    const font = new FontFace('LxgwWenkaiGB', 'url(./LXGWWenKaiGB-Regular.ttf)');
-    document.body.classList.add('fonts-loading');
-
-    font.load().then(() => {
-      document.fonts.add(font);
-      document.body.classList.remove('fonts-loading');
-      document.body.classList.add('fonts-loaded');
-    }).catch((err) => {
-      console.error('字体加载失败:', err);
-      document.body.classList.remove('fonts-loading');
-    });
-
     // 初始化主题
     document.addEventListener('DOMContentLoaded', () => {
       window.theme = localStorage.getItem('theme') ||
@@ -125,7 +112,6 @@
       --selection-bg: #b3d4fc;
       --selection-color: #333333;
     }
-
     [data-theme="dark"] {
       /* 基础颜色 */
       --bg-color: #0d1117;
@@ -166,19 +152,10 @@
       --progress-bg: rgba(255, 255, 255, 0.1);
       --progress-color: var(--link-color);
     }
+
     /* 全局样式 */
     * {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    }
-
-    /* 字体加载状态样式 */
-    .fonts-loading {
-      opacity: 0;
-    }
-
-    .fonts-loaded {
-      opacity: 1;
-      transition: opacity 0.3s ease;
     }
 
     body {
@@ -187,6 +164,12 @@
       color: var(--text-color);
       margin: 0;
       padding: 0;
+      opacity: 0.8;
+    }
+
+    body.fonts-loaded {
+      opacity: 1;
+      transition: opacity 0.3s ease;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -195,7 +178,7 @@
     }
 
     /* 进度条样式 */
-    #progress {
+    .progress {
       position: fixed;
       top: 0;
       left: 0;
@@ -206,7 +189,7 @@
       opacity: 0.8;
     }
 
-    #progress-bar {
+    .progress-bar {
       width: 0;
       height: 100%;
       background: var(--progress-color);
@@ -215,8 +198,7 @@
     }
 
     /* 文章内容样式 */
-    .single .post,
-    #posts .post {
+    .post {
       background-color: var(--post-bg);
       color: var(--post-content);
       padding: 2rem;
@@ -228,8 +210,7 @@
     }
 
     .post-content p,
-    .single .post p,
-    #posts .post .preview p {
+    .post p {
       margin: 1em 0;
       line-height: 1.8;
       color: var(--text-color);
@@ -238,8 +219,7 @@
 
     /* 链接样式 */
     .post-content a,
-    .single .post a,
-    #posts .post .preview a {
+    .post a {
       color: var(--link-color);
       text-decoration: none;
       border-bottom: 1px solid transparent;
@@ -247,8 +227,7 @@
     }
 
     .post-content a:hover,
-    .single .post a:hover,
-    #posts .post .preview a:hover {
+    .post a:hover {
       border-bottom-color: var(--link-color);
     }
 
@@ -273,7 +252,6 @@
       opacity: 0.8;
       transition: opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     }
-
     .theme-toggle:hover {
       opacity: 1;
     }
@@ -358,3 +336,121 @@
     }
   </style>
 </head>
+<body>
+<!-- 进度条 -->
+<div class="progress" id="progress">
+  <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+<!-- 主题切换按钮 -->
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <span class="sun">☀️</span>
+  <span class="moon">🌙</span>
+</button>
+
+<!-- 内容区域 -->
+<div class="page home" style="background: var(--bg-color);">
+  <div>
+    <div id="user"></div>
+    <div id="posts">
+      <!-- 文章列表 -->
+      <div class="post">
+        <div class="post-content">
+          <!-- 文章内容 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 文章页内容 -->
+<div class="page single" style="background: var(--bg-color);">
+  <div>
+    <div id="post"></div>
+    <div id="comments"></div>
+  </div>
+</div>
+
+<!-- 加载动画 -->
+<div id="loader">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<script src="./index.92ae90d1.js"></script>
+
+<script>
+  // 字体加载
+  const font = new FontFace('LxgwWenkaiGB', 'url(./LXGWWenKaiGB-Regular.ttf)');
+  document.body.classList.add('fonts-loading');
+
+  font.load().then(() => {
+    document.fonts.add(font);
+    document.body.classList.remove('fonts-loading');
+    document.body.classList.add('fonts-loaded');
+  }).catch((err) => {
+    console.error('字体加载失败:', err);
+    document.body.classList.remove('fonts-loading');
+  });
+
+  // 主题切换逻辑
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+
+  // 获取当前主题
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  function updateThemeIcon(theme) {
+    const moonIcon = document.querySelector('.moon');
+    const sunIcon = document.querySelector('.sun');
+    if (theme === 'dark') {
+      moonIcon.style.opacity = '0';
+      sunIcon.style.opacity = '1';
+    } else {
+      moonIcon.style.opacity = '1';
+      sunIcon.style.opacity = '0';
+    }
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+
+    // 更新所有内容区域的样式
+    document.querySelectorAll('.post, .post-content').forEach(element => {
+      element.style.backgroundColor = 'var(--post-bg)';
+      element.style.color = 'var(--post-content)';
+    });
+
+    // 更新链接颜色
+    document.querySelectorAll('.post a, .post-content a').forEach(link => {
+      link.style.color = 'var(--link-color)';
+    });
+  });
+
+  // 进度条逻辑
+  const progressBar = document.querySelector('.progress-bar');
+
+  window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
+    progressBar.style.width = `${scrolled}%`;
+  });
+
+  // 页面加载完成
+  window.addEventListener('load', () => {
+    document.documentElement.classList.remove('loading');
+    if (progressBar) {
+      progressBar.style.width = '100%';
+    }
+  });
+</script>
+</body>
+</html>
