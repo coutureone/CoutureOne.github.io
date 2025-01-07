@@ -6,18 +6,54 @@
   <link rel="shortcut icon" href="https://fav.farm/👨🏻‍💻" />
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title> Couture's Blog </title>
+  <script>
+    // 初始化主题并设置到全局变量
+    document.addEventListener('DOMContentLoaded', () => {
+      window.theme = localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', window.theme);
+    });
 
-  <!-- 预加载字体 -->
-  <link rel="preload" href="./LXGWWenKaiGB-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    // 创建一个 MutationObserver 来监听属性变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          // 当 loading 类被移除时，重新应用主题
+          if (!document.documentElement.classList.contains('loading')) {
+            document.documentElement.setAttribute('data-theme', window.theme);
+          }
+        }
+      });
+    });
 
+    // 开始观察 html 元素的属性变化
+    window.addEventListener('load', () => {
+      observer.observe(document.documentElement, {
+        attributes: true
+      });
+      // 确保在页面加载完成后移除 loading 类
+      document.documentElement.classList.remove('loading');
+    });
+  </script>
+  <link rel="preload" href="LXGWWenKaiGB-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <script>
+    window.config = {
+      organization: false,
+      order: 'CREATED_AT',
+      title: "Couture's Blog",
+      user: 'coutureone',
+      repository: 'gitblog',
+      authors: 'Couture',
+      ignores: '',
+      hash: 'ghp_WxJ$kKHi^rOFBUcCxwypTbLbEh(xRs#dw%hhYmxvZy5jb3V0dXJlcy50b3A=',
+      perpage: 5,
+    }
+  </script>
   <style>
-    /* 字体定义 */
     @font-face {
       font-family: "LxgwWenkaiGB";
-      src: url("./LXGWWenKaiGB-Regular.ttf") format("truetype");
+      src: url("LXGWWenKaiGB-Regular.ttf");
       font-display: swap;
-      font-weight: normal;
-      font-style: normal;
     }
 
     :root {
@@ -45,29 +81,29 @@
       --bar-border: #d0d7de;
 
       /* 代码块样式 */
-      --code-bg: #f6f8fa;
-      --code-text: #24292e;
-      --code-border: #e1e4e8;
-      --inline-code-bg: #f6f8fa;
-      --inline-code-text: #24292e;
-      --code-comment: #6e7781;
-      --code-keyword: #cf222e;
-      --code-string: #0a3069;
-      --code-number: #0550ae;
-      --code-function: #8250df;
-      --code-variable: #953800;
-      --code-operator: #24292f;
+      --code-bg: #f6f8fa;           /* 代码块背景色 */
+      --code-text: #24292e;         /* 代码文本颜色 */
+      --code-border: #e1e4e8;       /* 代码块边框颜色 */
+      --inline-code-bg: #f6f8fa;    /* 行内代码背景色 */
+      --inline-code-text: #24292e;  /* 行内代码文本颜色 */
+      --code-comment: #6e7781;      /* 注释 */
+      --code-keyword: #cf222e;      /* 关键字 */
+      --code-string: #0a3069;       /* 字符串 */
+      --code-number: #0550ae;       /* 数字 */
+      --code-function: #8250df;     /* 函数 */
+      --code-variable: #953800;     /* 变量 */
+      --code-operator: #24292f;     /* 操作符 */
 
       /* 加载进度条颜色 */
       --loader-bg: rgba(255, 255, 255, .95);
-      --loader-color-1: #0089fa;
-      --loader-color-2: #ff002b;
-      --loader-color-3: #ffa900;
-      --loader-color-4: #00a753;
+      --loader-color-1: #0089fa;    /* 蓝色 */
+      --loader-color-2: #ff002b;    /* 红色 */
+      --loader-color-3: #ffa900;    /* 黄色 */
+      --loader-color-4: #00a753;    /* 绿色 */
 
       /* 进度条颜色 */
-      --progress-bg: rgba(0, 0, 0, 0.1);
-      --progress-color: var(--link-color);
+      --progress-bg: transparent;
+      --progress-color: #0969da;
 
       /* 选中文本 */
       --selection-bg: #b3d4fc;
@@ -82,13 +118,13 @@
       --border-color: #30363d;
       --shadow-color: rgba(0, 0, 0, 0.3);
 
-      /* 按钮样式 */
+      /* 按钮样式 - 暗色模式 */
       --button-bg: #21262d;
       --button-text: #c9d1d9;
       --button-border: #30363d;
       --button-hover-bg: #30363d;
 
-      /* 内容区域 */
+      /* 内容区域 - 暗色模式 */
       --card-bg: #0d1117;
       --card-border: #30363d;
       --post-bg: #0d1117;
@@ -99,145 +135,112 @@
       --bar-border: #30363d;
 
       /* 代码块样式 */
-      --code-bg: #161b22;
-      --code-text: #e6edf3;
+      --code-bg: #161b22;           /* 更深的背景色 */
+      --code-text: #e6edf3;         /* 更亮的文本 */
       --code-border: #30363d;
-      --code-comment: #8b949e;
-      --code-keyword: #ff7b72;
-      --code-string: #a5d6ff;
-      --code-number: #79c0ff;
-      --code-function: #d2a8ff;
-      --code-variable: #ffa657;
-      --code-operator: #e6edf3;
+      --code-comment: #8b949e;      /* 注释 */
+      --code-keyword: #ff7b72;      /* 关键字 */
+      --code-string: #a5d6ff;       /* 字符串 */
+      --code-number: #79c0ff;       /* 数字 */
+      --code-function: #d2a8ff;     /* 函数 */
+      --code-variable: #ffa657;     /* 变量 */
+      --code-operator: #e6edf3;     /* 操作符 */
     }
 
-    /* 全局样式 */
+    /* 全局过渡效果 */
     * {
       transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
-    body {
-      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-      opacity: 0.8;
-    }
-
-    body.fonts-loaded {
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, serif;
-      color: var(--text-color);
-    }
-
-    /* 进度条样式 */
-    .progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--progress-bg);
-      z-index: 9999;
-      opacity: 0.8;
-    }
-
-    .progress-bar {
-      width: 0;
-      height: 100%;
-      background: var(--progress-color);
-      transition: width 0.2s ease;
-      border-radius: 0 1px 1px 0;
-    }
-
-    /* 文章内容样式 */
-    .post {
-      background-color: var(--post-bg);
-      color: var(--post-content);
-      padding: 2rem;
-      margin: 1rem 0;
-      border-radius: 6px;
-      box-shadow: 0 1px 3px var(--shadow-color);
-      line-height: 1.8;
-      letter-spacing: 0.5px;
-    }
-
-    .post-content p,
-    .post p {
-      margin: 1em 0;
-      line-height: 1.8;
-      color: var(--text-color);
-      font-family: "LxgwWenkaiGB", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-    }
-
-    /* 链接样式 */
-    .post-content a,
-    .post a {
-      color: var(--link-color);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease;
-    }
-
-    .post-content a:hover,
-    .post a:hover {
-      border-bottom-color: var(--link-color);
-    }
-
-    /* 主题切换按钮样式 */
-    .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      width: 32px;
-      height: 32px;
-      padding: 4px;
-      background: var(--bg-color);
+    /* 统一边框样式 */
+    .card, .post, .bar {
       border: 1px solid var(--border-color);
       border-radius: 6px;
-      cursor: pointer;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      line-height: 1;
-      opacity: 0.8;
-      transition: opacity 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+      overflow: hidden;
     }
 
-    .theme-toggle:hover {
-      opacity: 1;
+    /* 添加选中文本的样式 */
+    ::selection {
+      background-color: var(--selection-bg);
+      color: var(--selection-color);
     }
 
-    .theme-toggle .sun,
-    .theme-toggle .moon {
-      position: absolute;
-      transition: opacity 0.3s ease;
+    /* 补充文章内容的样式 */
+    .single .post {
+      color: var(--post-content);
     }
 
-    .theme-toggle .sun {
-      opacity: 0;
+    .single .post h1,
+    .single .post h2,
+    .single .post h3,
+    .single .post h4,
+    .single .post h5,
+    .single .post h6 {
+      color: var(--post-title);
     }
 
-    .theme-toggle .moon {
-      opacity: 1;
+    .single .post blockquote {
+      color: var(--post-content);
+      border-left-color: var(--border-color);
     }
 
-    [data-theme="dark"] .theme-toggle .sun {
-      opacity: 1;
+    .single .post code {
+      background-color: var(--code-bg);
+      color: var(--code-text);
     }
 
-    [data-theme="dark"] .theme-toggle .moon {
-      opacity: 0;
+    .single .post pre {
+      background-color: var(--code-bg);
+      color: var(--code-text);
     }
 
-    /* 加载动画样式 */
+    .single .post hr {
+      border-color: var(--border-color);
+    }
+
+    /* 用户信息和导航样式 */
+    #user {
+      border-color: var(--border-color);
+    }
+
+    .avatar {
+      border-color: var(--border-color);
+    }
+
+    /* 评论区样式 */
+    .comments {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
+    }
+
+    .comment-meta {
+      color: var(--post-time);
+    }
+
+    body {
+      font-family: "LxgwWenkaiGB", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    h1, h2, h3 {
+      font-family: "LxgwWenkaiGB", serif;
+    }
+
+    /* 加载状态样式 */
+    .loading,
+    .error,
+    .transition {
+      height: 100%;
+    }
+
+    .loading body,
+    .error body,
+    .transition body {
+      height: 100%;
+    }
+
+    /* 加载动画容器 */
     #loader {
       position: fixed;
       top: 0;
@@ -255,6 +258,7 @@
       display: flex;
     }
 
+    /* 加载动画 */
     #loader div {
       position: absolute;
       width: 40px;
@@ -294,123 +298,326 @@
       to { transform: rotate(360deg); }
     }
 
-    /* 内容容器样式 */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
+    /* 内容区域样式 */
+    #posts .post {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
     }
 
-    /* 博客标题样式 */
-    .blog-title {
-      text-align: center;
-      margin-bottom: 2rem;
+    #posts .post .title {
+      color: var(--post-title);
     }
 
-    .blog-title h1 {
-      font-size: 2.5rem;
-      margin: 0;
+    #posts .post .time {
+      color: var(--post-time);
+    }
+
+    #posts .post .preview {
+      color: var(--post-content);
+    }
+
+    #bar {
+      background-color: var(--bar-bg);
+      border-color: var(--bar-border);
+    }
+
+    /* 文章详情页样式 */
+    .single #post {
+      background-color: var(--post-bg);
+      color: var(--post-content);
+    }
+
+    .single #post .title {
+      color: var(--post-title);
+    }
+
+    .single #post .time {
+      color: var(--post-time);
+    }
+
+    /* 代码块样式 */
+    .single #post pre {
+      background-color: var(--code-bg);
+      border-color: var(--border-color);
+    }
+
+    .single #post code {
+      color: var(--code-text);
+    }
+
+    /* 评论区样式 */
+    #comments {
+      background-color: var(--post-bg);
+      border-color: var(--border-color);
+    }
+
+    /* 主题切换按钮样式 */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      padding: 4px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .theme-toggle .sun,
+    .theme-toggle .moon {
+      position: absolute;
+      transition: opacity 0.3s ease;
+    }
+
+    .theme-toggle .sun {
+      opacity: 0;
+    }
+
+    .theme-toggle .moon {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle .sun {
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle .moon {
+      opacity: 0;
+    }
+
+    /* 代码块基础样式 */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    pre code {
+      color: var(--code-text);
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+
+    /* 代码高亮 */
+    .token.comment { color: var(--code-comment); }
+    .token.keyword { color: var(--code-keyword); }
+    .token.string { color: var(--code-string); }
+    .token.number { color: var(--code-number); }
+    .token.function { color: var(--code-function); }
+    .token.variable { color: var(--code-variable); }
+    .token.operator { color: var(--code-operator); }
+
+    /* 行内代码样式 */
+    :not(pre) > code {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--code-border);
+    }
+
+    /* 代码块滚动条样式 */
+    pre::-webkit-scrollbar {
+      height: 8px;
+      background-color: var(--code-bg);
+    }
+
+    pre::-webkit-scrollbar-thumb {
+      background-color: var(--border-color);
+      border-radius: 4px;
+    }
+
+    /* 平滑过渡 */
+    body, .card, .post, .bar {
+      transition: all 0.3s ease;
+    }
+
+    /* 进度条样式 */
+    #progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--progress-bg);
+      z-index: 9999;
+    }
+
+    #progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--progress-color);
+      transition: width 0.2s ease;
+    }
+
+    /* 按钮基础样式 */
+    button, input[type="button"] {
+      padding: 6px 12px;
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: 1px solid var(--button-border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover, input[type="button"]:hover {
+      background: var(--button-hover-bg);
+    }
+
+    /* 评论按钮样式 */
+    .comment-button {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .comment-button:hover {
+      background: var(--border-color);
+      color: var(--text-color);
+    }
+
+    /* 代码块和内容背景 */
+    .post-content {
+      background: var(--post-bg);
+      border-radius: 6px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 16px 0;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--code-text);
+    }
+
+    /* 标签样式 */
+    .tag {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.9em;
+    }
+
+    /* 确保所有元素使用变量 */
+    body {
+      background-color: var(--bg-color);
       color: var(--text-color);
     }
   </style>
 </head>
 <body>
-<!-- 进度条 -->
-<div class="progress" id="progress">
-  <div class="progress-bar" id="progress-bar"></div>
-</div>
-
-<!-- 主题切换按钮 -->
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span class="sun">☀️</span>
   <span class="moon">🌙</span>
 </button>
-
-<!-- 内容区域 -->
-<div class="container">
-  <div class="blog-title">
-    <h1>Couture's Blog</h1>
-  </div>
-
-  <div id="posts">
-    <!-- 示例文章 -->
-    <div class="post">
-      <div class="post-content">
-        <h2>欢迎来到我的博客</h2>
-        <p>这是一个示例文章内容。您可以在这里添加您的博客文章。</p>
-      </div>
-    </div>
+<div id="bar"></div>
+<div class="page home" style="background: var(--bg-color);">
+  <div>
+    <div id="user"></div>
+    <div id="posts"></div>
   </div>
 </div>
-
-<!-- 加载动画 -->
-<div id="loader">
-  <div></div>
-  <div></div>
-  <div></div>
-  <div></div>
+<div class="page single" style="background: var(--bg-color);">
+  <div>
+    <div id="post"></div>
+    <div id="comments"></div>
+  </div>
 </div>
-
+<div id="loader"><div></div><div></div><div></div><div></div></div>
+<script src="./index.92ae90d1.js"></script>
 <script>
-  // 字体加载
-  document.addEventListener('DOMContentLoaded', () => {
-    const font = new FontFace('LxgwWenkaiGB', 'url(./LXGWWenKaiGB-Regular.ttf)');
-
-    font.load().then(() => {
-      document.fonts.add(font);
-      document.body.classList.add('fonts-loaded');
-    }).catch((err) => {
-      console.error('字体加载失败:', err);
-    });
-  });
-
-  // 主题切换逻辑
+  // 主题切换
   const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
 
   // 获取当前主题
-  const currentTheme = localStorage.getItem('theme') ||
-          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', currentTheme);
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  body.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
 
   // 更新主题图标
   function updateThemeIcon(theme) {
     const moonIcon = document.querySelector('.moon');
     const sunIcon = document.querySelector('.sun');
     if (theme === 'dark') {
-      moonIcon.style.opacity = '0';
-      sunIcon.style.opacity = '1';
+      moonIcon.style.opacity = 0;
+      sunIcon.style.opacity = 1;
     } else {
-      moonIcon.style.opacity = '1';
-      sunIcon.style.opacity = '0';
+      moonIcon.style.opacity = 1;
+      sunIcon.style.opacity = 0;
     }
   }
 
-  updateThemeIcon(currentTheme);
-
-  // 主题切换事件
+  // 切换主题
   themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const currentTheme = body.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', newTheme);
+
+    body.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateThemeIcon(newTheme);
   });
 
-  // 进度条逻辑
-  const progressBar = document.querySelector('.progress-bar');
+  // 进度条
+  const progress = document.getElementById('progress');
+  const progressBar = document.getElementById('progress-bar');
 
   window.addEventListener('scroll', () => {
     const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
-    progressBar.style.width = `${scrolled}%`;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    progressBar.style.width = scrolled + '%';
   });
 
-  // 页面加载完成
+  // 页面加载
   window.addEventListener('load', () => {
-    document.documentElement.classList.remove('loading');
-    if (progressBar) {
-      progressBar.style.width = '100%';
-    }
+    document.body.classList.remove('loading');
+    progressBar.style.width = '100%';
+
+    // 确保所有按钮使用正确的主题颜色
+    const buttons = document.querySelectorAll('button, input[type="button"]');
+    buttons.forEach(button => {
+      button.style.backgroundColor = 'var(--button-bg)';
+      button.style.color = 'var(--button-text)';
+      button.style.border = '1px solid var(--button-border)';
+    });
+  });
+
+  // 代码块样式
+  document.querySelectorAll('pre code').forEach(block => {
+    block.style.backgroundColor = 'var(--code-bg)';
+    block.style.color = 'var(--code-text)';
+    block.style.borderRadius = '6px';
+    block.style.padding = '1em';
   });
 </script>
 </body>
