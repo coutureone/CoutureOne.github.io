@@ -56,6 +56,22 @@
       font-display: swap;
     }
 
+    body {
+      font-family: "LxgwWenkaiGB", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    /* 确保所有文本元素都使用 LxgwWenkaiGB 字体 */
+    h1, h2, h3, h4, h5, h6, p, span, a, li, div, pre, code {
+      font-family: "LxgwWenkaiGB", sans-serif;
+    }
+
+    /* 如果需要强制覆盖其他样式 */
+    body * {
+      font-family: "LxgwWenkaiGB", sans-serif !important;
+    }
+
     :root {
       /* 基础颜色 */
       --bg-color: #ffffff;
@@ -170,14 +186,14 @@
       color: var(--post-content);
     }
 
-    .single .post h1,
-    .single .post h2,
-    .single .post h3,
-    .single .post h4,
-    .single .post h5,
-    .single .post h6 {
-      color: var(--post-title);
-    }
+    /*.single .post h1,*/
+    /*.single .post h2,*/
+    /*.single .post h3,*/
+    /*.single .post h4,*/
+    /*.single .post h5,*/
+    /*.single .post h6 {*/
+    /*  color: var(--post-title);*/
+    /*}*/
 
     .single .post blockquote {
       color: var(--post-content);
